@@ -1,4 +1,4 @@
-create table user(
+create table users(
 user_id varchar2(30) primary key,
 user_pwd varchar2(30) not null,
 user_name varchar2(30) not null,
