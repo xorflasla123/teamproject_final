@@ -45,6 +45,14 @@ header a { color: white; text-decoration: none; padding: 15px; font-size: 13pt;}
 					</c:choose>
 				</li>
 				
+				<li>
+					<c:choose>
+						<c:when test="${loginUser != null }">
+							<a href="${contextPath }/member/userInfo">마이페이지</a>
+						</c:when>
+					</c:choose>
+				</li>
+				
 				<li><a href="${contextPath }/board/#">이용방법</a></li>
 				
 				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>

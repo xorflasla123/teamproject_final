@@ -17,4 +17,9 @@ public class MemberController {
 	public String register() {
 		return "member/register";
 	}
+	
+	@GetMapping("userInfo")
+	public String userInfo() {
+		return "member/userInfo";
+	}
 }
