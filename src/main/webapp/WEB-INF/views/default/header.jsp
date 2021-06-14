@@ -15,7 +15,7 @@
 	width: 100%; height:25px; padding: 10px; margin: auto; }
 
 
-header a { color: white; text-decoration: none; padding: 15px; font-size: 13pt;}
+header a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
 
 .main { text-align: center; margin: auto; padding-top: 80px; }
 </style>
@@ -27,7 +27,7 @@ header a { color: white; text-decoration: none; padding: 15px; font-size: 13pt;}
 		
 		<div>
 			<ul class="bar">
-				<b style="padding-right: 1200px; font-size: 22pt; color: white;" >Hello World</b>
+				<b style="padding-right: 1200px; font-size: 22pt; color: black;" >Hello World</b>
 				
 				<li><a href="${contextPath }/index">HOME</a></li>
 				
