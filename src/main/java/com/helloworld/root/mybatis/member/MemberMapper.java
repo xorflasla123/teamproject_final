@@ -1,5 +1,7 @@
 package com.helloworld.root.mybatis.member;
 
-public interface MemberMapper {
+import com.helloworld.root.member.dto.MemberDTO;
 
+public interface MemberMapper {
+	public MemberDTO user_check(String id);
 }
