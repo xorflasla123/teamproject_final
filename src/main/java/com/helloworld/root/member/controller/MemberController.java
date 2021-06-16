@@ -1,8 +1,11 @@
 package com.helloworld.root.member.controller;
 
+<<<<<<< HEAD
 import java.sql.Date;
 import java.util.Calendar;
 
+=======
+>>>>>>> 73508cf5940214771453bccc8e3f2a4ebdc86ae9
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,8 +41,12 @@ public class MemberController implements MemberSessionName{
 		
 		if(result == 0) {
 			rs.addAttribute("id", request.getParameter("id"));
+<<<<<<< HEAD
 			rs.addAttribute("autoLogin",request.getParameter("autoLogin"));
 			System.out.print(request.getParameter("id"));
+=======
+			rs.addAttribute("autoLogin", request.getParameter("autoLogin"));
+>>>>>>> 73508cf5940214771453bccc8e3f2a4ebdc86ae9
 			return "redirect:successLogin";
 		}
 		return "redirect:login";
@@ -46,6 +54,7 @@ public class MemberController implements MemberSessionName{
 	
 	@RequestMapping("successLogin")
 	public String successLogin(@RequestParam String id, 
+<<<<<<< HEAD
 			@RequestParam (value="autoLogin", required = false)String autoLogin,
 			HttpSession session,
 			HttpServletResponse response) {
@@ -54,6 +63,20 @@ public class MemberController implements MemberSessionName{
     	
     	// return "redirect:/index ";  //redirect 저장된 데이터를 가져오는 것 
     
+=======
+								@RequestParam(value="autoLogin", required = false) String autoLogin, 
+								HttpSession session, HttpServletResponse response) {
+		session.setAttribute(LOGIN, id);
+		
+		if(autoLogin != null) {
+			int limitTime = 60*60*24*30; // 30일
+			Cookie loginCookie = new Cookie("loginCookie", id);
+			loginCookie.setPath("/");
+			loginCookie.setMaxAge(limitTime);
+			response.addCookie(loginCookie);
+		}
+		return "/index";
+>>>>>>> 73508cf5940214771453bccc8e3f2a4ebdc86ae9
 	}
 	
 	@GetMapping("/logout")
@@ -78,7 +101,20 @@ public class MemberController implements MemberSessionName{
     }
 	
 	@GetMapping("userInfo")
-	public String userInfo() {
+	public String userInfo(Model model) {
+		ms.userInfo(model);
 		return "member/userInfo";
+	}
+	
+	@GetMapping("info")
+	public String info(@RequestParam("id") String userId, Model model) {
+		ms.info(userId, model);
+		return "member/info";
+	}
+	
+	@GetMapping("save")
+	public String save(Model model) {
+		
+		return "redirect:/member/userInfo";
 	}
 }
