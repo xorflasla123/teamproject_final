@@ -18,4 +18,9 @@
 	<select id="user_check" resultMap="member">
 		select * from users where user_id=#{id}
 	</select>
+	
+	<insert id="register"><!-- dto 값 넣어줌 -->
+	insert into users (user_id, user_pwd, user_name, user_email, user_num, user_addr)
+	values(#{id},#{pwd},#{name},#{email},#{num},#{addr})
+	</insert>
 </mapper>
