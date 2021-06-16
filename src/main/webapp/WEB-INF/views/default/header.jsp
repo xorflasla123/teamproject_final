@@ -9,6 +9,8 @@
 <style type="text/css">
 * { margin: 0;}
 
+.wrap { width:1000px; margin: auto;}
+
 .head { width: 100%; height: 100%; margin: auto;}
 
 .bar { position:fixed; list-style: none; display: flex; justify-content: flex-end; 

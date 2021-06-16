@@ -18,4 +18,13 @@
 	<select id="user_check" resultMap="member">
 		select * from users where user_id=#{id}
 	</select>
+	
+	<select id="userInfo" resultMap="member">
+		select * from users
+	</select>
+	
+	<select id="info" resultMap="member">
+		select * from users where user_id=#{userId}
+	</select>
+	
 </mapper>
