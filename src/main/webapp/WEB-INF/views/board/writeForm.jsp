@@ -27,13 +27,13 @@
 	<div class="main">
 	<form action="${contextPath}/board/writesave" enctype="multipart/form-data" method="post">
 		<b>작성자</b>
-		<input type="text" name="user_id" placeholder="작성자"><br>
+		<input type="text" name="userId" placeholder="작성자"><br>
 		<b>제목</b>
 		<input type="text" name="title" placeholder="제목"><br>
 		<b>내용</b>
 		<textarea rows="20" cols="50" name="content"></textarea><br>
 		<b>이미지 첨부</b>
-		<input type="file" name="board_picture" onchange="readURL(this)"/><br>
+		<input type="file" name="boardPicture" onchange="readURL(this)"/><br>
 		<img id="preview" alt="선택된 이미지가 없습니다." src="#" width="100" height="100"/><br>
 		<input type="submit" value="글쓰기">
 		<input type="button" value="목록" onclick="location.href='${contextPath}/board/main'">

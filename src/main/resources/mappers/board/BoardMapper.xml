@@ -13,10 +13,67 @@
 		<result property="content" column="board_content" />
 		<result property="day" column="board_day" />
 		<result property="picture" column="board_picture" />
+		<result property="hit" column="board_hit" />
 	</resultMap>
 	
 	<insert id="writeSave">
 		insert into board(board_id,board_local,user_id,board_title,board_content,board_picture)
 		values(board_seq.nextval,#{boardLocal},#{userId},#{title},#{content},#{picture})
 	</insert>
+	
+	<insert id="writeInfo">
+		insert into board_info (board_id, user_id) values (#{boardId},#{userId})
+	</insert>
+	
+	<select id="boardList" resultMap="board">
+		select B.* from(select rownum rn, A.* from
+		(select * from board order by board_id desc)A)B
+		where rn between #{start} and #{end}
+	</select>
+	
+	<select id="boardCount" resultType="Integer">
+		select count(*) from board
+	</select>
+	
+	<select id="searchList" resultMap="board">
+		select B.* from(select rownum rn, A.* from
+		(select * from board where ${search} like '%${searchWord}%' order by board_id desc)A)B
+		where rn between #{start} and #{end}
+	</select>
+	
+	<select id="searchCount" resultType="Integer">
+		select count(*) from board where ${search} like '%${searchWord}%'
+	</select>
+	
+	<select id="contentView" resultMap="board">
+		select * from board where board_id=#{boardId}
+	</select>
+	
+	<select id="contentLike" resultType="Integer">
+		select count(*) from board_info where board_id=#{boardId}
+	</select>
+	
+	<select id="selectLike" resultType="Integer">
+		select count(*) from board_info where board_id=#{boardId} and user_id=#{userId}
+	</select>
+	
+	<insert id="insertLike">
+		insert into board_info (board_id, user_id) values (#{boardId},#{userId})
+	</insert>
+	
+	<delete id="deleteLike">
+		delete from board_info where board_id=#{boardId} and user_id=#{userId}
+	</delete>
+	
+	<update id="upHit">
+		update board set board_hit=board_hit+1 where board_id = #{boardId}
+	</update>
+	
+	<delete id="delete">
+		delete from board where board_id = #{boardId}
+	</delete>
+	
+	<update id="modify">
+		update board set board_title=#{title}, board_content=#{content}, board_picture=#{picture} where board_id = #{boardId}
+	</update>
 </mapper>
