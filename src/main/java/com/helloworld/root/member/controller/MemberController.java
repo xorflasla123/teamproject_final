@@ -4,6 +4,8 @@ package com.helloworld.root.member.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.Calendar;
 
@@ -92,7 +94,6 @@ public class MemberController implements MemberSessionName{
 			}
 			
 			session.invalidate();
-			System.out.println("wefwefwefwefwefffffffff");
 		}
 		return "redirect:/index";
 	}
@@ -118,5 +119,65 @@ public class MemberController implements MemberSessionName{
 	public String save(Model model) {
 		
 		return "redirect:/member/userInfo";
+	}
+	
+	@GetMapping("/forgotId")
+	public String forgotId() {
+		System.out.println("아이디 찾기 실행");
+		return "member/forgotId";
+	}
+	
+	@PostMapping("/id_check")
+	public void id_check(HttpServletRequest request, RedirectAttributes rs, HttpServletResponse response) throws Exception {
+		int result = ms.id_check(request);
+		if(result == 0) {
+			rs.addAttribute("email", request.getParameter("email"));
+			System.out.println("아이디찾기 이메일 인증 성공");
+			
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('메일이 발송 되었습니다. 메일을 확인하세요.'); location.href='login';</script>");
+			
+			//return "member/login";
+		}
+		else {
+			System.out.println("아이디찾기 이메일 인증 실패");
+			
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('등록된 이메일이 없습니다.'); location.href='forgotId'</script>");
+			
+			//return "member/forgotId"; 
+		}
+	}
+	
+	@GetMapping("/forgotPwd")
+	public String forgotPwd() {
+		System.out.println("비밀번호 찾기 실행");
+		return "member/forgotPwd";
+	}
+	
+	@PostMapping("/pwd_check")
+	public void pwd_check(HttpServletRequest request, RedirectAttributes rs, HttpServletResponse response) throws Exception {
+		int result = ms.pwd_check(request);
+		if(result == 0) {
+			rs.addAttribute("email", request.getParameter("email"));
+			System.out.println("비밀번호찾기 이메일 인증 성공");
+			
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('메일이 발송 되었습니다. 메일을 확인하세요.'); location.href='login';</script>");
+			
+			//return "member/login";
+		}
+		else {
+			System.out.println("비밀번호찾기 이메일 인증 실패");
+			
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('등록된 이메일이 없습니다.'); location.href='forgotPwd'</script>");
+			
+			//return "member/forgotPwd"; 
+		}
 	}
 }

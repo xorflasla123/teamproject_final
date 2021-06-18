@@ -36,4 +36,12 @@
 		select * from users where user_id=#{sessionId}
 	</select>
 	
+	<select id="id_check" resultMap="member">
+		select * from users where user_id=#{email}
+	</select>
+	
+	<select id="pwd_check" resultMap="member">
+		select * from users where user_id=#{email}
+	</select>
+	
 </mapper>

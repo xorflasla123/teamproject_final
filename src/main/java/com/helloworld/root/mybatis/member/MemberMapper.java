@@ -14,4 +14,7 @@ public interface MemberMapper {
 	public void keepLogin(Map<String, Object> map);
 	public MemberDTO getUserSessionId(String sessionId);
 	
+	public MemberDTO id_check(String email);
+	public MemberDTO pwd_check(String email);
+	
 }

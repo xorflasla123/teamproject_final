@@ -63,4 +63,31 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
+	@Override
+	public int id_check(HttpServletRequest request) {
+		MemberDTO dto = mapper.id_check(request.getParameter("email"));
+		
+		if(dto != null) {
+			if(request.getParameter("email").equals(dto.getEmail())) {
+				return 0;
+			}
+		}
+		return 1;
+	}
+
+
+	@Override
+	public int pwd_check(HttpServletRequest request) {
+		MemberDTO dto = mapper.pwd_check(request.getParameter("email"));
+		
+		if(dto != null) {
+			if(request.getParameter("email").equals(dto.getEmail())) {
+				return 0;
+			}
+		}
+		return 1;
+	}
+
+
+
 }
