@@ -6,7 +6,8 @@
 <mapper namespace="com.helloworld.root.mybatis.member.MemberMapper">
 
 	<resultMap type="com.helloworld.root.member.dto.MemberDTO" id="member">
-		<id property="id" column="user_id"/>
+
+		<id property="id" column="user_id" />
 		<result property="pwd" column="user_pwd" />
 		<result property="name" column="user_name" />
 		<result property="email" column="user_email" />
@@ -19,4 +20,20 @@
 		select * from users where user_id=#{id}
 	</select>
 
+	<select id="userInfo" resultMap="member">
+		select * from users
+	</select>
+	
+	<select id="info" resultMap="member">
+		select * from users where user_id=#{userId}
+	</select>
+	
+	<update id="keepLogin">
+		update users set session_id=#{sessionId}, limit_time=#{limitDate} where user_id=#{id}
+	</update>
+	
+	<select id="getUserSessionId" resultMap="member">
+		select * from users where user_id=#{sessionId}
+	</select>
+	
 </mapper>

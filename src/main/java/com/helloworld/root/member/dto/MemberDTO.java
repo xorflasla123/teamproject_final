@@ -9,12 +9,7 @@ public class MemberDTO {
 	private String addr;
 	private int email_chk;
 	
-	public int getEmail_chk() {
-		return email_chk;
-	}
-	public void setEmail_chk(int email_chk) {
-		this.email_chk = email_chk;
-	}
+
 	public String getId() {
 		return id;
 	}
@@ -52,5 +47,12 @@ public class MemberDTO {
 		this.addr = addr;
 	}
 
+	public int getEmail_chk() {
+		return email_chk;
+	}
+	public void setEmail_chk(int email_chk) {
+		this.email_chk = email_chk;
+	}
+	
 
 }
