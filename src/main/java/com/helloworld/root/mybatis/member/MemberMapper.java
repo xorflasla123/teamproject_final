@@ -16,5 +16,6 @@ public interface MemberMapper {
 	
 	public MemberDTO id_check(String email);
 	public MemberDTO pwd_check(String email);
+
 	
 }

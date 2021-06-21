@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.helloworld.root.member.dto.MemberDTO;
 
@@ -64,30 +65,30 @@ public class MemberServiceImpl implements MemberService{
 
 
 	@Override
-	public int id_check(HttpServletRequest request) {
+	public String id_check(HttpServletRequest request) {
 		MemberDTO dto = mapper.id_check(request.getParameter("email"));
 		
 		if(dto != null) {
 			if(request.getParameter("email").equals(dto.getEmail())) {
-				return 0;
+				String id = dto.getId();
+				return id;
 			}
 		}
-		return 1;
+		return null;
 	}
 
 
 	@Override
-	public int pwd_check(HttpServletRequest request) {
+	public String pwd_check(HttpServletRequest request) {
 		MemberDTO dto = mapper.pwd_check(request.getParameter("email"));
 		
 		if(dto != null) {
 			if(request.getParameter("email").equals(dto.getEmail())) {
-				return 0;
+				return dto.getPwd();
 			}
 		}
-		return 1;
+		return null;
 	}
-
 
 
 }

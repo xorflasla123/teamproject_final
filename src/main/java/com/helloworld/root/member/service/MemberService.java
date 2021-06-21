@@ -17,7 +17,8 @@ public interface MemberService {
 
 	public MemberDTO getUserSessionId(String sessionId);
 	
-	public int id_check(HttpServletRequest request);
-	public int pwd_check(HttpServletRequest request);
+	public String id_check(HttpServletRequest request);
+	public String pwd_check(HttpServletRequest request);
+	
 	
 }

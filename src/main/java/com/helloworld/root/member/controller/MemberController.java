@@ -129,10 +129,12 @@ public class MemberController implements MemberSessionName{
 	@PostMapping("/id_check")
 	public void id_check(HttpServletRequest request, RedirectAttributes rs, HttpServletResponse response,
 						HttpSession session) throws Exception {
-		int result = ms.id_check(request);
 		
-		if(result == 0) {
+		String idChk = ms.id_check(request);
+		
+		if(idChk != null) {
 			session.setAttribute("email", request.getParameter("email"));
+			session.setAttribute("idChk", idChk);
 			System.out.println("아이디찾기 이메일 인증 성공");
 			
 			response.setContentType("text/html; charset=utf-8");
@@ -141,6 +143,7 @@ public class MemberController implements MemberSessionName{
 			
 			//return "member/login";
 		}
+		
 		else {
 			System.out.println("아이디찾기 이메일 인증 실패");
 			
@@ -159,10 +162,14 @@ public class MemberController implements MemberSessionName{
 	}
 	
 	@PostMapping("/pwd_check")
-	public void pwd_check(HttpServletRequest request, RedirectAttributes rs, HttpServletResponse response) throws Exception {
-		int result = ms.pwd_check(request);
-		if(result == 0) {
-			rs.addAttribute("email", request.getParameter("email"));
+	public void pwd_check(HttpServletRequest request, RedirectAttributes rs, HttpServletResponse response,
+						HttpSession session) throws Exception {
+		
+		String pwdChk = ms.pwd_check(request);
+		
+		if(pwdChk != null) {
+			session.setAttribute("email", request.getParameter("email"));
+			session.setAttribute("pwdChk", pwdChk);
 			System.out.println("비밀번호찾기 이메일 인증 성공");
 			
 			response.setContentType("text/html; charset=utf-8");
