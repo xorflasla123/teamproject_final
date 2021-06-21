@@ -35,6 +35,16 @@
 		select count(*) from board
 	</select>
 	
+	<select id="categoryCount" resultType="Integer">
+		select count(*) from board where board_local=#{boardLocal}
+	</select>
+	
+	<select id="categoryBoardList" resultMap="board">
+		select B.* from(select rownum rn, A.* from
+		(select * from board where board_local=#{boardLocal} order by board_id desc)A)B
+		where rn between #{start} and #{end}
+	</select>
+	
 	<select id="searchList" resultMap="board">
 		select B.* from(select rownum rn, A.* from
 		(select * from board where ${search} like '%${searchWord}%' order by board_id desc)A)B
@@ -53,7 +63,7 @@
 		select count(*) from board_info where board_id=#{boardId}
 	</select>
 	
-	<select id="selectLike" resultType="Integer">
+	<select id="likeCount" resultType="Integer">
 		select count(*) from board_info where board_id=#{boardId} and user_id=#{userId}
 	</select>
 	
@@ -74,6 +84,6 @@
 	</delete>
 	
 	<update id="modify">
-		update board set board_title=#{title}, board_content=#{content}, board_picture=#{picture} where board_id = #{boardId}
+		update board set board_local=#{boardLocal}, board_title=#{title}, board_content=#{content}, board_picture=#{picture} where board_id = #{boardId}
 	</update>
 </mapper>

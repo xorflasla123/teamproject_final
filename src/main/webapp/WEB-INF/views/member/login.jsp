@@ -15,12 +15,12 @@
 	<div class="wrap" align="center" style="width: 100%; height: 969px; background-image: url('${contextPath }/resources/image/mainN.jpg');">
 	
 		<form action="${contextPath }/member/user_check" method="post">
-			<table>
+			<table style="font-size: 20pt; color: white; position: absolute; top: 400px; left: 200px;">
 				<tr>
 					<td><input type="text" name="id"></td>
 				</tr>
 				<tr>
-					<td><input type="password" name="pw"></td>
+					<td><input type="password" name="pwd"></td>
 				</tr>
 				<tr>
 					<td><input type="checkbox" name="autoLogin">로그인유지</td>

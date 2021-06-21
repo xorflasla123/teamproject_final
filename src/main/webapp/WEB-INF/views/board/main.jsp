@@ -18,13 +18,14 @@
 	<div class="page main">
 		<div>
 			<ul type="circle">
-			<li><a href="">서울</a></li>
-			<li><a href="">경기/인천</a></li>
-			<li><a href="">강원</a></li>
-			<li><a href="">충청</a></li>
-			<li><a href="">경상/부산</a></li>
-			<li><a href="">전라</a></li>
-			<li><a href="">제주</a></li>
+			<li><a href="${ contextPath }/board/main?boardLocal=전체">전체</a></li>
+			<li><a href="${ contextPath }/board/main?boardLocal=서울">서울</a></li>
+			<li><a href="${ contextPath }/board/main?boardLocal=경기/인천">경기/인천</a></li>
+			<li><a href="${ contextPath }/board/main?boardLocal=강원">강원</a></li>
+			<li><a href="${ contextPath }/board/main?boardLocal=충청">충청</a></li>
+			<li><a href="${ contextPath }/board/main?boardLocal=경상/부산">경상/부산</a></li>
+			<li><a href="${ contextPath }/board/main?boardLocal=전라">전라</a></li>
+			<li><a href="${ contextPath }/board/main?boardLocal=제주">제주</a></li>
 			</ul>
 		</div>
 		<div class="board">
@@ -54,17 +55,32 @@
 								<td>${ dto.hit }</td>
 							</tr>
 						</c:forEach>
-						
 					</c:otherwise>
 				</c:choose>
 				<tr>
 					<td colspan="4">
 						<c:forEach var="num" begin="1" end="${ repeat }">
-							<a href="${ contextPath }/board/main?num=${num}">${ num }</a>&nbsp;
+							<c:choose>
+									<c:when test="${ boardLocal == '전체' }">
+										<a href="${ contextPath }/board/main?boardLocal=${ boardLocal }&num=${num}">${ num }</a>&nbsp;
+									</c:when>
+									<c:otherwise>
+										<a href="${ contextPath }/board/main?boardLocal=${ boardLocal }&num=${num}">${ num }</a>&nbsp;
+									</c:otherwise>
+							</c:choose>
 						</c:forEach>
 					</td>
 					<td>
-						<button onclick="location.href='${contextPath}/board/write'">글쓰기</button>
+						<!-- if (세션 아이디가 있을 때) -->
+						<c:choose>
+							<c:when test="${ boardLocal == '전체' }">
+								<button onclick="location.href='${contextPath}/board/write?boardLocal=서울'">글쓰기</button>
+							</c:when>
+							<c:otherwise>
+								<button onclick="location.href='${contextPath}/board/write?boardLocal=${ boardLocal }'">글쓰기</button>
+							</c:otherwise>
+						</c:choose>
+						<!--  -->
 					</td>
 				</tr>
 			</table>

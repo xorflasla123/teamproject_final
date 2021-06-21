@@ -8,8 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:import url="../default/header.jsp"/>
+
 <h1>로그인 성공(${loginUser }님 환영합니다 )</h1>
-<c:import url="../default/footer.jsp"/>
+
 </body>
 </html>

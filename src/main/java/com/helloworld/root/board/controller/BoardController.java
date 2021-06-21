@@ -31,9 +31,14 @@ public class BoardController {
 	
 	@GetMapping("main")
 	public String main(Model model,
-			@RequestParam(value="num", required = false, defaultValue = "1") int num) {
-		System.out.println("board main 실행");
-		bs.boardList(model, num);
+			@RequestParam(value="num", required = false, defaultValue = "1") int num,
+			@RequestParam (value="boardLocal", required = false, defaultValue = "전체") String boardLocal) {
+		model.addAttribute("boardLocal", boardLocal);
+		if(boardLocal.equals("전체")) {
+			bs.boardList(model, num);
+		}else {
+			bs.categoryBoardList(model, num, boardLocal);
+		}
 		return "board/main";
 	}
 	@RequestMapping("search")
@@ -46,7 +51,8 @@ public class BoardController {
 		return "board/searchView";
 	}
 	@RequestMapping("write")
-	public String write() {
+	public String write(@RequestParam String boardLocal, Model model) {
+		model.addAttribute("boardLocal", boardLocal);
 		return "board/writeForm";
 	}
 	@PostMapping("writesave")
@@ -65,12 +71,21 @@ public class BoardController {
 	@PostMapping(value="like", produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public int boardLike(@RequestBody BoardInfoDTO dto) {
-		
 		System.out.println("ajax boardId : " + dto.getBoardId());
 		System.out.println("ajax userId : " + dto.getUserId());
 		int boardId = dto.getBoardId();
 		String userId = dto.getUserId();
 		int result = bs.boardLike(boardId, userId);
+		return result;
+	}
+	@PostMapping(value="checklike", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public int boardCheckLike(@RequestBody BoardInfoDTO dto) {
+		System.out.println("ajax boardId : " + dto.getBoardId());
+		System.out.println("ajax userId : " + dto.getUserId());
+		int boardId = dto.getBoardId();
+		String userId = dto.getUserId();
+		int result = bs.boardCheckLike(boardId, userId);
 		return result;
 	}
 	@GetMapping("download")

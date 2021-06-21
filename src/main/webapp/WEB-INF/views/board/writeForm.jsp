@@ -26,7 +26,17 @@
 	<c:import url="../default/header.jsp" /><hr>
 	<div class="main">
 	<form action="${contextPath}/board/writesave" enctype="multipart/form-data" method="post">
-		<b>작성자</b>
+		<b>카테고리</b>
+		<select size="1" name="boardLocal">
+			<option value="서울" <c:if test="${boardLocal == '서울'}">selected</c:if>>서울</option>
+			<option value="경기/인천" <c:if test="${boardLocal == '경기/인천'}">selected</c:if>>경기/인천</option>
+			<option value="강원" <c:if test="${boardLocal == '강원'}">selected</c:if>>강원</option>
+			<option value="충청" <c:if test="${boardLocal == '충청'}">selected</c:if>>충청</option>
+			<option value="경상/부산" <c:if test="${boardLocal == '경상/부산'}">selected</c:if>>경상/부산</option>
+			<option value="전라" <c:if test="${boardLocal == '전라'}">selected</c:if>>전라</option>
+			<option value="제주" <c:if test="${boardLocal == '제주'}">selected</c:if>>제주</option>
+		</select>
+		<b>작성자</b>	<!-- session아이디로 readonly하기 -->
 		<input type="text" name="userId" placeholder="작성자"><br>
 		<b>제목</b>
 		<input type="text" name="title" placeholder="제목"><br>

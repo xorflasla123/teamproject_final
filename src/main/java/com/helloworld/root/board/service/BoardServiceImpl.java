@@ -21,7 +21,7 @@ public class BoardServiceImpl implements BoardService {
 		BoardDTO dto = new BoardDTO();
 		BoardFileService bfs = new BoardFileServiceImpl();
 		String message = null;
-		dto.setBoardLocal("서울");
+		dto.setBoardLocal(mul.getParameter("boardLocal"));
 		dto.setUserId(mul.getParameter("userId"));	// 세션넣기(s_project BoardServiceImpl 참고)
 		dto.setTitle(mul.getParameter("title"));
 		dto.setContent(mul.getParameter("content"));
@@ -42,6 +42,19 @@ public class BoardServiceImpl implements BoardService {
 					+ "location.href='" + request.getContextPath() + "/board/write';</script>";
 		}
 		return message;
+	}
+	@Override
+	public void categoryBoardList(Model model, int num, String boardLocal) {
+		int boardCount = mapper.categoryCount(boardLocal);
+		int pageLetter = 3;
+		int repeat = boardCount / pageLetter;
+		if(boardCount % pageLetter != 0) {
+			repeat += 1;
+		}
+		int end = num * pageLetter;
+		int start = end + 1 - pageLetter;
+		model.addAttribute("repeat", repeat);
+		model.addAttribute("boardList", mapper.categoryBoardList(start, end, boardLocal));
 	}
 	@Override
 	public void boardList(Model model, int num) {
@@ -74,13 +87,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 	@Override
 	public void contentView(int boardId, Model model) {
+		upHit(boardId);
 		model.addAttribute("contentData", mapper.contentView(boardId));
 		model.addAttribute("contentLike", mapper.contentLike(boardId));
-		upHit(boardId);
 	}
 	@Override
 	public int boardLike(int boardId, String userId) {
-		int result = mapper.selectLike(boardId, userId);
+		int result = mapper.likeCount(boardId, userId);
 		if(result != 0) {
 			mapper.deleteLike(boardId, userId);
 		}else {
@@ -88,15 +101,11 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return mapper.contentLike(boardId);
 	}
-//	@Override
-//	public void boardLike(int boardId, String userId) {
-//		int result = mapper.selectLike(boardId, userId);
-//		if(result != 0) {
-//			mapper.deleteLike(boardId, userId);
-//		}else {
-//			mapper.insertLike(boardId, userId);
-//		}
-//	}
+	@Override
+	public int boardCheckLike(int boardId, String userId) {
+		int result = mapper.likeCount(boardId, userId);
+		return result;
+	}
 	private void upHit(int boardId) {
 		mapper.upHit(boardId);
 	}
@@ -123,6 +132,7 @@ public class BoardServiceImpl implements BoardService {
 	public String modify(MultipartHttpServletRequest mul, HttpServletRequest request) {
 		BoardDTO dto = new BoardDTO();
 		String message = null;
+		dto.setBoardLocal(mul.getParameter("boardLocal"));
 		dto.setBoardId(Integer.parseInt(mul.getParameter("boardId")));
 		dto.setTitle(mul.getParameter("title"));
 		dto.setContent(mul.getParameter("content"));

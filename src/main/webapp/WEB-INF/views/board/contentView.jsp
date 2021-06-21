@@ -9,9 +9,32 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-function test() {
-	var boardId = $("#bo").val();
-	var userId = $("#us").val();
+function checkLike() {
+	var boardId = $("#boardId").val();
+	var userId = $("#userId").val();
+	var form = {boardId:boardId, userId:userId}
+	$.ajax({
+		url : "checklike",	// url 주소
+		type : "post",			// 보내는 방식
+		data : JSON.stringify(form),	// 보낼 데이터(form을 json타입으로 변경) 자바스크립트 객체 타입을 json으로 변경
+		contentType : "application/json; charset=utf-8",	// 보낼 데이터 타입 지정
+		dataType : "json",	// 리턴 type
+		success : function(result) {
+			console.log(result)
+			if(result != 0) {
+				$("#likeBtn").val("좋아요 취소")
+			}else {
+				$("#likeBtn").val("좋아요")
+			}
+		},
+		error : function() {
+			alert('문제발생')
+		}
+	})
+}
+function like() {
+	var boardId = $("#boardId").val();
+	var userId = $("#userId").val();
 	var form = {boardId:boardId, userId:userId}
 	$.ajax({
 		url : "like",	// url 주소
@@ -21,6 +44,13 @@ function test() {
 		dataType : "json",	// 리턴 type
 		success : function(result) {
 			$("#like").text(result)
+			var valueBtn = $('#likeBtn').val();
+			console.log(valueBtn)
+			if(valueBtn == '좋아요') {
+				$("#likeBtn").val("좋아요 취소")
+			}else {
+				$("#likeBtn").val("좋아요")
+			}
 		},
 		error : function() {
 			alert('문제발생')
@@ -29,8 +59,10 @@ function test() {
 }
 </script>
 </head>
-<body>
+<body onload="checkLike()">
 	<div>
+		<input type="hidden" id="boardId" value="${ contentData.boardId }">
+		<input type="hidden" id="userId" value="${ contentData.userId }">	<!-- 세션 아이디로 바꾸기 -->
 		<table border="1">
 			<tr>
 				<th>글 번호</th><td>${ contentData.boardId }</td>
@@ -41,11 +73,14 @@ function test() {
 				<th>작성일</th><td>${ contentData.day }</td>
 			</tr>
 			<tr>
-				<th>내용</th><td colspan="3">${ contentData.content }</td>
-			</tr>
-			<tr>
 				<th>조회수</th><td>${ contentData.hit }</td>
 				<th>좋아요</th><td id="like">${ contentLike }</td>
+			</tr>
+			<tr>
+				<th colspan="4">내용</th>
+			</tr>
+			<tr>
+				<td colspan="4">${ contentData.content }</td>
 			</tr>
 			<c:if test="${ contentData.picture != 'nan' }">
 				<tr>
@@ -54,24 +89,26 @@ function test() {
 					</th>
 				</tr>
 			</c:if>
-			<!-- if : 로그인한 아이디와 작성한 로그인이 같을 때(세션아이디 == contentData.userId) -->
+			
 				<tr>
 					<td colspan="4">
+						<!-- if (세션아이디 == contentData.userId) -->
 						<input type="button" onclick="location.href='${ contextPath }/board/modifyform?boardId=${ contentData.boardId }'" value="수정하기">
 						<input type="button" onclick="location.href='${ contextPath }/board/delete?boardId=${ contentData.boardId }&pictureName=${ contentData.picture }'" value="삭제하기">
+						<!--  -->
 					</td>
 				</tr>
 				
 			<tr>
-				<td colspan="4">
+				<td colspan="4" style="align: right;">
+					<!-- if (세션 아이디가 있을 때) -->
 					<input type="button" onclick="" value="댓글달기">
+					<input type="button" onclick="like()" id="likeBtn" value="좋아요">
+					<!--  -->
 					<input type="button" onclick="location.href='${ contextPath }/board/main'" value="목록으로 이동">
-					<input type="button" onclick="test()" value="좋아요">
 				</td>
 			</tr>
 		</table>
-		<input type="hidden" id="bo" value="${ contentData.boardId }">
-		<input type="hidden" id="us" value="${ contentData.userId }">
 	</div>
 </body>
 </html>
