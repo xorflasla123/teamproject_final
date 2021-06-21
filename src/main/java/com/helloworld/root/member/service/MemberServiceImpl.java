@@ -1,20 +1,18 @@
 package com.helloworld.root.member.service;
 
-<<<<<<< HEAD
 
-
-=======
 import java.util.ArrayList;
->>>>>>> 73508cf5940214771453bccc8e3f2a4ebdc86ae9
+
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.helloworld.root.member.dto.MemberDTO;
+import com.helloworld.root.message.MessageDTO;
 import com.helloworld.root.mybatis.member.MemberMapper;
 
 @Service
@@ -34,7 +32,6 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-<<<<<<< HEAD
 	public int register(MemberDTO dto) {
 		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); //비밀번호 안보이게 설정 
 		
@@ -54,8 +51,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 }
-
-=======
+	@Override
 	public void userInfo(Model model) {
 		ArrayList<MemberDTO> list = mapper.userInfo();
 		model.addAttribute("memberList", list);	
@@ -65,6 +61,37 @@ public class MemberServiceImpl implements MemberService{
 	public void info(String userId, Model model) {
 		model.addAttribute("info", mapper.info(userId));
 	}
->>>>>>> 73508cf5940214771453bccc8e3f2a4ebdc86ae9
+
+
+
+
+	@Override
+	public int modify(MemberDTO dto) {
+	
+		try{
+			return mapper.modify(dto);
+			}catch(Exception e) {
+				e.printStackTrace();
+			return 0;
+		}
+	}
+
+	@Override
+	public void delete(String id) {
+		try{
+			mapper.delete(id);
+			}catch(Exception e) {
+				e.printStackTrace();
+		
+		}
+		
+	}
+
+	
+
+
+
+
+
 
 }

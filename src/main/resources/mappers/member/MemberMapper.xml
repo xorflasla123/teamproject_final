@@ -19,12 +19,12 @@
 		select * from users where user_id=#{id}
 	</select>
 	
-<<<<<<< HEAD
+
 	<insert id="register"><!-- dto 값 넣어줌 -->
 	insert into users (user_id, user_pwd, user_name, user_email, user_num, user_addr)
 	values(#{id},#{pwd},#{name},#{email},#{num},#{addr})
 	</insert>
-=======
+
 	<select id="userInfo" resultMap="member">
 		select * from users
 	</select>
@@ -33,5 +33,18 @@
 		select * from users where user_id=#{userId}
 	</select>
 	
->>>>>>> 73508cf5940214771453bccc8e3f2a4ebdc86ae9
+	<update id="modify" >
+	update users set 
+	user_pwd = #{pwd},
+	user_email = #{email},
+	user_num = #{num},
+	user_addr = #{addr}
+	 where user_id = #{id}
+	
+	</update>
+	
+	<delete id="delete">
+	delete from users where user_id=#{id} 
+	</delete>
+
 </mapper>

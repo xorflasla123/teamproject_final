@@ -6,12 +6,22 @@ import com.helloworld.root.member.dto.MemberDTO;
 
 public interface MemberMapper {
 	public MemberDTO user_check(String id);
-<<<<<<< HEAD
+
 
 	public int register(MemberDTO dto);
-=======
+
 	public ArrayList<MemberDTO> userInfo();
 	public MemberDTO info(String userId);
+
+
+	public int modify(MemberDTO dto);
+
+
 	
->>>>>>> 73508cf5940214771453bccc8e3f2a4ebdc86ae9
+
+
+	public void delete(String id);
+
+
+
 }
