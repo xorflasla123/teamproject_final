@@ -4,7 +4,6 @@ package com.helloworld.root.member.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.Calendar;
@@ -23,7 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.helloworld.root.member.service.MemberService;
@@ -138,7 +137,7 @@ public class MemberController implements MemberSessionName{
 			
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('메일이 발송 되었습니다. 메일을 확인하세요.'); location.href='/root/sendmail';</script>");
+			out.println("<script>alert('메일이 발송 되었습니다. 메일을 확인하세요.'); location.href='/root/sendId';</script>");
 			
 			//return "member/login";
 		}
@@ -168,7 +167,7 @@ public class MemberController implements MemberSessionName{
 			
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('메일이 발송 되었습니다. 메일을 확인하세요.'); location.href='login';</script>");
+			out.println("<script>alert('메일이 발송 되었습니다. 메일을 확인하세요.'); location.href='/root/sendPwd';</script>");
 			
 			//return "member/login";
 		}

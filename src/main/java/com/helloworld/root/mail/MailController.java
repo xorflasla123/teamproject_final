@@ -14,8 +14,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MailController {
 	@Autowired
 	MailService ms;
-	@GetMapping("sendmail")
-	public String sendSipleMail(HttpServletRequest request, HttpServletResponse response)throws Exception{
+	@GetMapping("sendId")
+	public String sendId(HttpServletRequest request, HttpServletResponse response)throws Exception{
+		HttpSession session = request.getSession();
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print("메일이 전송 되었습니다");
+		
+		ms.sendMail((String)session.getAttribute("email"), "Hello World", "요청하신 회원님의 아이디입니다.");
+		session.removeAttribute("email");
+		
+		return "/member/login";
+	}
+	
+	@GetMapping("sendPwd")
+	public String sendPwd(HttpServletRequest request, HttpServletResponse response)throws Exception{
 		HttpSession session = request.getSession();
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
