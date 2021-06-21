@@ -128,15 +128,17 @@ public class MemberController implements MemberSessionName{
 	}
 	
 	@PostMapping("/id_check")
-	public void id_check(HttpServletRequest request, RedirectAttributes rs, HttpServletResponse response) throws Exception {
+	public void id_check(HttpServletRequest request, RedirectAttributes rs, HttpServletResponse response,
+						HttpSession session) throws Exception {
 		int result = ms.id_check(request);
+		
 		if(result == 0) {
-			rs.addAttribute("email", request.getParameter("email"));
+			session.setAttribute("email", request.getParameter("email"));
 			System.out.println("아이디찾기 이메일 인증 성공");
 			
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('메일이 발송 되었습니다. 메일을 확인하세요.'); location.href='login';</script>");
+			out.println("<script>alert('메일이 발송 되었습니다. 메일을 확인하세요.'); location.href='/root/sendmail';</script>");
 			
 			//return "member/login";
 		}

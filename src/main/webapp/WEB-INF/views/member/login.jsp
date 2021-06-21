@@ -26,7 +26,7 @@
 					<td><input type="checkbox" name="autoLogin">로그인유지</td>
 				</tr>
 				<tr>
-					<td><a href="">아이디 / 비밀번호 찾기</a></td>
+					<td><a href="${contextPath }/member/forgotId">아이디 / 비밀번호 찾기</a></td>
 				</tr>
 				<tr>
 					<td><input type="submit" value="로그인">&nbsp;</td>
