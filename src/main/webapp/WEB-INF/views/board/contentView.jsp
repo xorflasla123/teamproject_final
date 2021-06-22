@@ -9,23 +9,60 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-function checkLike() {
+function move(total,goodRate) {
+	console.log('move 실행')
+    var elem = document.getElementById("myBar");
+    var pro = document.getElementById("myProgress");
+    var width = 1;
+    var id = setInterval(frame, 10);
+    pro.style.background = "gray";
+	elem.style.background = "gray";
+    elem.style.width = 0;
+    console.log("frame-total : "+total)
+    function frame() {
+    	if(total != 0) {
+   			pro.style.background = "red";
+       		elem.style.background = "green";
+       		if(width >= goodRate) {
+       			clearInterval(id);
+       		}else {
+       			width++;
+          	        elem.style.width = width + "%";
+       		}
+    	}
+	}
+}
+function boardCheck() {
 	var boardId = $("#boardId").val();
 	var userId = $("#userId").val();
 	var form = {boardId:boardId, userId:userId}
 	$.ajax({
-		url : "checklike",	// url 주소
+		url : "boardcheck",	// url 주소
 		type : "post",			// 보내는 방식
 		data : JSON.stringify(form),	// 보낼 데이터(form을 json타입으로 변경) 자바스크립트 객체 타입을 json으로 변경
 		contentType : "application/json; charset=utf-8",	// 보낼 데이터 타입 지정
 		dataType : "json",	// 리턴 type
 		success : function(result) {
-			console.log(result)
-			if(result != 0) {
+			if(result.like != 0) {
 				$("#likeBtn").val("좋아요 취소")
 			}else {
 				$("#likeBtn").val("좋아요")
 			}
+			var total = result.total;
+			console.log("토탈 : "+total);
+			if(total != 0) {
+				var good = result.good;
+				var bad = total - good;
+				var goodRate = (good/total)*100;
+				var badRate = 100 - goodRate;
+				$("#good").text(goodRate + "%")
+				$("#bad").text(badRate + "%")
+			}else {
+				var goodRate = 0;
+				$("#good").text(0 + "%")
+				$("#bad").text(0 + "%")
+			}
+			move(total,goodRate);
 		},
 		error : function() {
 			alert('문제발생')
@@ -57,12 +94,89 @@ function like() {
 		}
 	})
 }
+function good() {
+	var boardId = $("#boardId").val();
+	var userId = $("#userId").val();
+	var form = {boardId:boardId, userId:userId}
+	$.ajax({
+		url : "good",	// url 주소
+		type : "post",			// 보내는 방식
+		data : JSON.stringify(form),	// 보낼 데이터(form을 json타입으로 변경) 자바스크립트 객체 타입을 json으로 변경
+		contentType : "application/json; charset=utf-8",	// 보낼 데이터 타입 지정
+		dataType : "json",	// 리턴 type
+		success : function(result) {
+			console.log('good성공')
+			var total = result.total;
+			if(total != 0) {
+				var good = result.good;
+				var bad = total - good;
+				var goodRate = (good/total)*100;
+				var badRate = 100 - goodRate;
+				$("#good").text(goodRate + "%")
+				$("#bad").text(badRate + "%")
+			}else {
+				var goodRate = 0;
+				$("#good").text(0 + "%")
+				$("#bad").text(0 + "%")
+			}
+			move(total,goodRate);
+		},
+		error : function() {
+			alert('문제발생')
+		}
+	})
+}
+function bad() {
+	var boardId = $("#boardId").val();
+	var userId = $("#userId").val();
+	var form = {boardId:boardId, userId:userId}
+	$.ajax({
+		url : "bad",	// url 주소
+		type : "post",			// 보내는 방식
+		data : JSON.stringify(form),	// 보낼 데이터(form을 json타입으로 변경) 자바스크립트 객체 타입을 json으로 변경
+		contentType : "application/json; charset=utf-8",	// 보낼 데이터 타입 지정
+		dataType : "json",	// 리턴 type
+		success : function(result) {
+			console.log('bad성공')
+			var total = result.total;
+			if(total != 0) {
+				var bad = result.bad;
+				var good = total - bad;
+				var badRate = (bad/total)*100;
+				var goodRate = 100 - badRate;
+				$("#good").text(goodRate + "%")
+				$("#bad").text(badRate + "%")
+			}else {
+				var goodRate = 0;
+				$("#good").text(0 + "%")
+				$("#bad").text(0 + "%")
+			}
+			move(total,goodRate);
+		},
+		error : function() {
+			alert('문제발생')
+		}
+	})
+}
 </script>
+<style type="text/css">
+	.reco { display: flex; }
+	#myProgress {
+	  width: 300px;
+	  background-color: grey;
+	}
+	
+	#myBar {
+	  width: 0%;
+	  height: 30px;
+	  background-color: green;
+	}
+</style>
 </head>
-<body onload="checkLike()">
+<body onload="boardCheck()">
 	<div>
 		<input type="hidden" id="boardId" value="${ contentData.boardId }">
-		<input type="hidden" id="userId" value="${ contentData.userId }">	<!-- 세션 아이디로 바꾸기 -->
+		<input type="hidden" id="userId" value="aaa">	<!-- 세션 아이디로 바꾸기 -->
 		<table border="1">
 			<tr>
 				<th>글 번호</th><td>${ contentData.boardId }</td>
@@ -109,6 +223,13 @@ function like() {
 				</td>
 			</tr>
 		</table>
+		<div class="reco">
+		<input type="button" onclick="good()" value="추천"><label id="good">0</label>&nbsp;
+		<div id="myProgress">
+ 			<div id="myBar"></div>
+		</div>
+		&nbsp;<label id="bad">0</label><input type="button" onclick="bad()" value="비추천">
+		</div>
 	</div>
 </body>
 </html>

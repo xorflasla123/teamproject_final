@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.helloworld.root.board.dto.BoardDTO;
 import com.helloworld.root.board.dto.BoardInfoDTO;
+import com.helloworld.root.board.dto.BoardRecoDTO;
 
 public interface BoardMapper {
 	public int writeSave(BoardDTO dto);
@@ -21,6 +22,13 @@ public interface BoardMapper {
 	public int likeCount(@Param("boardId") int boardId, @Param("userId") String userId);
 	public int deleteLike(@Param("boardId") int boardId, @Param("userId") String userId);
 	public int insertLike(@Param("boardId") int boardId, @Param("userId") String userId);
+	public int recoCount(BoardRecoDTO dto);
+	public BoardRecoDTO goodNum(BoardRecoDTO dto);
+	public int deleteReco(BoardRecoDTO dto);
+	public int insertReco(BoardRecoDTO dto);
+	public int updateReco(BoardRecoDTO dto);
+	public int recommendCount(BoardRecoDTO dto);
+	public int goodNumCount(BoardRecoDTO dto);
 	public void upHit(int boardId);
 	public int delete(int boardId);
 	public int modify(BoardDTO dto);

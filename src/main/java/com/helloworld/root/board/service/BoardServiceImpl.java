@@ -1,5 +1,7 @@
 package com.helloworld.root.board.service;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.helloworld.root.board.dto.BoardDTO;
+import com.helloworld.root.board.dto.BoardRecoDTO;
 import com.helloworld.root.mybatis.board.BoardMapper;
 
 @Service
@@ -102,9 +105,59 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.contentLike(boardId);
 	}
 	@Override
-	public int boardCheckLike(int boardId, String userId) {
-		int result = mapper.likeCount(boardId, userId);
-		return result;
+	public HashMap<String, Integer> boardCheck(int boardId, String userId) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		BoardRecoDTO dto = new BoardRecoDTO();
+		dto.setGood(1);
+		dto.setBoardId(boardId);
+		dto.setUserId(userId);
+		map.put("like", mapper.likeCount(boardId, userId));
+		map.put("total", mapper.recommendCount(dto));
+		map.put("good", mapper.goodNumCount(dto));
+		return map;
+	}
+	@Override
+	public HashMap<String, Integer> goodClick(BoardRecoDTO dto) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		int result = mapper.recoCount(dto);
+		if(result != 0) {	// 데이터가 있을 때
+			dto = mapper.goodNum(dto);
+			int num = dto.getGood();
+			if(num == 1) {	// good
+				mapper.deleteReco(dto);
+			}else {			// bad
+				dto.setGood(1);
+				mapper.updateReco(dto);
+			}
+		}else {				// 데이터가 없을 때
+			dto.setGood(1);
+			mapper.insertReco(dto);
+		}
+		map.put("total", mapper.recommendCount(dto));
+		map.put("good", mapper.goodNumCount(dto));
+		
+		return map;
+	}
+	@Override
+	public HashMap<String, Integer> badClick(BoardRecoDTO dto) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		int result = mapper.recoCount(dto);
+		if(result != 0) {	// 데이터가 있을 때
+			dto = mapper.goodNum(dto);
+			int num = dto.getGood();
+			if(num == 1) {	// good
+				dto.setGood(2);
+				mapper.updateReco(dto);
+			}else {			// bad
+				mapper.deleteReco(dto);
+			}
+		}else {				// 데이터가 없을 때
+			dto.setGood(2);
+			mapper.insertReco(dto);
+		}
+		map.put("total", mapper.recommendCount(dto));
+		map.put("bad", mapper.goodNumCount(dto));
+		return map;
 	}
 	private void upHit(int boardId) {
 		mapper.upHit(boardId);
