@@ -1,4 +1,4 @@
-package com.helloworld.root.mail;
+package com.helloworld.root.member.mail;
 
 import java.util.Properties;
 

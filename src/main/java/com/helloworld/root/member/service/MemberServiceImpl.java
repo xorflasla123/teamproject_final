@@ -1,6 +1,7 @@
 package com.helloworld.root.member.service;
 
 import java.sql.Date;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.helloworld.root.member.dto.MemberDTO;
 
@@ -35,6 +35,26 @@ public class MemberServiceImpl implements MemberService{
 
 
 	@Override
+	public int register(MemberDTO dto) {
+		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); //비밀번호 안보이게 설정 
+		
+		// dto.setPw(encoder.encode(dto.getPw())); 아래와 같음 
+		System.out.println("비밀번호 변경 전 : "+dto.getPwd());
+	//	String pwd = encoder.encode(dto.getPwd());
+	//	System.out.println("암호화 후 :"+pwd);
+		
+	//	dto.setPwd(pwd);
+		System.out.println(dto.getAddr());
+		
+		try{
+		return mapper.register(dto);
+		}catch(Exception e) {
+			e.printStackTrace();
+		return 0;
+	}
+
+}
+	@Override
 	public void userInfo(Model model) {
 		ArrayList<MemberDTO> list = mapper.userInfo();
 		model.addAttribute("memberList", list);	
@@ -45,7 +65,6 @@ public class MemberServiceImpl implements MemberService{
 		model.addAttribute("info", mapper.info(userId));
 	}
 
-
 	@Override
 	public void keepLogin(String sessionId, Date limitDate, String id) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -55,7 +74,6 @@ public class MemberServiceImpl implements MemberService{
 		mapper.keepLogin(map);
 		
 	}
-
 
 	@Override
 	public MemberDTO getUserSessionId(String sessionId) {
@@ -89,6 +107,29 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return null;
 	}
+
+	@Override
+	public int modify(MemberDTO dto) {
+	
+		try{
+			return mapper.modify(dto);
+			}catch(Exception e) {
+				e.printStackTrace();
+			return 0;
+		}
+	}
+
+	@Override
+	public void delete(String id) {
+		try{
+			mapper.delete(id);
+			}catch(Exception e) {
+				e.printStackTrace();
+		
+		}
+		
+	}
+
 
 
 }

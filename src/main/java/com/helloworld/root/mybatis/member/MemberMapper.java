@@ -9,13 +9,23 @@ import java.util.Map;
 
 public interface MemberMapper {
 	public MemberDTO user_check(String id);
+
+
+	public int register(MemberDTO dto);
+
 	public ArrayList<MemberDTO> userInfo();
 	public MemberDTO info(String userId);
+
 	public void keepLogin(Map<String, Object> map);
 	public MemberDTO getUserSessionId(String sessionId);
 	
 	public MemberDTO id_check(String email);
 	public MemberDTO pwd_check(String email);
 
+	public int modify(MemberDTO dto);
 	
+	public void delete(String id);
+
+
+
 }

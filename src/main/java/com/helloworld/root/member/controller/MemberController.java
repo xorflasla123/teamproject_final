@@ -2,13 +2,14 @@
 package com.helloworld.root.member.controller;
 
 
-import javax.servlet.http.HttpServletRequest;
 
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.Calendar;
 
 import javax.servlet.http.Cookie;
+
+import javax.servlet.http.HttpServletRequest;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.helloworld.root.member.dto.MemberDTO;
 import com.helloworld.root.member.service.MemberService;
 import com.helloworld.root.member.session_name.MemberSessionName;
 
@@ -48,7 +50,11 @@ public class MemberController implements MemberSessionName{
 		if(result == 0) {
 			rs.addAttribute("id", request.getParameter("id"));
 			System.out.println("로그인 성공");
-			rs.addAttribute("autoLogin", request.getParameter("autoLogin"));
+
+			rs.addAttribute("autoLogin",request.getParameter("autoLogin"));
+			System.out.print(request.getParameter("id"));
+
+
 			return "redirect:successLogin";
 		}
 		System.out.println("로그인 실패");
@@ -57,9 +63,15 @@ public class MemberController implements MemberSessionName{
 		
 	@RequestMapping("/successLogin")
 	public String successLogin(@RequestParam String id, 
-								@RequestParam(value="autoLogin", required = false) String autoLogin, 
-								HttpSession session, HttpServletResponse response) {
+
+			@RequestParam (value="autoLogin", required = false)String autoLogin,
+			HttpSession session,
+			HttpServletResponse response) {
 		session.setAttribute(LOGIN, id);
+	
+    	
+    	// return "redirect:/index ";  //redirect 저장된 데이터를 가져오는 것 
+   
 		
 		if(autoLogin != null) {
 			int limitTime = 60*60*24*30; // 30일
@@ -79,6 +91,7 @@ public class MemberController implements MemberSessionName{
 		}
 
 		return "/index";
+
 	}
 	
 	@GetMapping("/logout")
@@ -98,9 +111,18 @@ public class MemberController implements MemberSessionName{
 	}
 	
 	@GetMapping("register_form")
-	public String register() {
+	public String register_form() {
 		return "member/register";
 	}
+    @PostMapping("register")
+    public String register(MemberDTO dto) {
+    	int result = ms.register(dto);
+    	if(result==1) {
+    		
+    		return "redirect:login";
+    	}
+    	return "redirect:register_form";
+    }
 	
 	@GetMapping("/userInfo")
 	public String userInfo(Model model) {
@@ -113,6 +135,7 @@ public class MemberController implements MemberSessionName{
 		ms.info(userId, model);
 		return "member/info";
 	}
+
 	
 	@GetMapping("save")
 	public String save(Model model) {
@@ -188,4 +211,29 @@ public class MemberController implements MemberSessionName{
 			//return "member/forgotPwd"; 
 		}
 	}
+
+
+	@GetMapping("modify_form")
+	public String modify_form(@RequestParam String id, Model model) {
+		ms.info(id,model);
+		return "member/modify";
+	}
+    @PostMapping("modify")
+    public String modify(MemberDTO dto, Model model) {
+   
+    	int result = ms.modify(dto);
+    	if(result==1) {
+    		model.addAttribute("id", dto.getId()); // 데이터를 가져옴
+    		return "redirect:info";
+    	}
+    	return "redirect:modify_form";
+    }
+  @GetMapping("delete")
+  public String delete(@RequestParam String id, HttpSession session) {
+      
+	  ms.delete(id);
+	  session.invalidate();
+	  return "redirect:/index";		
+  }
+
 }

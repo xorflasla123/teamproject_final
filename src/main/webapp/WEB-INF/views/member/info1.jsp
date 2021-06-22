@@ -86,34 +86,6 @@ padding-top: 20px;
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 	<c:import url="../default/header.jsp" />
 	<div class="wrap" align="center" style="width: 100%; height: 969px; background-image: url('${contextPath }/resources/image/mainN.jpg');">
-<<<<<<< HEAD
-	
-		<form action="${contextPath }/member/user_check" method="post">
-			<table style="font-size: 20pt; color: white; position: absolute; top: 400px; left: 200px;">
-				<tr>
-					<td><input type="text" name="id"></td>
-				</tr>
-				<tr>
-					<td><input type="password" name="pwd"></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" name="autoLogin">로그인유지</td>
-				</tr>
-				<tr>
-					<td><a href="${contextPath }/member/forgotId">아이디 / 비밀번호 찾기</a></td>
-				</tr>
-				<tr>
-					<td><input type="submit" value="로그인">&nbsp;</td>
-				</tr>
-				<tr>
-					<td><input type="button"
-						onclick="location.href='${contextPath }/member/register_form'">회원가입</td>
-				</tr>
-
-			</table>
-		</form>
-	</div>
-=======
 
 
 <form action="${contextPath }/member/user_check" method="post">
@@ -147,7 +119,6 @@ padding-top: 20px;
   </div> <!-- login_box -->
 </form>
 </div> 
->>>>>>> 2600799e0e2517afaf4e52e612b0c4251d5d32fc
 
 </body>
 </html>
