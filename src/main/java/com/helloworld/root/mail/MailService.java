@@ -18,7 +18,7 @@ public class MailService {
 			MimeMessageHelper me = new MimeMessageHelper(message, true, "UTF-8");
 			me.setSubject(subject); //타이틀
 			me.setTo(to); //보내는곳
-			me.setText(body); //내용
+			me.setText(body, true); //내용
 			mailSender.send(message);
 			
 		} catch (Exception e) {

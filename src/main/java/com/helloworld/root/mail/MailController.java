@@ -21,7 +21,16 @@ public class MailController {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print("메일이 전송 되었습니다");
-		String message = "요청하신 회원님의 아이디는" + (String)session.getAttribute("idChk") + "입니다.";
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("<html><body>");
+		sb.append("<h1>Hello World</h>");
+		sb.append("<h2>요청하신 회원님의 아이디는 </h2>");
+		sb.append("<h4>"+(String)session.getAttribute("idChk")+"</h4>");
+		sb.append("<h2> 입니다.</h2>");
+		sb.append("</body></html>");
+		
+		String message = sb.toString();
 		
 		ms.sendMail((String)session.getAttribute("email"), "Hello World", message);
 		session.removeAttribute("email");
@@ -36,7 +45,16 @@ public class MailController {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print("메일이 전송 되었습니다");
-		String message = "요청하신 회원님의 비밀번호는" + (String)session.getAttribute("pwdChk") + "입니다.";
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("<html><body>");
+		sb.append("<h1>Hello World</h>");
+		sb.append("<h2>요청하신 회원님의 비밀번호는 </h2>");
+		sb.append("<h4>"+(String)session.getAttribute("pwdChk")+"</h4>");
+		sb.append("<h2> 입니다.</h2>");
+		sb.append("</body></html>");
+		
+		String message = sb.toString();
 		
 		ms.sendMail((String)session.getAttribute("email"), "Hello World", message);
 		session.removeAttribute("email");
