@@ -12,17 +12,17 @@ public class MailConfig {
 	@Bean
 	public JavaMailSender mailSender() {
 		JavaMailSenderImpl jms = new JavaMailSenderImpl();
-		jms.setHost("smtp.gmail.com"); //google smtp 서버 
-		jms.setPort(587); //google 메일 서버 포트
-		jms.setUsername("rlatifhs7@gmail.com");
-		jms.setPassword("ksr^*^3651");
+		jms.setHost("smtp.gmail.com");
+		jms.setPort(587);
+		jms.setUsername("team5helloworld@gmail.com");
+		jms.setPassword("xlavkdlqm!");
 		
 		Properties prop = new Properties();
 		prop.setProperty("mail.transport.protocol", "smtp");
-		prop.setProperty("mail.smtp.auth", "true"); //사용자 인증 
-		prop.setProperty("mail.smtp.starttls.enable", "true"); //보안 
+		prop.setProperty("mail.smtp.auth", "true"); //사용자 인증을 하겠다
+		prop.setProperty("mail.smtp.starttls.enable", "true"); //보안관련 설정을 하겠다
 		
-		jms.setJavaMailProperties(prop); //jms에 설정 
+		jms.setJavaMailProperties(prop);
 		return jms;
 	}
 

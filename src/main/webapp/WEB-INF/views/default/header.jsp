@@ -9,12 +9,12 @@
 <style type="text/css">
 * { margin: 0;}
 
-.wrap { width:1000px; margin: auto;}
+.wrap { width:1900px; margin: auto;}
 
 .head { width: 100%; height: 100%; margin: auto;}
 
 .bar { position:fixed; list-style: none; display: flex; justify-content: flex-end; 
-	width: 100%; height:25px; padding: 10px; margin: auto; }
+	width: 2000px; height:25px; padding: 10px;}
 
 
 header a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
@@ -27,9 +27,10 @@ header a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
 	
 	<header>
 		
-		<div>
+		<div class="wrap">
 			<ul class="bar">
-				<b style="padding-right: 1200px; font-size: 22pt; color: black;" >Hello World</b>
+		
+				<li><a style="padding-right: 1200px; font-size: 22pt; color: black;"><b>Hello World</b></a></li>
 				
 				<li><a href="${contextPath }/index">HOME</a></li>
 				
@@ -47,14 +48,9 @@ header a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
 					</c:choose>
 				</li>
 				
-				<li>
-					<c:choose>
-						<c:when test="${loginUser != null }">
-							<a href="${contextPath }/member/userInfo">마이페이지</a>
-						</c:when>
-					</c:choose>
-				</li>
+				<li><a href="${contextPath }/member/info?id=${loginUser }">마이페이지</a></li>
 				
+
 				<li><a href="${contextPath }/board/#">이용방법</a></li>
 				
 				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>

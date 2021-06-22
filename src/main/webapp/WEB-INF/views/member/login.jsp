@@ -5,7 +5,9 @@
 <html>
 <head>
 <meta charset="utf-8">
+
 <style>
+
 * {
     margin:0;
     padding:0;
@@ -26,19 +28,20 @@ margin-top:-80px; margin-left:-110px;
 
     width:420px;
     height:450px;
-    border:solid 1px #bbbbbb;
+  
     
     margin:80px;
     padding:80px;
 }
 h1 {
     font-family:"Arial";
-   
+   font-size:30px;
     margin-bottom:10px;
 }
 #login_box input {
-    width:340px;
+    width:370px;
     height:45px;
+    font-size:15px;
 }
 #id_pass {
     display: inline-block;
@@ -52,6 +55,7 @@ h1 {
     margin-top:3px;
 }
 #login_btn button {
+font-size:20px;
     margin-left:5px;
     padding:12px;
     border-radius:5px;
@@ -60,7 +64,7 @@ h1 {
  
 }
 #btns {
-    margin:12px 0 0 0;
+    margin:40px 0 0 0;
     text-decoration:underline;   
 }
 #btns li {
@@ -74,12 +78,16 @@ h1 {
  margin-bottom: 10px;
    
 }
+#chk_loin {
+ font-size:16px;
+}
 
 li {
 padding-top: 20px;
 }
-
+ 
 </style>
+
 </head>
 <body>
 
@@ -88,16 +96,17 @@ padding-top: 20px;
 	<div class="wrap" align="center" style="width: 100%; height: 969px; background-image: url('${contextPath }/resources/image/mainN.jpg');">
 
 
+<header>
 <form action="${contextPath }/member/user_check" method="post">
   <div id="login_box">
     <h1>Hello World</h1><br>
     <ul id="input_button">
       <li id="id_pass">
         <ul><li>
-            <input type="text" name="id" placeholder="아이디를 입력하세요">
+            <input type="text" name="id" placeholder=" 아이디를 입력하세요">
           </li> <!-- id -->
           <li id="pass">        
-            <input type="password" name="pwd" placeholder="비밀번호를 입력하세요">         
+            <input type="password" name="pwd" placeholder=" 비밀번호를 입력하세요">         
           </li> <!-- pass -->
         </ul>
       </li>
@@ -114,11 +123,40 @@ padding-top: 20px;
     <ul id="btns">
 
       <li><a href="register_form">회원 가입 </a></li>
-      <li><a href="">아이디/비밀번호 찾기</a></li>
+      <li><a href="${contextPath }/member/forgotId">아이디 찾기</a></li>
+       <li><a href="${contextPath }/member/forgotPwd">비밀번호 찾기</a></li>
     </ul>
   </div> <!-- login_box -->
-</form>
+</form></header>
 </div> 
+
+	<!-- 
+		<form action="${contextPath }/member/user_check" method="post">
+			<table style="font-size: 20pt; color: white; position: absolute; top: 400px; left: 200px;">
+				<tr>
+					<td><input type="text" name="id"></td>
+				</tr>
+				<tr>
+					<td><input type="password" name="pwd"></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="autoLogin">로그인유지</td>
+				</tr>
+				<tr>
+					<td><a href="${contextPath }/member/forgotId">아이디 / 비밀번호 찾기</a></td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="로그인">&nbsp;</td>
+				</tr>
+				<tr>
+					<td><input type="button"
+						onclick="location.href='${contextPath }/member/register_form'">회원가입</td>
+				</tr>
+
+			</table>
+		</form> 
+	</div>-->
+
 
 </body>
 </html>
