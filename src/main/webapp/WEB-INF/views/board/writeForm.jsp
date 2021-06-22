@@ -36,8 +36,8 @@
 			<option value="전라" <c:if test="${boardLocal == '전라'}">selected</c:if>>전라</option>
 			<option value="제주" <c:if test="${boardLocal == '제주'}">selected</c:if>>제주</option>
 		</select>
-		<b>작성자</b>	<!-- session아이디로 readonly하기 -->
-		<input type="text" name="userId" placeholder="작성자"><br>
+		<b>작성자</b>
+		<input type="text" name="userId" value="${ loginUser }" readonly><br>
 		<b>제목</b>
 		<input type="text" name="title" placeholder="제목"><br>
 		<b>내용</b>

@@ -9,6 +9,9 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
+function alertLogin() {
+	alert('로그인 먼저 하세요.')
+}
 function move(total,goodRate) {
 	console.log('move 실행')
     var elem = document.getElementById("myBar");
@@ -176,7 +179,7 @@ function bad() {
 <body onload="boardCheck()">
 	<div>
 		<input type="hidden" id="boardId" value="${ contentData.boardId }">
-		<input type="hidden" id="userId" value="aaa">	<!-- 세션 아이디로 바꾸기 -->
+		<input type="hidden" id="userId" value="${ loginUser }">
 		<table border="1">
 			<tr>
 				<th>글 번호</th><td>${ contentData.boardId }</td>
@@ -203,32 +206,46 @@ function bad() {
 					</th>
 				</tr>
 			</c:if>
-			
+			<c:if test="${ loginUser == contentData.userId }">
 				<tr>
 					<td colspan="4">
-						<!-- if (세션아이디 == contentData.userId) -->
 						<input type="button" onclick="location.href='${ contextPath }/board/modifyform?boardId=${ contentData.boardId }'" value="수정하기">
 						<input type="button" onclick="location.href='${ contextPath }/board/delete?boardId=${ contentData.boardId }&pictureName=${ contentData.picture }'" value="삭제하기">
-						<!--  -->
 					</td>
 				</tr>
-				
+			</c:if>
 			<tr>
 				<td colspan="4" style="align: right;">
-					<!-- if (세션 아이디가 있을 때) -->
-					<input type="button" onclick="" value="댓글달기">
-					<input type="button" onclick="like()" id="likeBtn" value="좋아요">
-					<!--  -->
+					<c:if test="${ loginUser != null }">
+						<input type="button" onclick="" value="댓글달기">
+						<input type="button" onclick="like()" id="likeBtn" value="좋아요">
+					</c:if>
 					<input type="button" onclick="location.href='${ contextPath }/board/main'" value="목록으로 이동">
 				</td>
 			</tr>
 		</table>
 		<div class="reco">
-		<input type="button" onclick="good()" value="추천"><label id="good">0</label>&nbsp;
+		<c:choose>
+			<c:when test="${ loginUser != null }">
+				<input type="button" onclick="good()" value="추천">
+			</c:when>
+			<c:otherwise>
+				<input type="button" onclick="alertLogin()" value="추천">
+			</c:otherwise>
+		</c:choose>
+		<label id="good">0</label>&nbsp;
 		<div id="myProgress">
  			<div id="myBar"></div>
 		</div>
-		&nbsp;<label id="bad">0</label><input type="button" onclick="bad()" value="비추천">
+		&nbsp;<label id="bad">0</label>
+		<c:choose>
+			<c:when test="${ loginUser != null }">
+				<input type="button" onclick="bad()" value="비추천">
+			</c:when>
+			<c:otherwise>
+				<input type="button" onclick="alertLogin()" value="비추천">
+			</c:otherwise>
+		</c:choose>
 		</div>
 	</div>
 </body>
