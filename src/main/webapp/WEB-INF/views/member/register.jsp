@@ -93,11 +93,12 @@ function authNum1(){
   <input size="30" type="password" name="chkPw" id="chkPw" onchange="myFocus()"placeholder="비밀번호 확인">
   <input size="30" type="text" name="name" placeholder="이름">
     <input size="30" type="text" name="email" id="email" placeholder="이메일">
+    <input type="button" onclick="email22()" value="인증하기"><br>
     <input type="text" id = "auth" name = "authNum" placeholder="인증번호를 입력해주세요" >
 <input type="button" onclick="authNum1()" value="확인">
 <input type="hidden" id="userkey" value="">
 <input type="hidden" id="possRegi" value="">
-    <input type="button" onclick="email22()" value="인증하기"><br>
+    
      
   <input size="30" type="text" name="num" placeholder="휴대전화">
  <input type="text" id="addr" name="addr" placeholder="주 소"><br>

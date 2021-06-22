@@ -34,14 +34,15 @@ margin-top:-80px; margin-left:-110px;
     padding:80px;
 }
 h1 {
+
     font-family:"Arial";
-   font-size:30px;
+   font-size:35px;
     margin-bottom:10px;
 }
 #login_box input {
     width:370px;
     height:45px;
-    font-size:15px;
+    font-size:17px;
 }
 #id_pass {
     display: inline-block;
@@ -74,12 +75,18 @@ font-size:20px;
 
 #chk_login {
  display: inline-block; 
- margin: 25px 0px 0px;
+ margin: 20px 0px 0px;
  margin-bottom: 10px;
+  font-size:18px;
+text-align: left;
+
    
 }
 #chk_loin {
  font-size:16px;
+text-align: center;
+padding-top: 20px;
+ padding-bottom: 20px;
 }
 
 li {
@@ -111,7 +118,7 @@ padding-top: 20px;
         </ul>
       </li>
     
-          <li id=chk_loin>   
+          <li id=chk_login>   
         <input type="checkbox" style="width:18px;height:18px;"  name="autoLogin" >
          로그인 상태 유지</li> 
     
@@ -123,8 +130,8 @@ padding-top: 20px;
     <ul id="btns">
 
       <li><a href="register_form">회원 가입 </a></li>
-      <li><a href="${contextPath }/member/forgotId">아이디 찾기</a></li>
-       <li><a href="${contextPath }/member/forgotPwd">비밀번호 찾기</a></li>
+      <li><a href="${contextPath }/member/forgotId">아이디 찾기 </a></li>
+       <li><a href="${contextPath }/member/forgotPwd">비밀번호 찾기 </a></li>
     </ul>
   </div> <!-- login_box -->
 </form></header>
