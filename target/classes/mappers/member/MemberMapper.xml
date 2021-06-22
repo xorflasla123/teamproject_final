@@ -39,7 +39,7 @@
 	</update>
 	
 	<select id="getUserSessionId" resultMap="member">
-		select * from users where user_id=#{sessionId}
+		select * from users where session_id=#{sessionId}
 	</select>
 	
 	<select id="id_check" resultMap="member">

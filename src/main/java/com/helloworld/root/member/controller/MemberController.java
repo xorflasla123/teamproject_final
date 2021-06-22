@@ -52,8 +52,6 @@ public class MemberController implements MemberSessionName{
 			System.out.println("로그인 성공");
 
 			rs.addAttribute("autoLogin",request.getParameter("autoLogin"));
-			System.out.print(request.getParameter("id"));
-
 
 			return "redirect:successLogin";
 		}
@@ -69,10 +67,8 @@ public class MemberController implements MemberSessionName{
 			HttpServletResponse response) {
 		session.setAttribute(LOGIN, id);
 	
-    	
     	// return "redirect:/index ";  //redirect 저장된 데이터를 가져오는 것 
    
-		
 		if(autoLogin != null) {
 			int limitTime = 60*60*24*30; // 30일
 			Cookie loginCookie = new Cookie("loginCookie", session.getId());
@@ -101,7 +97,7 @@ public class MemberController implements MemberSessionName{
 			if(loginCookie != null) {
 				loginCookie.setMaxAge(0);
 				response.addCookie(loginCookie);
-				ms.keepLogin("nono", new Date(System.currentTimeMillis()),
+				ms.keepLogin("nan", new Date(System.currentTimeMillis()),
 								(String)session.getAttribute(LOGIN));
 			}
 			
