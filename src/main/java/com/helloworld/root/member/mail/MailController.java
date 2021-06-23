@@ -67,7 +67,9 @@ public class MailController {
 		return "/member/login";
 	}
 	
+
 	   @GetMapping("auth_form")
+
 	   public String authForm(@RequestParam String email, Model model ) {
 		   model.addAttribute("email",email);
 		   return "authentication";

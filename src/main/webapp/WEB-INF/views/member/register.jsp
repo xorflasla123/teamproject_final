@@ -13,6 +13,31 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!--  <script src="${contextPath }/resources/daumPost_js/daumpost.js"></script>-->
 <script>
+function id22(){
+	console.log('아이디 중복확인')
+	var id1 = $("#id").val();
+	$.ajax({
+		url : "${contextPath }/member/id_chk", type:"POST",
+		   data : JSON.stringify(id1), //보낼 데이터(form을 json타입으로 변경)
+		   contentType : "application/json; charset=utf-8", //보낼 데이터 타입 지정 
+		   dataType : "json", //리턴 type
+		   success:function(data){
+			   console.log(data)
+			   if(data == 0){
+				   alert('중복된 아이디입니다') 
+				   $('#id').val('');
+			   }else {
+				   alert('사용가능한 아이디입니다')
+			   }
+			   }, error: function(){
+				   alert('문제 발생했어요')
+			   }
+		   
+	})
+}
+</script>
+
+<script>
 function myFocus(){
 	console.log('비밀번호 확인 실행')
 	pwd = document.getElementById("pwd");
@@ -88,16 +113,18 @@ function authNum1(){
 <form id="fo" action="register" method="post">
   <table border="1" style="width:300px;">
   <tr><td>
-  <input size="30" type="text" name="id" placeholder="아이디"> <!-- name과 dto 이름과 같아야 함  -->
+  <input size="30" type="text" name="id" id="id" placeholder="아이디"> <!-- name과 dto 이름과 같아야 함  -->
+    <input type="button" onclick="id22()" value="중복인증"><br>
    <input size="30" type="password" name="pwd" id="pwd" placeholder="비밀번호">
   <input size="30" type="password" name="chkPw" id="chkPw" onchange="myFocus()"placeholder="비밀번호 확인">
   <input size="30" type="text" name="name" placeholder="이름">
     <input size="30" type="text" name="email" id="email" placeholder="이메일">
+    <input type="button" onclick="email22()" value="인증하기"><br>
     <input type="text" id = "auth" name = "authNum" placeholder="인증번호를 입력해주세요" >
 <input type="button" onclick="authNum1()" value="확인">
 <input type="hidden" id="userkey" value="">
 <input type="hidden" id="possRegi" value="">
-    <input type="button" onclick="email22()" value="인증하기"><br>
+    
      
   <input size="30" type="text" name="num" placeholder="휴대전화">
  <input type="text" id="addr" name="addr" placeholder="주 소"><br>

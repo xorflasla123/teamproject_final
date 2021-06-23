@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.helloworld.root.mybatis.board.ReplyMapper">
+	<resultMap type="com.helloworld.root.board.dto.BoardRepDTO" id="reply">
+		<result property="board_id" column="board_id"/>
+		<result property="user_id" column="user_id"/>
+		<result property="content" column="comment_content"/>
+		<result property="id" column="comment_id"/>
+		<result property="layer" column="comment_layer"/>
+		<result property="date" column="comment_date"/>
+	</resultMap>
+	
+	<insert id="addReply">
+		insert into board_comment(board_id, user_id, comment_content, comment_id, comment_layer) values(#{board_id}, #{user_id}, #{content}, reply_seq.nextval, #{layer})
+	</insert>
+	<insert id="addReply2">
+		insert into board_comment(board_id, user_id, comment_content, comment_id, comment_layer) values(#{board_id}, #{user_id}, #{content}, #{id}, #{layer})
+	</insert>
+	
+	<select id="getRepList" resultMap="reply">
+		select * from board_comment where board_id = #{board_id} order by comment_id desc, comment_date asc
+	</select>
+	
+	<delete id="removeReply">
+		delete from board_comment where board_id = #{board_id} and comment_id = #{id} and comment_content = #{content} and user_id = #{user_id}
+	</delete>
+	<delete id="removeAllRep">
+		delete from board_comment where board_id = #{board_id} and comment_id = #{id}
+	</delete>
+</mapper>

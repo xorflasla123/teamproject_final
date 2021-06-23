@@ -16,13 +16,24 @@ public interface MemberMapper {
 	public ArrayList<MemberDTO> userInfo();
 	public MemberDTO info(String userId);
 
+
+
+
+	public int modify(MemberDTO dto);
+
+
+
 	public void keepLogin(Map<String, Object> map);
 	public MemberDTO getUserSessionId(String sessionId);
 	
 	public MemberDTO id_check(String email);
 	public MemberDTO pwd_check(String email);
+	public ArrayList<MemberDTO> idChk(String id);
 
-	public int modify(MemberDTO dto);
+
+
+	
+
 	
 	public void delete(String id);
 
