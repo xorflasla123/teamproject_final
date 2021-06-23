@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,78 +9,92 @@
 <style>
 
 * {
-    margin:0;
-    padding:0;
+	margin: 0;
+	padding: 0;
 }
+
 ul {
-    list-style-type: none;
+	list-style-type: none;
 }
+
 body {
-     font-family:"맑은고딕", "돋움";
-    font-size:12px;
-    color:444444;
+	font-family: "맑은고딕", "돋움";
+	font-size: 12px;
+	color: 444444;
 }
+
 #login_box {
+
 position:absolute; 
 top:10%; left:30%;
 margin-top:-80px; margin-left:-110px;
  text-align: center; margin:auto; padding-top: 80px;
-
     width:420px;
     height:450px;
-  
-    
     margin:80px;
     padding:80px;
 }
-h1 {
 
-    font-family:"Arial";
+h1 {
+font-family:"Arial";
    font-size:35px;
     margin-bottom:10px;
+
 }
+
 #login_box input {
+
     width:370px;
     height:45px;
     font-size:17px;
+
 }
+
 #id_pass {
-    display: inline-block;
-    vertical-align: top; 
+	display: inline-block;
+	vertical-align: top;
 }
+
 #id_pass span {
-    display: inline-block;
-    width:50px;
+	display: inline-block;
+	width: 50px;
 }
+
 #pass {
-    margin-top:3px;
+	margin-top: 3px;
 }
+
 #login_btn button {
+
 font-size:20px;
     margin-left:5px;
     padding:12px;
     border-radius:5px;
      width:340px;
     height:45px;
- 
+
 }
+
 #btns {
+
     margin:40px 0 0 0;
     text-decoration:underline;   
+
 }
+
 #btns li {
-    margin-left:10px;
-    display:inline;
+	margin-left: 40px;
+	display: inline;
 }
 
 #chk_login {
+
  display: inline-block; 
  margin: 20px 0px 0px;
  margin-bottom: 10px;
   font-size:18px;
 text-align: left;
 
-   
 }
 #chk_loin {
  font-size:16px;
@@ -90,16 +104,17 @@ padding-top: 20px;
 }
 
 li {
-padding-top: 20px;
+	padding-top: 20px;
 }
- 
+
 </style>
 
 </head>
 <body>
 
-<c:set var="contextPath" value="${pageContext.request.contextPath }" />
+	<c:set var="contextPath" value="${pageContext.request.contextPath }" />
 	<c:import url="../default/header.jsp" />
+
 	<div class="wrap" align="center" style="width: 100%; height: 969px; background-image: url('${contextPath }/resources/image/mainN.jpg');">
 
 
@@ -163,6 +178,9 @@ padding-top: 20px;
 			</table>
 		</form> 
 	</div>-->
+
+	
+
 
 
 </body>

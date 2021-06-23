@@ -18,7 +18,9 @@ public interface MemberMapper {
 
 
 
+
 	public int modify(MemberDTO dto);
+
 
 
 	public void keepLogin(Map<String, Object> map);
@@ -26,11 +28,13 @@ public interface MemberMapper {
 	
 	public MemberDTO id_check(String email);
 	public MemberDTO pwd_check(String email);
+	public ArrayList<MemberDTO> idChk(String id);
+
 
 
 	
 
-
+	
 	public void delete(String id);
 
 

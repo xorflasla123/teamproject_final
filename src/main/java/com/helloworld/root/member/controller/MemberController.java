@@ -1,12 +1,19 @@
 
 package com.helloworld.root.member.controller;
 
+
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.Calendar;
 
 import javax.servlet.http.Cookie;
+
 import javax.servlet.http.HttpServletRequest;
+
+
+import javax.servlet.http.HttpServletRequest;
+
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -16,8 +23,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.helloworld.root.member.dto.MemberDTO;
@@ -36,51 +45,49 @@ public class MemberController implements MemberSessionName {
 		return "member/login";
 	}
 
-	@PostMapping("/user_check")
-	public String user_check(HttpServletRequest request, RedirectAttributes rs) {
+	@PostMapping("user_check")
+	public void user_check(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		int result = ms.user_check(request);
-		if (result == 0) {
-			rs.addAttribute("id", request.getParameter("id"));
-
-			rs.addAttribute("autoLogin", request.getParameter("autoLogin"));
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		if(result == 0) {
+			
 			System.out.print(request.getParameter("id"));
 
-			System.out.println("로그인 성공");
+			out.print("<script>location.href='successLogin?id="+request.getParameter("id")+"&autoLogin="+request.getParameter("autoLogin")+"';</script>");
+			// return "redirect:successLogin";
+		}else {
+			out.print("<script>alert('로그인 정보를 확인해주세요.');location.href='login';</script>");}
+			// out.flush();
 
-			rs.addAttribute("autoLogin", request.getParameter("autoLogin"));
+		// return "redirect:login";}
+		
 
-			return "redirect:successLogin";
-		}
-		System.out.println("로그인 실패");
-		return "redirect:login";
+
+		
 	}
+	
+	@RequestMapping("successLogin")
+	public String successLogin(@RequestParam(value="id", required = false) String id, 
 
-	@RequestMapping("/successLogin")
-	public String successLogin(@RequestParam String id,
-
-			@RequestParam(value = "autoLogin", required = false) String autoLogin, HttpSession session,
+			@RequestParam (value="autoLogin", required = false)String autoLogin,
+			HttpSession session,
 			HttpServletResponse response) {
+		System.out.println("successLogin"+id);
 		session.setAttribute(LOGIN, id);
-
-		// return "redirect:/index "; //redirect 저장된 데이터를 가져오는 것
-
-		if (autoLogin != null) {
-			int limitTime = 60 * 60 * 24 * 30; // 30일
-			Cookie loginCookie = new Cookie("loginCookie", session.getId());
+	System.out.println(autoLogin);
+    	
+    	// return "redirect:/index ";  //redirect 저장된 데이터를 가져오는 것 
+   
+		
+		if(autoLogin != null) {
+			int limitTime = 60*60*24*30; // 30일
+			Cookie loginCookie = new Cookie("loginCookie", id);
 			loginCookie.setPath("/");
 			loginCookie.setMaxAge(limitTime);
 			response.addCookie(loginCookie);
-
-			// long expiredDate = System.currentTimeMillis() + (limitTime*1000);
-
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(new java.util.Date());
-			cal.add(Calendar.MONTH, 1);
-
-			Date limitDate = new Date(cal.getTimeInMillis());
-			ms.keepLogin(session.getId(), limitDate, id);
 		}
-
 		return "/index";
 
 	}
@@ -92,7 +99,12 @@ public class MemberController implements MemberSessionName {
 			if (loginCookie != null) {
 				loginCookie.setMaxAge(0);
 				response.addCookie(loginCookie);
+
 				ms.keepLogin("nono", new Date(System.currentTimeMillis()), (String) session.getAttribute(LOGIN));
+
+				ms.keepLogin("nan", new Date(System.currentTimeMillis()),
+								(String)session.getAttribute(LOGIN));
+
 			}
 
 			session.invalidate();
@@ -132,31 +144,34 @@ public class MemberController implements MemberSessionName {
 
 		return "redirect:/member/userInfo";
 	}
-
+	
 	@GetMapping("modify_form")
 	public String modify_form(@RequestParam String id, Model model) {
-		ms.info(id, model);
+		ms.info(id,model);
 		return "member/modify";
 	}
+	
+    @PostMapping("modify")
+    public String modify(MemberDTO dto, Model model) {
+   
+    	int result = ms.modify(dto);
+    	if(result==1) {
+    		model.addAttribute("id", dto.getId()); // 데이터를 가져옴
+    		return "redirect:info";
+    	}
+    	return "redirect:modify_form";
+    }
+    
+  @GetMapping("delete")
+  public String delete(@RequestParam String id, HttpSession session) {
+      
+	  ms.delete(id);
+	  session.invalidate();
+	  return "redirect:/index";		
+  }
 
-	@PostMapping("modify")
-	public String modify(MemberDTO dto, Model model) {
+	
 
-		int result = ms.modify(dto);
-		if (result == 1) {
-			model.addAttribute("id", dto.getId()); // 데이터를 가져옴
-			return "redirect:info";
-		}
-		return "redirect:modify_form";
-	}
-
-	@GetMapping("delete")
-	public String delete(@RequestParam String id, HttpSession session) {
-
-		ms.delete(id);
-		session.invalidate();
-		return "redirect:/index";
-	}
 
 	@GetMapping("/forgotId")
 	public String forgotId() {
@@ -225,5 +240,17 @@ public class MemberController implements MemberSessionName {
 			// return "member/forgotPwd";
 		}
 	}
+	@ResponseBody
+	  @PostMapping("id_chk")
+		public int id_chk(@RequestBody String id1 ) {
+			System.out.println("id_chk 실행");
+			id1 = id1.replace("\"", ""); //쌍따옴표 없애는 법
+			System.out.println("11"+id1);
+			int chkId = ms.id_chk(id1);
+			return chkId;
+		}
+
+
+
 
 }

@@ -25,7 +25,24 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-
+	
+	<context:component-scan base-package="com.helloworld.root" />
+	
+	<beans:bean id="boardInterceptor" class="com.helloworld.root.board.interceptor.BoardInterceptor"/>
+	
+	<!-- 인터셉터 설정 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/board/write"/>
+			<mapping path="/board/writesave"/>
+			<mapping path="/board/likelist"/>
+			<mapping path="delete"/>
+			<mapping path="modifyform"/>
+			<mapping path="modify"/>
+			<beans:ref bean="boardInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 	<context:component-scan
 		base-package="com.helloworld.root" />
 
@@ -54,7 +71,5 @@
 		<beans:property name="maxUploadSize" value="52428800" />
 		<beans:property name="defaultEncoding" value="utf-8" />
 	</beans:bean>
-
-
 
 </beans:beans>

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +15,14 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.ui.Model;
 
+
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.helloworld.root.member.dto.MemberDTO;
 import com.helloworld.root.message.MessageDTO;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+
 
 import com.helloworld.root.member.dto.MemberDTO;
 
@@ -98,10 +99,7 @@ public class MemberServiceImpl implements MemberService{
 		}
 		
 	}
-
 	
-
-
 
 
 	@Override
@@ -113,7 +111,6 @@ public class MemberServiceImpl implements MemberService{
 		mapper.keepLogin(map);
 		
 	}
-
 
 	@Override
 	public MemberDTO getUserSessionId(String sessionId) {
@@ -147,6 +144,19 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return null;
 	}
+
+	@Override
+	public int id_chk(String id) {
+			ArrayList<MemberDTO> list = mapper.idChk(id);
+			System.out.println(list.size());
+			if(list.size()==0) {
+				return 1;
+			}else {
+				return 0;
+			}
+	}
+	
+
 
 
 

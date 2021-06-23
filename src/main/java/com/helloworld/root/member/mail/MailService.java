@@ -30,6 +30,7 @@ public class MailService {
 			e.printStackTrace();
 		}
 	}
+	
 	public String auth( String email,HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		String userid = "dhyeon";

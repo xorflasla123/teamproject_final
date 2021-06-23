@@ -26,14 +26,24 @@
 	<c:import url="../default/header.jsp" /><hr>
 	<div class="main">
 	<form action="${contextPath}/board/writesave" enctype="multipart/form-data" method="post">
+		<b>카테고리</b>
+		<select size="1" name="boardLocal">
+			<option value="서울" <c:if test="${boardLocal == '서울'}">selected</c:if>>서울</option>
+			<option value="경기/인천" <c:if test="${boardLocal == '경기/인천'}">selected</c:if>>경기/인천</option>
+			<option value="강원" <c:if test="${boardLocal == '강원'}">selected</c:if>>강원</option>
+			<option value="충청" <c:if test="${boardLocal == '충청'}">selected</c:if>>충청</option>
+			<option value="경상/부산" <c:if test="${boardLocal == '경상/부산'}">selected</c:if>>경상/부산</option>
+			<option value="전라" <c:if test="${boardLocal == '전라'}">selected</c:if>>전라</option>
+			<option value="제주" <c:if test="${boardLocal == '제주'}">selected</c:if>>제주</option>
+		</select>
 		<b>작성자</b>
-		<input type="text" name="user_id" placeholder="작성자"><br>
+		<input type="text" name="userId" value="${ loginUser }" readonly><br>
 		<b>제목</b>
 		<input type="text" name="title" placeholder="제목"><br>
 		<b>내용</b>
 		<textarea rows="20" cols="50" name="content"></textarea><br>
 		<b>이미지 첨부</b>
-		<input type="file" name="board_picture" onchange="readURL(this)"/><br>
+		<input type="file" name="boardPicture" onchange="readURL(this)"/><br>
 		<img id="preview" alt="선택된 이미지가 없습니다." src="#" width="100" height="100"/><br>
 		<input type="submit" value="글쓰기">
 		<input type="button" value="목록" onclick="location.href='${contextPath}/board/main'">

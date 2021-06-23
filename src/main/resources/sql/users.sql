@@ -9,5 +9,5 @@ email_chk number default 0
 );
 
 alter table users add 
-   session_id varchar2(100) default 'nono' not null;
+   session_id varchar2(100) default 'nan' not null;
 alter table users add limit_time date;
