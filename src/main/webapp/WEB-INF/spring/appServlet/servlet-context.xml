@@ -35,6 +35,7 @@
 		<interceptor>
 			<mapping path="/board/write"/>
 			<mapping path="/board/writesave"/>
+			<mapping path="/board/likelist"/>
 			<mapping path="delete"/>
 			<mapping path="modifyform"/>
 			<mapping path="modify"/>

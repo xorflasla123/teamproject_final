@@ -56,7 +56,7 @@ function boardCheck() {
 			if(total != 0) {
 				var good = result.good;
 				var bad = total - good;
-				var goodRate = (good/total)*100;
+				var goodRate = Math.round(((good/total)*100)*10)/10;
 				var badRate = 100 - goodRate;
 				$("#good").text(goodRate + "%")
 				$("#bad").text(badRate + "%")
@@ -113,7 +113,7 @@ function good() {
 			if(total != 0) {
 				var good = result.good;
 				var bad = total - good;
-				var goodRate = (good/total)*100;
+				var goodRate = Math.round(((good/total)*100)*10)/10;
 				var badRate = 100 - goodRate;
 				$("#good").text(goodRate + "%")
 				$("#bad").text(badRate + "%")
@@ -145,7 +145,7 @@ function bad() {
 			if(total != 0) {
 				var bad = result.bad;
 				var good = total - bad;
-				var badRate = (bad/total)*100;
+				var badRate = Math.round(((bad/total)*100)*10)/10;
 				var goodRate = 100 - badRate;
 				$("#good").text(goodRate + "%")
 				$("#bad").text(badRate + "%")
@@ -220,7 +220,7 @@ function bad() {
 						<input type="button" onclick="" value="댓글달기">
 						<input type="button" onclick="like()" id="likeBtn" value="좋아요">
 					</c:if>
-					<input type="button" onclick="location.href='${ contextPath }/board/main'" value="목록으로 이동">
+					<input type="button" onclick="history.back()" value="돌아가기">
 				</td>
 			</tr>
 		</table>

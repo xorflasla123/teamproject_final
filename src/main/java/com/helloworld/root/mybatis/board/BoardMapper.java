@@ -13,6 +13,8 @@ public interface BoardMapper {
 	public int boardCount();
 	public int categoryCount(String boardLocal);
 	public ArrayList<BoardDTO> boardList(@Param("start") int start, @Param("end") int end);
+	public int boardLikeCount(String userId);
+	public ArrayList<BoardDTO> boardLikeList(@Param("start") int start, @Param("end") int end, @Param("userId") String userId);
 	public ArrayList<BoardDTO> categoryBoardList(@Param("start") int start, @Param("end") int end, @Param("boardLocal") String boardLocal);
 	public int searchCount(@Param("search") String search, @Param("searchWord") String searchWord);
 	public ArrayList<BoardDTO> searchList(@Param("start") int start, @Param("end") int end, @Param("search") String search, @Param("searchWord") String searchWord);

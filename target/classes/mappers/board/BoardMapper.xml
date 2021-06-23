@@ -41,6 +41,16 @@
 		select count(*) from board
 	</select>
 	
+	<select id="boardLikeCount" resultType="Integer">
+		select count(*) from board_info where user_id=#{userId}
+	</select>
+	
+	<select id="boardLikeList" resultMap="board">
+		select B.* from(select rownum rn, A.* from
+		(select * from  board where board_id in (select board_id from board_info where user_id=#{userId}) order by board_id desc)A)B
+		where rn between #{start} and #{end}
+	</select>
+	
 	<select id="categoryCount" resultType="Integer">
 		select count(*) from board where board_local=#{boardLocal}
 	</select>

@@ -52,6 +52,12 @@ public class BoardController {
 		
 		return "board/searchView";
 	}
+	@GetMapping("likelist")
+	public String likeBoardList(Model model, @RequestParam String userId,
+			@RequestParam(value="num", required = false, defaultValue = "1") int num) {
+		bs.boardLikeList(model, num, userId);
+		return "board/likeList";
+	}
 	@RequestMapping("write")
 	public String write(@RequestParam String boardLocal, Model model) {
 		model.addAttribute("boardLocal", boardLocal);

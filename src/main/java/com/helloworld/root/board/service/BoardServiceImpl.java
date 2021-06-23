@@ -3,7 +3,6 @@ package com.helloworld.root.board.service;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +19,11 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired BoardMapper mapper;
 	@Override
 	public String writeSave(MultipartHttpServletRequest mul, HttpServletRequest request) {
-		HttpSession session = request.getSession();
 		BoardDTO dto = new BoardDTO();
 		BoardFileService bfs = new BoardFileServiceImpl();
 		String message = null;
 		dto.setBoardLocal(mul.getParameter("boardLocal"));
-		dto.setUserId(mul.getParameter("userId"));	// 세션넣기(s_project BoardServiceImpl 참고)
+		dto.setUserId(mul.getParameter("userId"));
 		dto.setTitle(mul.getParameter("title"));
 		dto.setContent(mul.getParameter("content"));
 		MultipartFile file = mul.getFile("boardPicture");
@@ -71,6 +69,19 @@ public class BoardServiceImpl implements BoardService {
 		int start = end + 1 - pageLetter;
 		model.addAttribute("repeat", repeat);
 		model.addAttribute("boardList", mapper.boardList(start, end));
+	}
+	@Override
+	public void boardLikeList(Model model, int num, String userId) {
+		int boardLikeCount = mapper.boardLikeCount(userId);
+		int pageLetter = 3;
+		int repeat = boardLikeCount / pageLetter;
+		if(boardLikeCount % pageLetter != 0) {
+			repeat += 1;
+		}
+		int end = num * pageLetter;
+		int start = end + 1 - pageLetter;
+		model.addAttribute("repeat", repeat);
+		model.addAttribute("boardLikeList", mapper.boardLikeList(start, end, userId));
 	}
 	@Override
 	public void search(Model model, int num, String search, String searchWord) {

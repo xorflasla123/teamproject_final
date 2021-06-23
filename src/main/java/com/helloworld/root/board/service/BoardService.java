@@ -13,6 +13,7 @@ public interface BoardService {
 	public String writeSave(MultipartHttpServletRequest mul, HttpServletRequest request);
 	public void categoryBoardList(Model model, int num, String boardLocal);
 	public void boardList(Model model, int num);
+	public void boardLikeList(Model model, int num, String userId);
 	public void contentView(int boardId, Model model);
 	public int boardLike(int boardId, String userId);
 	public HashMap<String, Integer> boardCheck(int boardId, String userId);
