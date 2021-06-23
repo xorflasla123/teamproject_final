@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import org.springframework.ui.Model;
@@ -23,22 +24,24 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	public int user_check(HttpServletRequest request) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
 		MemberDTO dto = mapper.user_check(request.getParameter("id"));
 		
 		if(dto != null) {
-			if(request.getParameter("pwd").equals(dto.getPwd())) {
+			if(encoder.matches(request.getParameter("pwd"), dto.getPwd()) || 
+								request.getParameter("pwd").equals(dto.getPwd())) {
 				return 0;
 			}
 		}
 		return 1;
 	}
-
-
+	
 	@Override
 	public int register(MemberDTO dto) {
 		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); //비밀번호 안보이게 설정 
 		
-		// dto.setPw(encoder.encode(dto.getPw())); 아래와 같음 
+		// dto.setPw(encoder.encode(dto.getPwd())); 아래와 같음 
 		System.out.println("비밀번호 변경 전 : "+dto.getPwd());
 	//	String pwd = encoder.encode(dto.getPwd());
 	//	System.out.println("암호화 후 :"+pwd);

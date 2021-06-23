@@ -14,8 +14,9 @@
 .head { width: 100%; height: 100%; margin: auto;}
 
 .bar { position:fixed; list-style: none; display: flex; justify-content: flex-end; 
-	width: 2000px; height:25px; padding: 10px;}
+	width: 2000px; height:25px;}
 
+li {padding-right: 30px;}
 
 header a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
 
@@ -30,7 +31,7 @@ header a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
 		<div class="wrap">
 			<ul class="bar">
 		
-				<li><a style="padding-right: 1200px; font-size: 22pt; color: black;"><b>Hello World</b></a></li>
+				<li><a style="padding-right: 850px; font-size: 22pt; color: black;"><b>Hello World</b></a></li>
 				
 				<li><a href="${contextPath }/index">HOME</a></li>
 				
@@ -50,6 +51,7 @@ header a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
 				
 				<li><a href="${contextPath }/member/info?id=${loginUser }">마이페이지</a></li>
 				
+				<li><a href="${contextPath }/navigate">길찾기</a></li>
 
 				<li><a href="${contextPath }/board/#">이용방법</a></li>
 				
