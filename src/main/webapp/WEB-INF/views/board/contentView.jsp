@@ -250,16 +250,16 @@ function replyData(){ //댓글 보여주는 부분
 					let writeDate = date.getFullYear()+"."+(date.getMonth()+1)+"."
 					writeDate += date.getDate()+" "+hours+":"
 					writeDate += minutes+":"+seconds
-					
+					var userId = $("#userId").val();
 					console.log(rep[i].user_id);
-					console.log(${ loginUser });
+					console.log(userId);
 					let user_id = rep[i].user_id;
 					if(rep[i].layer==0){ //부모 댓글은 [댓글]버튼 추가
 						html += "<div class= 'reply'>"
 						html +=		rep[i].content+"<br>"
 						html +=		"<font class= 'time'>"+writeDate+"</font><br>"
 						
-						if(${loginUser}==user_id){
+						if(userId==user_id){
 							html +=	"<input type='button' id='"+i+"' value='삭제' onclick='remove(this.id)'>"
 						}
 						
@@ -284,7 +284,7 @@ function replyData(){ //댓글 보여주는 부분
 						html +=		"└>"+rep[i].content+"<br>"
 						html +=		"<font class= 'time'>"+writeDate+"</font><br>"
 						
-						if(${loginUser}==user_id){
+						if(userId==user_id){
 							html +=	"<input type='button' id='"+i+"' value='삭제' onclick='remove(this.id)'>"
 						}
 						
