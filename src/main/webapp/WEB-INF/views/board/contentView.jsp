@@ -47,9 +47,9 @@ function boardCheck() {
 		dataType : "json",	// 리턴 type
 		success : function(result) {
 			if(result.like != 0) {
-				$("#likeBtn").val("좋아요 취소")
+				$("#likeBtn").attr("src", "${contextPath }/resources/image/like.jpg");
 			}else {
-				$("#likeBtn").val("좋아요")
+				$("#likeBtn").attr("src", "${contextPath }/resources/image/dislike.jpg");
 			}
 			var total = result.total;
 			console.log("토탈 : "+total);
@@ -84,12 +84,12 @@ function like() {
 		dataType : "json",	// 리턴 type
 		success : function(result) {
 			$("#like").text(result)
-			var valueBtn = $('#likeBtn').val();
+			var valueBtn = $("#likeBtn").attr("src");
 			console.log(valueBtn)
-			if(valueBtn == '좋아요') {
-				$("#likeBtn").val("좋아요 취소")
+			if(valueBtn == '${contextPath }/resources/image/like.jpg') {
+				$("#likeBtn").attr("src", "${contextPath }/resources/image/dislike.jpg");
 			}else {
-				$("#likeBtn").val("좋아요")
+				$("#likeBtn").attr("src", "${contextPath }/resources/image/like.jpg");
 			}
 		},
 		error : function() {
@@ -217,8 +217,8 @@ function bad() {
 			<tr>
 				<td colspan="4" style="align: right;">
 					<c:if test="${ loginUser != null }">
+						<img src="${contextPath }/resources/image/dislike.jpg" id="likeBtn" onclick="like()" style="width: 20px; height: 20px;">
 						<input type="button" onclick="" value="댓글달기">
-						<input type="button" onclick="like()" id="likeBtn" value="좋아요">
 					</c:if>
 					<input type="button" onclick="history.back()" value="돌아가기">
 				</td>
