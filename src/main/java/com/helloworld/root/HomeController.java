@@ -1,11 +1,9 @@
 package com.helloworld.root;
 
-import java.net.URLEncoder;
+
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,24 +42,6 @@ public class HomeController {
 	public String index() {
 		System.out.println("index 실행");
 		return "index";
-	}
-	
-	@GetMapping("navigate")
-	public String navigate() {
-		System.out.println("길찾기 실행");
-		return "navigate";
-	}
-	
-	@GetMapping("navi")
-	public String navi(HttpServletRequest request) throws Exception{
-		
-		String dep = request.getParameter("dep");
-		String arr = request.getParameter("arr");
-		
-		dep = URLEncoder.encode(dep,"UTF-8");
-		arr = URLEncoder.encode(arr,"UTF-8");
-		
-		return "redirect:https://map.kakao.com/?sName="+dep+"&eName="+arr;
 	}
 	
 }

@@ -19,7 +19,7 @@
 	
 	<div class="main">
 	
-		<form action="#">
+		<form action="${contextPath }/map/test">
 			<input type="search" name="HomeSearch" placeholder="검색어 입력"> <input type="submit" value="검색">
 		</form>
 	</div>
@@ -30,16 +30,16 @@
 	<div align="center">
 		<table>
 			<tr>
-				<td style="width: 400px; height: 600px"><img src="${contextPath }/resources/image/andong.jpg"><br><b style="font-size: 20pt;">ANDONG</b><br>대한민국 안동</td>
-				<td style="width: 400px; height: 600px"><img src="${contextPath }/resources/image/busan.jpg"><br><b style="font-size: 20pt;">BUSAN</b><br>대한민국 부산</td>
-				<td style="width: 400px; height: 600px"><img src="${contextPath }/resources/image/gangneung.jpg"><br><b style="font-size: 20pt;">GANGNEUNG</b><br>대한민국 강릉</td>
-				<td style="width: 400px; height: 600px"><img src="${contextPath }/resources/image/gyeongju.jpg"><br><b style="font-size: 20pt;">GYEONGJU</b><br>대한민국 경주</td>
+				<td style="width: 400px; height: 600px"><a href="${contextPath }/map/test?name=안동"><img src="${contextPath }/resources/image/andong.jpg" name="안동"></a><br><b style="font-size: 20pt;">ANDONG</b><br>대한민국 안동</td>
+				<td style="width: 400px; height: 600px"><a href="${contextPath }/map/test?name=부산"><img src="${contextPath }/resources/image/busan.jpg" name="부산"></a><br><b style="font-size: 20pt;">BUSAN</b><br>대한민국 부산</td>
+				<td style="width: 400px; height: 600px"><a href="${contextPath }/map/test?name=강릉"><img src="${contextPath }/resources/image/gangneung.jpg" name="강릉"></a><br><b style="font-size: 20pt;">GANGNEUNG</b><br>대한민국 강릉</td>
+				<td style="width: 400px; height: 600px"><a href="${contextPath }/map/test?name=경주"><img src="${contextPath }/resources/image/gyeongju.jpg" name="경주"></a><br><b style="font-size: 20pt;">GYEONGJU</b><br>대한민국 경주</td>
 			</tr>
 			
 			<tr>
-				<td style="width: 400px; height: 600px"><img src="${contextPath }/resources/image/jeju.jpg"><br><b style="font-size: 20pt;">JEJU</b><br>대한민국 제주도</td>
-				<td style="width: 400px; height: 600px"><img src="${contextPath }/resources/image/jeonju.jpg"><br><b style="font-size: 20pt;">JEONJU</b><br>대한민국 전주</td>
-				<td style="width: 400px; height: 600px"><img src="${contextPath }/resources/image/mokpo.jpg"><br><b style="font-size: 20pt;">MOKPO</b><br>대한민국 목포</td>
+				<td style="width: 400px; height: 600px"><a href="${contextPath }/map/test?name=제주"><img src="${contextPath }/resources/image/jeju.jpg" name="제주"></a><br><b style="font-size: 20pt;">JEJU</b><br>대한민국 제주도</td>
+				<td style="width: 400px; height: 600px"><a href="${contextPath }/map/test?name=전주"><img src="${contextPath }/resources/image/jeonju.jpg" name="전주"></a><br><b style="font-size: 20pt;">JEONJU</b><br>대한민국 전주</td>
+				<td style="width: 400px; height: 600px"><a href="${contextPath }/map/test?name=목포"><img src="${contextPath }/resources/image/mokpo.jpg" name="목포"></a><br><b style="font-size: 20pt;">MOKPO</b><br>대한민국 목포</td>
 				<td style="width: 400px; height: 600px">선 없앰</td>
 			</tr>
 			

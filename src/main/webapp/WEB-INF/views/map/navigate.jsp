@@ -10,7 +10,7 @@
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath }" />
 
-	<form action="${contextPath }/navi" method="get" target="_blank">
+	<form action="${contextPath }/map/navi" method="get" target="_blank">
 		<input type="text" name="dep" placeholder="출발지 입력"><br>
 		<input type="text" name="arr" placeholder="도착지 입력"><br>
 		<input type="submit" value="검색">

@@ -51,7 +51,7 @@ header a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
 				
 				<li><a href="${contextPath }/member/info?id=${loginUser }">마이페이지</a></li>
 				
-				<li><a href="${contextPath }/navigate">길찾기</a></li>
+				<li><a href="${contextPath }/map/navigate">길찾기</a></li>
 
 				<li><a href="${contextPath }/board/#">이용방법</a></li>
 				
