@@ -11,8 +11,8 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 	<c:import url="default/header.jsp" /><hr>
 	
-	<div class="wrap">
-		<img src="${contextPath }/resources/image/mainN.jpg" width="100%" height="970px">
+	<div>
+		<img src="${contextPath }/resources/image/mainN.jpg" width="100%" height="960px">
 		<h1 style="font-size: 60pt; color: white; position: absolute; top: 400px; left: 200px;">Hello World</h1>
 		<h1 style="font-size: 14pt; color: white; position: absolute; top: 500px; left: 200px;">우하하하하하하하하하하하하<br>우하하하하하하하하하하하하<br>우하하하하하하하하하하하하<br></h1>
 	</div>

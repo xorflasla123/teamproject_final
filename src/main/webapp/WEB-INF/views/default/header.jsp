@@ -21,6 +21,8 @@ li {padding-right: 30px;}
 header a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
 
 .main { text-align: center; margin: auto; padding-top: 80px; }
+
+#test {float: right !important}
 </style>
 </head>
 <body>
@@ -29,7 +31,7 @@ header a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
 	<header>
 		
 		<div class="wrap">
-			<ul class="bar">
+			<ul class="bar" id="test">
 		
 				<li><a style="padding-right: 850px; font-size: 22pt; color: black;"><b>Hello World</b></a></li>
 				
