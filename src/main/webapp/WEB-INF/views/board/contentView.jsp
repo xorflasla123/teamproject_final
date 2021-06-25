@@ -47,9 +47,9 @@ function boardCheck() {
 		dataType : "json",	// 리턴 type
 		success : function(result) {
 			if(result.like != 0) {
-				$("#likeBtn").val("좋아요 취소")
+				$("#likeBtn").attr("src", "${contextPath }/resources/image/like.jpg");
 			}else {
-				$("#likeBtn").val("좋아요")
+				$("#likeBtn").attr("src", "${contextPath }/resources/image/dislike.jpg");
 			}
 			var total = result.total;
 			console.log("토탈 : "+total);
@@ -84,12 +84,12 @@ function like() {
 		dataType : "json",	// 리턴 type
 		success : function(result) {
 			$("#like").text(result)
-			var valueBtn = $('#likeBtn').val();
+			var valueBtn = $("#likeBtn").attr("src");
 			console.log(valueBtn)
-			if(valueBtn == '좋아요') {
-				$("#likeBtn").val("좋아요 취소")
+			if(valueBtn == '${contextPath }/resources/image/like.jpg') {
+				$("#likeBtn").attr("src", "${contextPath }/resources/image/dislike.jpg");
 			}else {
-				$("#likeBtn").val("좋아요")
+				$("#likeBtn").attr("src", "${contextPath }/resources/image/like.jpg");
 			}
 		},
 		error : function() {
@@ -250,16 +250,16 @@ function replyData(){ //댓글 보여주는 부분
 					let writeDate = date.getFullYear()+"."+(date.getMonth()+1)+"."
 					writeDate += date.getDate()+" "+hours+":"
 					writeDate += minutes+":"+seconds
-					
+					var userId = $("#userId").val();
 					console.log(rep[i].user_id);
-					console.log(${ loginUser });
+					console.log(userId);
 					let user_id = rep[i].user_id;
 					if(rep[i].layer==0){ //부모 댓글은 [댓글]버튼 추가
 						html += "<div class= 'reply'>"
 						html +=		rep[i].content+"<br>"
 						html +=		"<font class= 'time'>"+writeDate+"</font><br>"
 						
-						if(${loginUser}==user_id){
+						if(userId==user_id){
 							html +=	"<input type='button' id='"+i+"' value='삭제' onclick='remove(this.id)'>"
 						}
 						
@@ -284,7 +284,7 @@ function replyData(){ //댓글 보여주는 부분
 						html +=		"└>"+rep[i].content+"<br>"
 						html +=		"<font class= 'time'>"+writeDate+"</font><br>"
 						
-						if(${loginUser}==user_id){
+						if(userId==user_id){
 							html +=	"<input type='button' id='"+i+"' value='삭제' onclick='remove(this.id)'>"
 						}
 						
@@ -390,9 +390,9 @@ window.onload = function (){ //브라우저 시작과 동시에 댓글 보여주
 				</tr>
 			</c:if>
 			<tr>
-				<td colspan="4" style="align: right;">
+				<td colspan="4" style="align-content: right;">
 					<c:if test="${ loginUser != null }">
-						<input type="button" onclick="like()" id="likeBtn" value="좋아요">
+						<img src="${contextPath }/resources/image/dislike.jpg" id="likeBtn" onclick="like()" style="width: 20px; height: 20px;">
 					</c:if>
 					<input type="button" onclick="history.back()" value="돌아가기">
 				</td>

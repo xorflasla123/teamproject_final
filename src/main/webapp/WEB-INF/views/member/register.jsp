@@ -131,7 +131,7 @@ function authNum1(){
   <input type="button" onclick="daumPost()" value="주소찾기"><br>
 
   <input type="button" onclick="register()" name="join" value="가입" >
- <input type="button" onclick="location.href='history.back()'" value="취소" >
+ <input type="button" onclick="history.back()" value="취소" >
   </td>
   </tr>
   </table>
