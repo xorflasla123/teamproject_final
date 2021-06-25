@@ -122,7 +122,7 @@
 	
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9d91be7e6ccf8a9cef5bc26a83d6face&libraries=services"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d88b03ad0e3ed3f735224649327c5f2&libraries=services"></script>
 	<script>                                        /* 여기부분 =이랑 &사이가 appkey넣는 자리 */
 		window.onload = function(){
 			let keyword = "${hs}";
@@ -345,25 +345,17 @@
 				// 마커와 검색결과 항목에 mouseover 했을때
 				// 해당 장소에 인포윈도우에 장소명을 표시합니다
 				// mouseout 했을 때는 인포윈도우를 닫습니다
-				(function(marker, title) {
-					kakao.maps.event.addListener(marker, 'mouseover',
+				(function(marker, place) {
+					kakao.maps.event.addListener(marker, 'click',
 							function() {
-								displayInfowindow(marker, title);
+								displayInfowindow(marker, place);
 							});
-
-					kakao.maps.event.addListener(marker, 'mouseout',
-							function() {
-								infowindow.close();
-							});
-
-					itemEl.onmouseover = function() {
-						displayInfowindow(marker, title);
+					
+					itemEl.onclick = function() {
+						displayInfowindow(marker, place);
 					};
 
-					itemEl.onmouseout = function() {
-						infowindow.close();
-					};
-				})(marker, places[i].place_name);
+				})(marker, places[i]);
 
 				fragment.appendChild(itemEl);
 			}
@@ -508,12 +500,25 @@
 
 		// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 		// 인포윈도우에 장소명을 표시합니다
-		function displayInfowindow(marker, title) {
-			var content = '<div style="padding:5px;z-index:1;">' + title
-					+ '</div>';
+		function displayInfowindow(marker, place) {
+			var content = '<div class="placeinfo">' +
+		    '   <a class="title" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">' + place.place_name + '</a>';   
 
-			infowindow.setContent(content);
-			infowindow.open(map, marker);
+			if (place.road_address_name) {
+			content += '    <span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
+			    '  <span class="jibun" title="' + place.address_name + '">(지번 : ' + place.address_name + ')</span>';
+			}  else {
+			content += '    <span title="' + place.address_name + '">' + place.address_name + '</span>';
+			}                
+			
+			content += '    <span class="tel">' + place.phone + '</span>' + 
+			'</div>' + '<div class="after"></div>';
+
+			//infowindow.setContent(content);
+			//infowindow.open(map, marker);
+			contentNode.innerHTML = content;
+			placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
+			placeOverlay.setMap(map);
 		}
 
 		// 검색결과 목록의 자식 Element를 제거하는 함수입니다
