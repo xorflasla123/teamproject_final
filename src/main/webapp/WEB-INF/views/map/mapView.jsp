@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -136,22 +135,22 @@
 			$("#hidden1").show();
 			$("#hidden2").hide();
 			$("#btnhidden").show();
-
+			kakao.maps.event.removeListener(map, 'idle', searchPlaces1);
 			resetCategory();
 		}
 		function visible2() {
 			$("#hidden2").show();
 			$("#hidden1").hide();
 			$("#btnhidden").show();
-
 			resetKeyword();
+			kakao.maps.event.addListener(map, 'idle', searchPlaces1);
 		}
 
 		function invisible() {
 			$("#hidden1").hide();
 			$("#hidden2").hide();
 			$("#btnhidden").hide();
-
+			kakao.maps.event.removeListener(map, 'idle', searchPlaces1);
 			resetCategory();
 			resetKeyword();
 		}
@@ -161,6 +160,7 @@
 			resetList();
 			removeMarker();
 			resetPagenation();
+			placeOverlay.setMap(null);
 		}
 
 		function resetList() {
@@ -224,7 +224,7 @@
 		//searchPlaces();
 
 		// 지도에 idle 이벤트를 등록합니다(카테고리만)
-		kakao.maps.event.addListener(map, 'idle', searchPlaces1);
+		//kakao.maps.event.addListener(map, 'idle', searchPlaces1);
 
 		// 커스텀 오버레이의 컨텐츠 노드에 css class를 추가합니다 
 		contentNode.className = 'placeinfo_wrap';
