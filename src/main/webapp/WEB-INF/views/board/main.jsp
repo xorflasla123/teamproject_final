@@ -15,7 +15,7 @@
 <body>
 	<c:set var="contextPath" value="${ pageContext.request.contextPath }" />
 	<c:import url="../default/header.jsp" /><hr>
-	<div class="page main">
+	<div class="page main" style="margin: auto; width: 1000px;">
 		<div>
 			<ul type="circle">
 			<li><a href="${ contextPath }/board/main?boardLocal=전체">전체</a></li>
