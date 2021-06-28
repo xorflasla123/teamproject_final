@@ -45,11 +45,12 @@ header a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
 						
 						<c:otherwise>
 							<a href="${contextPath }/member/logout">로그아웃</a>
+							<li><a href="${contextPath }/member/info?id=${loginUser }">마이페이지</a></li>
 						</c:otherwise>
 					</c:choose>
 				</li>
 				
-				<li><a href="${contextPath }/member/info?id=${loginUser }">마이페이지</a></li>
+				
 				
 				<li><a href="${contextPath }/map/navigate">길찾기</a></li>
 

@@ -6,6 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<style type="text/css"> 
+ #first{
+ display:none;
+     position: fixed; z-index:9; margin: 0 auto; 
+     top: 30px; left: 100; right: 0; height: 1200px; width: 330px;
+     background-color: rgba(212,244,250);      }
+
+#content{  resize:none; height: 500px; width: 270px; }
+</style> <!--여기까지 메모  -->
+
 <style>
 	.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 	.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
@@ -78,12 +90,15 @@
 </head>
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath }" />
-	
+	<input id="hidden_name" type="hidden" name="place_name" value="">
+	<input id="hidden_address" type="hidden" name="place_address" value="">
+	<input id="hidden_userId" type="hidden" name="user_Id" value="${loginUser }">
 	<div class="map_wrap">
 		<div id="map"
 			style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
 		<button type="button" onclick="visible1()" id="">키워드 검색</button>
 		<button type="button" onclick="visible2()" id="">카테고리 검색</button>
+		<input type="button" onclick="slideClick()" value="메모">
 		<div id="btnhidden">
 			<button type="button" onclick="invisible()" id="">닫기</button>
 		</div>
@@ -119,8 +134,61 @@
 			</ul>
 		</div>
 	</div>
-	
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<div id="first">
+<div style="width:250px; margin: 0 auto; padding-top: 20px;">
+<form id="frm">
+<b>메모 페이지</b> <hr>
+
+<b>작성자  <input type="text" id="id" name="user_id" value="${loginUser} " readonly> </b><br> <br>
+<b>제목</b>  <input type="text" id="title" size="30" name="title"><br><br>
+<b>내용</b> <br> <textarea rows="5" cols="30" id="content" name="content"></textarea>
+<hr>
+<button type="button" onclick="rep()">저장</button>
+<button type="button" onclick="slide_hide()">취소</button>
+<button type="button" onclick="memoList()">메모 목록</button>
+<input type="button" onclick="location.href='${contextPath }/map/memolist'" value="메모 목록">
+</form>
+</div ><div id="memolist">
+
+
+</div>
+</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script><!-- 메모 -->
+	<script type="text/javascript">
+   function slideClick(){
+	   var userId = document.getElementById("hidden_userId").value;
+	   if(userId == ""){
+		   alert('로그인 먼저 해주세요')
+	   }else{
+	   console.log('실행11')
+	   $("#first").slideDown("slow");
+	   $("#modal_wrap").show();
+	   }
+   }
+   function slide_hide(){
+	   $("#first").slideUp("fast");
+	   $("#modal_wrap").hide();
+   }
+   function rep(){
+	   let form={}; let arr = $("#frm").serializeArray();
+	   for(i=0 ; i<arr.length ; i++){
+		   form[arr[i].name] = arr[i].value
+	   }
+	   $.ajax({
+		   url: "addMemo", type:"POST",  
+		   data: JSON.stringify(form),
+		   contentType: "application/json; charset=utf-8",
+		   dataType : "json",
+		   success: function(result){
+			   alert("성공적으로 저장되었습니다"); slide_hide();
+			   
+		   }, error: function(){
+			   alert("문제 발생 !!!");
+		   }
+	   })
+   }
+  
+</script><!-- 여기까지 메모 -->
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=761a0a96bd36bae33e8d2523115b5777&libraries=services"></script>
 	<script>                                        /* 여기부분 =이랑 &사이가 appkey넣는 자리 */
@@ -541,11 +609,14 @@
 			}
 
 			content += '    <span class="tel">' + place.phone + '</span>'
-					+ '</div>' + '<div class="after"></div>';
+					+ '<button type="button" onclick="memoAdd()">메모 추가</button></div>' + '<div class="after"></div>';
 
 			contentNode.innerHTML = content;
 			placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
 			placeOverlay.setMap(map);
+		
+		document.getElementById("hidden_name").value = place.place_name
+		document.getElementById("hidden_address").value = place.address_name
 		}
 
 		// 각 카테고리에 클릭 이벤트를 등록합니다
@@ -586,6 +657,38 @@
 				el.className = 'on';
 			}
 		}
+		
+		function memoAdd(){
+			var content = document.getElementById("content").value;
+			 var name1 = document.getElementById("hidden_name").value;
+			var addr1 =  document.getElementById("hidden_address").value;
+			var newContent = content+name1+addr1
+			console.log(name1)
+			console.log(addr1)
+			$("#content").val(newContent);
+		
+		}
+		
+		function memoList(){
+		var userId = document.getElementById("hidden_userId").value;
+		
+		}
+		$.ajax({
+		url: "memolist/" + ${loginUser}, type:"GET",
+		 contentType: "application/json; charset=utf-8",
+		 dataType : "json",
+		  success: function(list){
+			   let html =""
+			   list.forEach(function(data){
+				   html += "<div align='center'><b>아이디 : </b>" + data.user_id + "님/";
+				   html += "<b>제목 : </b>" + data.title + "<br>";
+				   html += "<b>내용 : </b>" + data.content + "<br>";
+			   })
+			   $("#memolist").html(html)
+		   }, error: function(){
+			   alert("문제 발생 !!!");
+		   }
+		})
 	</script>
 </body>
 </html>
