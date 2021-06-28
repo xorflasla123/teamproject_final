@@ -21,6 +21,9 @@
 		}
 	}
 </script>
+<style type="text/css">
+	#content { resize: none; }
+</style>
 </head>
 <body>
 	<div>
@@ -40,7 +43,7 @@
 			<b>제목</b>
 			<input type="text" name="title" value="${ contentData.title }"><br>
 			<b>내용</b>
-			<textarea rows="20" cols="50" name="content">${ contentData.content }</textarea><br>
+			<textarea rows="20" cols="50" id="content" name="content">${ contentData.content }</textarea><br>
 			<input type="file" name="pictureName" onchange="readURL(this)"/><br>
 			<c:choose>
 				<c:when test="${ contentData.picture != 'nan' }">

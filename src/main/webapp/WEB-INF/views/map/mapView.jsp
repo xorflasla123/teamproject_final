@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -204,22 +203,22 @@
 			$("#hidden1").show();
 			$("#hidden2").hide();
 			$("#btnhidden").show();
-
+			kakao.maps.event.removeListener(map, 'idle', searchPlaces1);
 			resetCategory();
 		}
 		function visible2() {
 			$("#hidden2").show();
 			$("#hidden1").hide();
 			$("#btnhidden").show();
-
 			resetKeyword();
+			kakao.maps.event.addListener(map, 'idle', searchPlaces1);
 		}
 
 		function invisible() {
 			$("#hidden1").hide();
 			$("#hidden2").hide();
 			$("#btnhidden").hide();
-
+			kakao.maps.event.removeListener(map, 'idle', searchPlaces1);
 			resetCategory();
 			resetKeyword();
 		}
@@ -229,6 +228,7 @@
 			resetList();
 			removeMarker();
 			resetPagenation();
+			placeOverlay.setMap(null);
 		}
 
 		function resetList() {
@@ -292,7 +292,7 @@
 		//searchPlaces();
 
 		// 지도에 idle 이벤트를 등록합니다(카테고리만)
-		kakao.maps.event.addListener(map, 'idle', searchPlaces1);
+		//kakao.maps.event.addListener(map, 'idle', searchPlaces1);
 
 		// 커스텀 오버레이의 컨텐츠 노드에 css class를 추가합니다 
 		contentNode.className = 'placeinfo_wrap';
@@ -413,25 +413,17 @@
 				// 마커와 검색결과 항목에 mouseover 했을때
 				// 해당 장소에 인포윈도우에 장소명을 표시합니다
 				// mouseout 했을 때는 인포윈도우를 닫습니다
-				(function(marker, title) {
-					kakao.maps.event.addListener(marker, 'mouseover',
+				(function(marker, place) {
+					kakao.maps.event.addListener(marker, 'click',
 							function() {
-								displayInfowindow(marker, title);
+								displayInfowindow(marker, place);
 							});
-
-					kakao.maps.event.addListener(marker, 'mouseout',
-							function() {
-								infowindow.close();
-							});
-
-					itemEl.onmouseover = function() {
-						displayInfowindow(marker, title);
+					
+					itemEl.onclick = function() {
+						displayInfowindow(marker, place);
 					};
 
-					itemEl.onmouseout = function() {
-						infowindow.close();
-					};
-				})(marker, places[i].place_name);
+				})(marker, places[i]);
 
 				fragment.appendChild(itemEl);
 			}
@@ -576,12 +568,25 @@
 
 		// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 		// 인포윈도우에 장소명을 표시합니다
-		function displayInfowindow(marker, title) {
-			var content = '<div style="padding:5px;z-index:1;">' + title
-					+ '</div>';
+		function displayInfowindow(marker, place) {
+			var content = '<div class="placeinfo">' +
+		    '   <a class="title" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">' + place.place_name + '</a>';   
 
-			infowindow.setContent(content);
-			infowindow.open(map, marker);
+			if (place.road_address_name) {
+			content += '    <span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
+			    '  <span class="jibun" title="' + place.address_name + '">(지번 : ' + place.address_name + ')</span>';
+			}  else {
+			content += '    <span title="' + place.address_name + '">' + place.address_name + '</span>';
+			}                
+			
+			content += '    <span class="tel">' + place.phone + '</span>' + 
+			'</div>' + '<div class="after"></div>';
+
+			//infowindow.setContent(content);
+			//infowindow.open(map, marker);
+			contentNode.innerHTML = content;
+			placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
+			placeOverlay.setMap(map);
 		}
 
 		// 검색결과 목록의 자식 Element를 제거하는 함수입니다
