@@ -11,6 +11,6 @@ public interface ReplyMapper {
 	
 	public List<BoardRepDTO> getRepList(int board_id);
 	
-	public void removeReply(Object map); //대댓글만 삭제
+	public void removeReply(Map<String, Object> map); //대댓글만 삭제
 	public void removeAllRep(Map<String, Object> map); //댓글 + 연관된 대댓글 전부
 }
