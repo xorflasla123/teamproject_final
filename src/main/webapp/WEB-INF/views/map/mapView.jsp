@@ -382,10 +382,10 @@
 			<div id="menu_wrap" class="bg_white">
 				<div class="option">
 					<div>
-						<form>
-							키워드 : <input type="text" id="keyword" size="15">
-							<button type="button" onclick="searchPlaces()">검색하기</button>
-						</form>
+						<form onsubmit="searchPlaces(); return false;">
+		                    키워드 : <input type="text" value="" id="keyword" size="15"> 
+		                    <button type="submit">검색하기</button> 
+		                </form>
 					</div>
 				</div>
 				<hr>
@@ -414,16 +414,21 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d88b03ad0e3ed3f735224649327c5f2&libraries=services"></script>
-	<script>
-		/* 여기부분 =이랑 &사이가 appkey넣는 자리 */
-		window.onload = function() {
-			let keyword = "${hs}";
-			document.getElementById('keyword').value = keyword;
+
+	<script>                                        /* 여기부분 =이랑 &사이가 appkey넣는 자리 */
+		let keyword='';
+		$(document).ready(function(){
+			let keyword1 = "${hs}";
+			console.log(keyword);
+			console.log(keyword1);
+			if(keyword1!=null){
+				document.getElementById('keyword').value = keyword1;
+			}
 			searchPlaces();
 			$("#hidden1").show();
 			$("#btnhidden").show();
-		}
-
+		});
+	
 		function visible1() {
 			$("#hidden1").show();
 			$("#hidden2").hide();
@@ -544,8 +549,7 @@
 
 		// 키워드 검색을 요청하는 함수입니다
 		function searchPlaces() {
-
-			var keyword = document.getElementById('keyword').value;
+			keyword = document.getElementById('keyword').value;
 			//console.log(keyword);
 			if (!keyword.replace(/^\s+|\s+$/g, '')) {
 				alert('키워드를 입력해주세요!');
@@ -554,6 +558,7 @@
 
 			// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
 			ps.keywordSearch(keyword, placesSearchCB);
+			keyword = '';
 		}
 
 		// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다

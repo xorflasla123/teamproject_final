@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import com.helloworld.root.board.dto.BoardDTO;
-import com.helloworld.root.board.dto.BoardInfoDTO;
+
 import com.helloworld.root.board.dto.BoardRecoDTO;
 
 public interface BoardMapper {
