@@ -1,5 +1,8 @@
 create table notepad(
-user_id varchar2(30) primary key,
-note_name varchar2(100) not null,
-note_content varchar2(1000) not null
+user_id varchar(20) not null,
+memo_id number primary key,
+title varchar(50),
+content varchar(300),
+write_date date default sysdate
 );
+create sequence memo_seq;
