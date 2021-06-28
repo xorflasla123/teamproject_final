@@ -316,7 +316,7 @@ window.onload = function (){ //브라우저 시작과 동시에 댓글 보여주
 <style type="text/css">
 	.reco { display: flex; }
 	#myProgress {
-	  width: 300px;
+	  width: 500px;
 	  background-color: grey;
 	}
 	
@@ -352,74 +352,79 @@ window.onload = function (){ //브라우저 시작과 동시에 댓글 보여주
 </style>
 </head>
 <body>
+<c:import url="../default/header.jsp"/><br>
 	<div>
-		<input type="hidden" id="boardId" value="${ contentData.boardId }">
-		<input type="hidden" id="userId" value="${ loginUser }">
-		<table border="1">
-			<tr>
-				<th>글 번호</th><td>${ contentData.boardId }</td>
-				<th>작성자</th><td>${ contentData.userId }</td>
-			</tr>
-			<tr>
-				<th>제 목</th><td>${ contentData.title }</td>
-				<th>작성일</th><td>${ contentData.day }</td>
-			</tr>
-			<tr>
-				<th>조회수</th><td>${ contentData.hit }</td>
-				<th>좋아요</th><td id="like">${ contentLike }</td>
-			</tr>
-			<tr>
-				<th colspan="4">내용</th>
-			</tr>
-			<tr>
-				<td colspan="4">${ contentData.content }</td>
-			</tr>
-			<c:if test="${ contentData.picture != 'nan' }">
-				<tr>
-					<th colspan="4">
-						<img width="200px" height="200px" src="${ contextPath }/board/download?pictureName=${ contentData.picture }">
-					</th>
-				</tr>
-			</c:if>
-			<c:if test="${ loginUser == contentData.userId }">
-				<tr>
-					<td colspan="4">
-						<input type="button" onclick="location.href='${ contextPath }/board/modifyform?boardId=${ contentData.boardId }'" value="수정하기">
-						<input type="button" onclick="location.href='${ contextPath }/board/delete?boardId=${ contentData.boardId }&pictureName=${ contentData.picture }'" value="삭제하기">
-					</td>
-				</tr>
-			</c:if>
-			<tr>
-				<td colspan="4" style="align-content: right;">
-					<c:if test="${ loginUser != null }">
-						<img src="${contextPath }/resources/image/dislike.jpg" id="likeBtn" onclick="like()" style="width: 20px; height: 20px;">
+		<div>
+			<div style="margin: auto; width: 400px;">
+				<input type="hidden" id="boardId" value="${ contentData.boardId }">
+				<input type="hidden" id="userId" value="${ loginUser }">
+				<table border="1">
+					<tr>
+						<th>글 번호</th><td>${ contentData.boardId }</td>
+						<th>작성자</th><td>${ contentData.userId }</td>
+					</tr>
+					<tr>
+						<th>제 목</th><td>${ contentData.title }</td>
+						<th>작성일</th><td>${ contentData.day }</td>
+					</tr>
+					<tr>
+						<th>조회수</th><td>${ contentData.hit }</td>
+						<th>좋아요</th><td id="like">${ contentLike }</td>
+					</tr>
+					<tr>
+						<th colspan="4">내용</th>
+					</tr>
+					<tr>
+						<td colspan="4">${ contentData.content }</td>
+					</tr>
+					<c:if test="${ contentData.picture != 'nan' }">
+						<tr>
+							<th colspan="4">
+								<img width="200px" height="200px" src="${ contextPath }/board/download?pictureName=${ contentData.picture }">
+							</th>
+						</tr>
 					</c:if>
-					<input type="button" onclick="history.back()" value="돌아가기">
-				</td>
-			</tr>
-		</table>
-		<div class="reco">
-		<c:choose>
-			<c:when test="${ loginUser != null }">
-				<input type="button" onclick="good()" value="추천">
-			</c:when>
-			<c:otherwise>
-				<input type="button" onclick="alertLogin()" value="추천">
-			</c:otherwise>
-		</c:choose>
-		<label id="good">0</label>&nbsp;
-		<div id="myProgress">
- 			<div id="myBar"></div>
-		</div>
-		&nbsp;<label id="bad">0</label>
-		<c:choose>
-			<c:when test="${ loginUser != null }">
-				<input type="button" onclick="bad()" value="비추천">
-			</c:when>
-			<c:otherwise>
-				<input type="button" onclick="alertLogin()" value="비추천">
-			</c:otherwise>
-		</c:choose>
+					<c:if test="${ loginUser == contentData.userId }">
+						<tr>
+							<td colspan="4">
+								<input type="button" onclick="location.href='${ contextPath }/board/modifyform?boardId=${ contentData.boardId }'" value="수정하기">
+								<input type="button" onclick="location.href='${ contextPath }/board/delete?boardId=${ contentData.boardId }&pictureName=${ contentData.picture }'" value="삭제하기">
+							</td>
+						</tr>
+					</c:if>
+					<tr>
+						<td colspan="4" style="align-content: right;">
+							<c:if test="${ loginUser != null }">
+								<img src="${contextPath }/resources/image/dislike.jpg" id="likeBtn" onclick="like()" style="width: 20px; height: 20px;">
+							</c:if>
+							<input type="button" onclick="history.back()" value="돌아가기">
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="reco" style="padding-top: 30px; padding-bottom: 30px; margin: auto; width: 600px;">
+			<c:choose>
+				<c:when test="${ loginUser != null }">
+					<input type="button" onclick="good()" value="추천">
+				</c:when>
+				<c:otherwise>
+					<input type="button" onclick="alertLogin()" value="추천">
+				</c:otherwise>
+			</c:choose>
+			<label id="good">0</label>&nbsp;
+			<div id="myProgress">
+	 			<div id="myBar"></div>
+			</div>
+			&nbsp;<label id="bad">0</label>
+			<c:choose>
+				<c:when test="${ loginUser != null }">
+					<input type="button" onclick="bad()" value="비추천">
+				</c:when>
+				<c:otherwise>
+					<input type="button" onclick="alertLogin()" value="비추천">
+				</c:otherwise>
+			</c:choose>
+			</div>
 		</div>
 		
 		<div style="margin: auto; width: 600px;">

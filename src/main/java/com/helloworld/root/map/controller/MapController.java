@@ -33,18 +33,22 @@ public class MapController {
 	}
 	
 	
-	@GetMapping("test")
+	@GetMapping("mapView")
 	public String test(HttpServletRequest request, Model model) {
 		
-		String hs = request.getParameter("HomeSearch");
-		String name = request.getParameter("name");
+		String hs;
+		
+		if(request.getParameter("HomeSearch")!=null) {
+			hs = request.getParameter("HomeSearch");
+		} else {
+			hs = request.getParameter("name");
+		}
 		
 		model.addAttribute("hs",hs);
-		model.addAttribute("name",name);
 		
 		System.out.println("테스트 실행");
 		
-		return "map/test";
+		return "map/mapView";
 	}
 
 }
