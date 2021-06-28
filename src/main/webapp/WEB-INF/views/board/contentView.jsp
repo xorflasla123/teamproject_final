@@ -352,6 +352,7 @@ window.onload = function (){ //브라우저 시작과 동시에 댓글 보여주
 </style>
 </head>
 <body>
+<c:import url="../default/header.jsp"/><br>
 	<div>
 		<div>
 			<div style="margin: auto; width: 400px;">
