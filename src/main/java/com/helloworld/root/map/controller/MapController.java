@@ -77,12 +77,38 @@ public class MapController  implements MemberSessionName{
 		
 	}
 	
-	@GetMapping(value="memolist/{user_id}", produces = "application/json; charset=utf-8")
+	@GetMapping(value="memolist/{userId}/{num}", produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public List<MemoDTO> memolist(@PathVariable String userId,Model model,
-			@RequestParam(value="num", required=false, defaultValue="1") int num,HttpSession session ){
+	public Map<String,Object> memolist(@PathVariable String userId,@PathVariable int num, Model model,
+			 HttpSession session ){
 		System.out.println("num :"+num); //해당하는 num이 없으면 null값이나 0을 나타내기 위해 required= false 사용 false없으면 오류발생
 		return ms.selectAllMemoList(model,num,userId, session);
+	}
+	
+	@GetMapping(value="modishow/{memo_id}", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public MemoDTO modishow(@PathVariable int memo_id){
+		return ms.modishow(memo_id);
+	}
+	
+	@PostMapping(value="modiMemo", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public int modiMemo(@RequestBody Map<String, Object> map, HttpSession session) {
+		MemoDTO dto = new MemoDTO();
+		dto.setUser_id((String)session.getAttribute(LOGIN));
+		dto.setTitle((String)map.get("title"));
+		dto.setContent((String)map.get("content"));
+		dto.setMemo_id(Integer.parseInt((String)map.get("memo_id")));
+	    int result = ms.modiMemo(dto);
+	    System.out.println(result);
+		return result;
+		
+	}
+	
+	@GetMapping(value="delete1/{memo_id}", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public int delete1(@PathVariable int memo_id){
+		return ms.delete1(memo_id);
 	}
 	
 }

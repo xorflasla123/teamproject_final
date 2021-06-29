@@ -1,6 +1,7 @@
 package com.helloworld.root.memo;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,7 +15,16 @@ public interface MemoService {
 
 	public void mapView(int memo_id, Model model);
 
-	public List<MemoDTO> selectAllMemoList(Model model, int num, String userId,HttpSession session);
+	public Map<String,Object> selectAllMemoList(Model model, int num, String userId,HttpSession session);
+
+
+	public MemoDTO modishow(int memo_id);
+
+
+	public int modiMemo(MemoDTO dto);
+
+
+	public int delete1(int memo_id);
 
 
 	

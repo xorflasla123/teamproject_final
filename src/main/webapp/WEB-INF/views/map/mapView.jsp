@@ -85,6 +85,9 @@
 	#hidden1 {display: none;}
 	#hidden2 {display: none;}
 	#btnhidden {display: none;}
+	
+	#hiddenMode {display: none;}
+	#btns11 {display: none;}
 </style>
 </head>
 <body>
@@ -142,13 +145,19 @@
 <b>제목</b>  <input type="text" id="title" size="30" name="title"><br><br>
 <b>내용</b> <br> <textarea rows="5" cols="30" id="content" name="content"></textarea>
 <hr>
-<button type="button" onclick="rep()">저장</button>
-<button type="button" onclick="slide_hide()">취소</button>
-<button type="button" onclick="memoList()">메모 목록</button>
-<input type="button" onclick="location.href='${contextPath }/map/memolist'" value="메모 목록">
+<div id="btns11">
+<input type="button" id="repBtn" onclick="rep()" value="저장">
+<input type="button" id="cancelBtn" onclick="slide_hide()" value="취소">
+<input type="button" id="listBtn" onclick="memoList()" value="메모 목록"> </div>
+
+<div id="hiddenMode">
+<input type="button" id="modiBtn" onclick="modify1()" value="수정"type="hidden">
+<input type="button" id="deleBtn" onclick="delete1()" value="삭제" type="hidden">
+<input type="button" id="backBtn" onclick="back1()" value="이전으로"type="hidden">
+</div>
+<input type="hidden" name="memo_id" id="memo_id" value="">
 </form>
 </div ><div id="memolist">
-
 
 </div>
 </div>
@@ -162,6 +171,12 @@
 	   console.log('실행11')
 	   $("#first").slideDown("slow");
 	   $("#modal_wrap").show();
+	   $("#btns11").show();
+	   $("#hiddenMode").hide();
+	   document.getElementById("content").value = "";
+	   document.getElementById("title").value = "";
+	
+	   
 	   }
    }
    function slide_hide(){
@@ -676,24 +691,130 @@
 		
 		function memoList(){
 		var userId = document.getElementById("hidden_userId").value;
-		
-		}
+		var num1 = 1;
 		$.ajax({
-		url: "memolist/" + ${loginUser}, type:"GET",
+		url: "memolist/" + $("#hidden_userId").val()+"/"+num1, type:"GET",
 		 contentType: "application/json; charset=utf-8",
 		 dataType : "json",
-		  success: function(list){
+		  success: function(map){
+			  console.log('성공 1 2')
 			   let html =""
-			   list.forEach(function(data){
-				   html += "<div align='center'><b>아이디 : </b>" + data.user_id + "님/";
-				   html += "<b>제목 : </b>" + data.title + "<br>";
-				   html += "<b>내용 : </b>" + data.content + "<br>";
-			   })
+				   html += "<div align='center' ><table border='1'><tr><th>제목</th><th>날짜</th> </tr>";
+			   map.list.forEach(function(data){
+				 
+				html +=" <tr><td><a href='#'onclick=modishow("+data.memo_id+")>"+data.title+"</a></td><td>"+data.saveDate+"</td></tr>";
+
+				    })
+				    html+="</table>"; 
+				    
+			   for (var num=1; num <= map.repeat; num++){
+				     html += "<a href='#' onclick='paging11("+num+")'>["+num+"]&nbsp;</a>";
+				
+			   
+			   }
 			   $("#memolist").html(html)
+			   document.getElementById("content").value = "";
+			   document.getElementById("title").value = "";
+			
 		   }, error: function(){
 			   alert("문제 발생 !!!");
 		   }
 		})
+		}
+		function paging11(num1){
+			console.log(num1+"나는123")
+			 $.ajax({
+			 		url: "memolist/" + $("#hidden_userId").val()+"/"+num1, type:"GET",
+			 		 contentType: "application/json; charset=utf-8",
+			 		 dataType : "json", 
+					  success: function(map){
+						  console.log('성공 1 2')
+						   let html =""
+							   html += "<div align='center' ><table border='1'><tr><th>날짜</th><th>제목</th> </tr>";
+						   map.list.forEach(function(data){
+							 
+							html +=" <tr><td><a href='#'onclick=modishow("+data.memo_id+")>"+data.saveDate+"</a></td><td>"+data.title+"</td></tr>";
+
+							    })
+							    html+="</table>"; 
+							    
+						   for (var num=1; num <= map.repeat; num++){
+							     html += "<a href='#' onclick='paging11("+num+")'>["+num+"]&nbsp;</a>";
+							
+						   
+						   }
+						   $("#memolist").html(html)
+					   }, error: function(){
+						   alert("문제 발생 !!!");
+					   }
+					})
+					}
+function modishow(memo_id){
+$.ajax({
+		url: "modishow/" + memo_id, type:"GET",
+		 contentType: "application/json; charset=utf-8",
+		 dataType : "json", 
+	  success: function(data){
+		  console.log('성공 1 2')
+		  $("#btns11").hide();
+		  $("#hiddenMode").show();
+		  $("#id").val(data.user_id);
+		  $("#title").val(data.title);
+		  $("#content").val(data.content);
+		 $("#memo_id").val(memo_id);
+	   }, error: function(){
+		   alert("문제 발생 !!!");
+	   }
+	})
+}
+function modify1(){
+		   let form={}; let arr = $("#frm").serializeArray();
+		   for(i=0 ; i<arr.length ; i++){
+			   form[arr[i].name] = arr[i].value
+		   }
+		   $.ajax({
+			   url: "modiMemo", type:"POST",  
+			   data: JSON.stringify(form),
+			   contentType: "application/json; charset=utf-8",
+			   dataType : "json",
+			   success: function(result){
+				   alert("성공적으로 수정되었습니다"); 
+				   $("#btns11").show();
+					  $("#hiddenMode").hide();
+				   
+			   }, error: function(){
+				   alert("문제가 발생하였씁낟 !!!");
+			   }
+		   })
+}
+
+function delete1(){
+	var memo_id = document.getElementById("memo_id").value;
+	$.ajax({
+		url: "delete1/" + memo_id, type:"GET",
+		 contentType: "application/json; charset=utf-8",
+		 dataType : "json", 
+	  success: function(data){
+		  console.log('성공 3 4')
+		  document.getElementById("content").value = "";
+	      document.getElementById("title").value = "";
+	      alert("삭제되었습니다");
+		  $("#btns11").show();
+		  $("#hiddenMode").hide();
+		  memoList();
+		 
+	   }, error: function(){
+		   alert("문제 발생 !!!");
+	   }
+	})
+}
+
+function back1(){
+	$("#btns11").show();
+	  $("#hiddenMode").hide();
+	document.getElementById("content").value = "";
+	   document.getElementById("title").value = "";
+}
 	</script>
 </body>
 </html>

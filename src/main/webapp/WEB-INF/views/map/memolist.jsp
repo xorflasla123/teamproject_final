@@ -19,14 +19,13 @@
 <h1 style="text-align: center;">게시판</h1>
 <table class="table" border="1">
 <tr>
-<th>번호</th><th>id</th><th>제목</th><th>날짜</th>
+<th>제목</th><th>날짜</th>
 </tr>
 <c:if test="${memoList.size() == 0 }">
-<tr> <th colspan="4">저장 데이터 없음</th> </tr>
+<tr> <th colspan="2">저장 데이터 없음</th> </tr>
 </c:if>
 <c:forEach var="dto" items="${memoList }">
 <tr>
-<td>${dto.memo_id }</td><td>${dto.user_id }</td>
 <td><a href="${contextPath }/map/mapView?memo_id=${dto.memo_id}">${dto.title }</a></td>
 <td>${dto.saveDate }</td>
 </tr>

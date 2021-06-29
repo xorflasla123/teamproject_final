@@ -15,6 +15,8 @@ public interface MemoMapper {
 	public List<MemoDTO> selectAllMemoList(@Param("s")int start, @Param("e")int end, @Param("userId")String userId);
 	public MemoDTO mapView(int memo_id);
 	public int selectMemoCount(String userId);
+	public MemoDTO modishow(int memo_id);
+	public int modiMemo(MemoDTO dto);
 	
 	
 
