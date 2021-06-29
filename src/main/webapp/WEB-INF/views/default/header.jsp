@@ -25,6 +25,14 @@ header a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
 
 .main { text-align: center; margin: auto; padding-top: 80px; }
 
+footer {
+	font-size: 20pt;
+	color: pink;
+	text-align: center;
+	font-family: monospace;
+	font-style: italic;
+}
+
 
 </style>
 <script>
