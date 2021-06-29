@@ -13,14 +13,14 @@
 	
 	<div>
 		<img src="${contextPath }/resources/image/main5.jpg" width="100%" height="960px">
-		<h1 style="font-size: 60pt; color: white; position: absolute; top: 400px; left: 200px;">Hello World</h1>
-		<h1 style="font-size: 14pt; color: white; position: absolute; top: 500px; left: 200px;">쉽고 간편한 여행플래너 Hellow World와 함께<br>힘들고 지친 일상을 벗어나 세상에 인사하세요.<br>Say Hellow World!!!<br></h1>
+		<h1 style="font-size: 72pt; color: white; position: absolute; top: 400px; left: 200px;">Hello World</h1>
+		<h1 style="font-size: 14pt; color: white; position: absolute; top: 500px; left: 200px;"><br>쉽고 간편한 여행플래너 Hello World와 함께<br>힘들고 지친 일상을 벗어나 세상에 인사하세요.<br>Say Hellow World!!!<br></h1>
 	</div>
 	
 	<div class="main">
 	
 		<form action="${contextPath }/map/mapView">
-			<input type="text" name="HomeSearch" placeholder="여행지를 직접 검색하세요." style="width:20%; height: 50px; font-size: 15pt; border-top: 1px; border-right: 1px; border-left: 1px; text-align: center;">
+			<input type="text" name="HomeSearch" placeholder="여행지를 직접 검색해 보세요." style="width:20%; height: 50px; font-size: 15pt; border-top: 1px; border-right: 1px; border-left: 1px; text-align: center;">
 			<input type="submit" value="검색" style="width:70px; height: 50px; font-size: 15pt;">
 		</form>
 	</div>
