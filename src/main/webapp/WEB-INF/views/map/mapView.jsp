@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -135,23 +134,26 @@
 		function visible1() {
 			$("#hidden1").show();
 			$("#hidden2").hide();
+			$(".option").show();
 			$("#btnhidden").show();
-
+			kakao.maps.event.removeListener(map, 'idle', searchPlaces1);
 			resetCategory();
+			resetKeyword();
 		}
 		function visible2() {
 			$("#hidden2").show();
 			$("#hidden1").hide();
 			$("#btnhidden").show();
-
+			$("#category").css('left','10px');
 			resetKeyword();
+			kakao.maps.event.addListener(map, 'idle', searchPlaces1);
 		}
 
 		function invisible() {
 			$("#hidden1").hide();
 			$("#hidden2").hide();
 			$("#btnhidden").hide();
-
+			kakao.maps.event.removeListener(map, 'idle', searchPlaces1);
 			resetCategory();
 			resetKeyword();
 		}
@@ -161,6 +163,7 @@
 			resetList();
 			removeMarker();
 			resetPagenation();
+			placeOverlay.setMap(null);
 		}
 
 		function resetList() {
@@ -224,7 +227,7 @@
 		//searchPlaces();
 
 		// 지도에 idle 이벤트를 등록합니다(카테고리만)
-		kakao.maps.event.addListener(map, 'idle', searchPlaces1);
+		//kakao.maps.event.addListener(map, 'idle', searchPlaces1);
 
 		// 커스텀 오버레이의 컨텐츠 노드에 css class를 추가합니다 
 		contentNode.className = 'placeinfo_wrap';
@@ -310,6 +313,9 @@
 
 				// 정상적으로 검색이 완료됐으면 지도에 마커를 표출합니다
 				displayPlaces1(data);
+				
+				// 페이지 번호를 표출합니다
+				displayPagination(pagination);
 			} else if (status === kakao.maps.services.Status.ZERO_RESULT) {
 				// 검색결과가 없는경우 해야할 처리가 있다면 이곳에 작성해 주세요
 
@@ -370,7 +376,18 @@
 
 		// 지도에 마커를 표출하는 함수입니다
 		function displayPlaces1(places) {
+			$("#hidden1").show();
+			$(".option").hide();
+			$("#category").css('left','300px');
+			var listEl = document.getElementById('placesList'), menuEl = document
+			.getElementById('menu_wrap'), fragment = document
+			.createDocumentFragment(), bounds = new kakao.maps.LatLngBounds(), listStr = '';
+			
+			// 검색 결과 목록에 추가된 항목들을 제거합니다
+			removeAllChildNods(listEl);
 
+			// 지도에 표시되고 있는 마커를 제거합니다
+			removeMarker();
 			// 몇번째 카테고리가 선택되어 있는지 얻어옵니다
 			// 이 순서는 스프라이트 이미지에서의 위치를 계산하는데 사용됩니다
 			var order = document.getElementById(currCategory).getAttribute(
@@ -379,8 +396,13 @@
 			for (var i = 0; i < places.length; i++) {
 
 				// 마커를 생성하고 지도에 표시합니다
-				var marker = addMarker1(new kakao.maps.LatLng(places[i].y,
-						places[i].x), order);
+				var placePosition = new kakao.maps.LatLng(places[i].y,
+					places[i].x), marker = addMarker1(placePosition, order), itemEl = getListItem(
+								i, places[i]);
+				
+				// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+				// LatLngBounds 객체에 좌표를 추가합니다
+				bounds.extend(placePosition);
 
 				// 마커와 검색결과 항목을 클릭 했을 때
 				// 장소정보를 표출하도록 클릭 이벤트를 등록합니다
@@ -388,8 +410,15 @@
 					kakao.maps.event.addListener(marker, 'click', function() {
 						displayPlaceInfo(place);
 					});
+					itemEl.onclick = function() {
+						displayPlaceInfo(place);
+					};
 				})(marker, places[i]);
+				fragment.appendChild(itemEl);
 			}
+			// 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
+			listEl.appendChild(fragment);
+			menuEl.scrollTop = 0;
 		}
 
 		// 검색결과 항목을 Element로 반환하는 함수입니다
