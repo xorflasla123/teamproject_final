@@ -3,6 +3,7 @@ package com.helloworld.root.board.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.helloworld.root.board.dto.BoardInfoDTO;
+import com.helloworld.root.board.dto.BoardRecoDTO;
 import com.helloworld.root.board.service.BoardFileService;
 import com.helloworld.root.board.service.BoardService;
 
@@ -50,6 +52,12 @@ public class BoardController {
 		
 		return "board/searchView";
 	}
+	@GetMapping("likelist")
+	public String likeBoardList(Model model, @RequestParam String userId,
+			@RequestParam(value="num", required = false, defaultValue = "1") int num) {
+		bs.boardLikeList(model, num, userId);
+		return "board/likeList";
+	}
 	@RequestMapping("write")
 	public String write(@RequestParam String boardLocal, Model model) {
 		model.addAttribute("boardLocal", boardLocal);
@@ -78,15 +86,30 @@ public class BoardController {
 		int result = bs.boardLike(boardId, userId);
 		return result;
 	}
-	@PostMapping(value="checklike", produces = "application/json; charset=utf-8")
+	@PostMapping(value="boardcheck", produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public int boardCheckLike(@RequestBody BoardInfoDTO dto) {
+	public HashMap<String, Integer> boardCheckLike(@RequestBody BoardInfoDTO dto) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		System.out.println("ajax boardId : " + dto.getBoardId());
 		System.out.println("ajax userId : " + dto.getUserId());
 		int boardId = dto.getBoardId();
 		String userId = dto.getUserId();
-		int result = bs.boardCheckLike(boardId, userId);
-		return result;
+		map = bs.boardCheck(boardId, userId);
+		return map;
+	}
+	@PostMapping(value="good", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public HashMap<String, Integer> goodClick(@RequestBody BoardRecoDTO dto) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map = bs.goodClick(dto);
+		return map;
+	}
+	@PostMapping(value="bad", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public HashMap<String, Integer> badClick(@RequestBody BoardRecoDTO dto) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map = bs.badClick(dto);
+		return map;
 	}
 	@GetMapping("download")
 	public void download(@RequestParam String pictureName, HttpServletResponse response) throws Exception {

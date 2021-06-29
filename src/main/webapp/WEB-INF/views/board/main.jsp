@@ -6,16 +6,23 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
 	.page { display: flex; padding-top: 80px; }
 	.board { padding-left: 100px; }
 	li a { text-decoration: none; }
+	.attribute {
+		padding: 10px;
+		vertical-align: top;
+		color: #e7708d;
+		border-bottom: 3px solid #ccc;
+	}
 </style>
 </head>
 <body>
-	<c:set var="contextPath" value="${pageContext.request.contextPath }" />
+	<c:set var="contextPath" value="${ pageContext.request.contextPath }" />
 	<c:import url="../default/header.jsp" /><hr>
-	<div class="page main">
+	<div class="page main" style="margin: auto; width: 1000px;">
 		<div>
 			<ul type="circle">
 			<li><a href="${ contextPath }/board/main?boardLocal=전체">전체</a></li>
@@ -36,11 +43,15 @@
 					<option value="user_id">작성자</option>
 				</select>
 				<input type="text" name="searchWord" placeholder="검색어를 입력하세요."><button type="submit">검색</button>
+				<img src="${contextPath }/resources/image/like.jpg" onclick="location.href='${ contextPath }/board/likelist?userId=${ loginUser }'" style="width: 20px; height: 20px;">
 			</form>
-			<table border="1">
-				<tr>
+			<table class="table table-hover" border="1">
+				<thead>
+				<tr class="attribute">
 					<th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th>
 				</tr>
+				</thead>
+				<tbody>
 				<c:choose>
 					<c:when test="${ boardList.size() == 0 }">
 						<tr>
@@ -57,6 +68,8 @@
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
+				</tbody>
+				<tfoot>
 				<tr>
 					<td colspan="4">
 						<c:forEach var="num" begin="1" end="${ repeat }">
@@ -71,7 +84,6 @@
 						</c:forEach>
 					</td>
 					<td>
-						<!-- if (세션 아이디가 있을 때) -->
 						<c:choose>
 							<c:when test="${ boardLocal == '전체' }">
 								<button onclick="location.href='${contextPath}/board/write?boardLocal=서울'">글쓰기</button>
@@ -80,9 +92,9 @@
 								<button onclick="location.href='${contextPath}/board/write?boardLocal=${ boardLocal }'">글쓰기</button>
 							</c:otherwise>
 						</c:choose>
-						<!--  -->
 					</td>
 				</tr>
+				</tfoot>
 			</table>
 		</div>
 	</div>

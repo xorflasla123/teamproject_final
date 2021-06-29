@@ -46,7 +46,11 @@
 				<c:if test="${loginUser == info.id }">
 					<tr>
 						<td colspan="2">
-							<button type="button">삭제</button>
+
+							<button id="delete"   onclick="location.href='delete?id=${info.id}'">삭제</button>
+							<button id="infomodify"  onclick="location.href='modify_form?id=${info.id}'">수정</button>
+							<button id="info"  onclick="location.href='/root/index'">돌아가기</button>
+
 						</td>
 					</tr>
 				</c:if>

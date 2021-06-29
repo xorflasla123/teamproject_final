@@ -24,6 +24,7 @@
 					<option value="user_id">작성자</option>
 				</select>
 				<input type="text" name="searchWord" placeholder="검색어를 입력하세요."><button type="submit">검색</button>
+				<img src="${contextPath }/resources/image/like.jpg" onclick="location.href='${ contextPath }/board/likelist?userId=${ loginUser }'" style="width: 20px; height: 20px;">
 			</form>
 			<table border="1">
 				<tr>

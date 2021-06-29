@@ -16,6 +16,12 @@
 		<result property="hit" column="board_hit" />
 	</resultMap>
 	
+	<resultMap type="com.helloworld.root.board.dto.BoardRecoDTO" id="recoDTO">
+		<result property="boardId" column="board_id" />
+		<result property="userId" column="user_id" />
+		<result property="good" column="board_good" />
+	</resultMap>
+	
 	<insert id="writeSave">
 		insert into board(board_id,board_local,user_id,board_title,board_content,board_picture)
 		values(board_seq.nextval,#{boardLocal},#{userId},#{title},#{content},#{picture})
@@ -33,6 +39,16 @@
 	
 	<select id="boardCount" resultType="Integer">
 		select count(*) from board
+	</select>
+	
+	<select id="boardLikeCount" resultType="Integer">
+		select count(*) from board_info where user_id=#{userId}
+	</select>
+	
+	<select id="boardLikeList" resultMap="board">
+		select B.* from(select rownum rn, A.* from
+		(select * from  board where board_id in (select board_id from board_info where user_id=#{userId}) order by board_id desc)A)B
+		where rn between #{start} and #{end}
 	</select>
 	
 	<select id="categoryCount" resultType="Integer">
@@ -74,6 +90,34 @@
 	<delete id="deleteLike">
 		delete from board_info where board_id=#{boardId} and user_id=#{userId}
 	</delete>
+	
+	<select id="recoCount" resultType="Integer">
+		select count(*) from board_reco where board_id=#{boardId} and user_id=#{userId}
+	</select>
+	
+	<select id="goodNum" resultMap="recoDTO">
+		select * from board_reco where board_id=#{boardId} and user_id=#{userId}
+	</select>
+	
+	<insert id="insertReco">
+		insert into board_reco (board_id, user_id, board_good) values (#{boardId},#{userId},#{good})
+	</insert>
+	
+	<delete id="deleteReco">
+		delete from board_reco where board_id=#{boardId} and user_id=#{userId}
+	</delete>
+	
+	<update id="updateReco">
+		update board_reco set board_good=#{good} where board_id=#{boardId} and user_id=#{userId}
+	</update>
+	
+	<select id="recommendCount" resultType="Integer">
+		select count(*) from board_reco where board_id=#{boardId}
+	</select>
+	
+	<select id="goodNumCount" resultType="Integer">
+		select count(*) from board_reco where board_id=#{boardId} and board_good=#{good}
+	</select>
 	
 	<update id="upHit">
 		update board set board_hit=board_hit+1 where board_id = #{boardId}

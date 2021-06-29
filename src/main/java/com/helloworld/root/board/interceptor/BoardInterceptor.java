@@ -17,6 +17,7 @@ public class BoardInterceptor extends HandlerInterceptorAdapter implements Membe
 			throws Exception {
 		System.out.println("인터셉터 실행");
 		HttpSession session = request.getSession();
+		
 		if(session.getAttribute(LOGIN) == null) {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
@@ -24,6 +25,7 @@ public class BoardInterceptor extends HandlerInterceptorAdapter implements Membe
 			"location.href='" + request.getContextPath() + "/member/login';</script>");
 			return false;
 		}
+		
 		return true;
 	}
 }
