@@ -32,8 +32,7 @@ public class MailService {
 	}
 	
 	public String auth( String email,HttpServletRequest request, Model model) {
-		HttpSession session = request.getSession();
-		String userid = "dhyeon";
+
 		String userkey = rand();
 		model.addAttribute("userkey", userkey);
 		System.out.println(email);

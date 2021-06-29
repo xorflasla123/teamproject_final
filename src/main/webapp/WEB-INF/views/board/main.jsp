@@ -6,10 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 <style type="text/css">
 	.page { display: flex; padding-top: 80px; }
-	.board { padding-left: 100px; }
+	.board { padding-left: 100px; padding-top: 50px; padding-bottom: 80px; }
 	li a { text-decoration: none; }
 	.attribute {
 		padding: 10px;
@@ -17,14 +17,17 @@
 		color: #e7708d;
 		border-bottom: 3px solid #ccc;
 	}
+	.boardTable { width: 1000px; height: 500px; }
+	.boardUl { padding-top: 200px; }
+	.boardUl li { padding-top: 10px; }
 </style>
 </head>
 <body>
 	<c:set var="contextPath" value="${ pageContext.request.contextPath }" />
 	<c:import url="../default/header.jsp" /><hr>
-	<div class="page main" style="margin: auto; width: 1000px;">
+	<div class="page main" style="margin: auto; width: 1500px;">
 		<div>
-			<ul type="circle">
+			<ul class="boardUl">
 			<li><a href="${ contextPath }/board/main?boardLocal=전체">전체</a></li>
 			<li><a href="${ contextPath }/board/main?boardLocal=서울">서울</a></li>
 			<li><a href="${ contextPath }/board/main?boardLocal=경기/인천">경기/인천</a></li>
@@ -36,7 +39,7 @@
 			</ul>
 		</div>
 		<div class="board">
-			<h1>게시판</h1>
+			<h1>게시판</h1><br><br>
 			<form action="${ contextPath }/board/search">
 				<select size="1" name="search">
 					<option value="board_title" selected>제목</option>
@@ -45,7 +48,8 @@
 				<input type="text" name="searchWord" placeholder="검색어를 입력하세요."><button type="submit">검색</button>
 				<img src="${contextPath }/resources/image/like.jpg" onclick="location.href='${ contextPath }/board/likelist?userId=${ loginUser }'" style="width: 20px; height: 20px;">
 			</form>
-			<table class="table table-hover" border="1">
+			<br>
+			<table class="boardTable" border="1">
 				<thead>
 				<tr class="attribute">
 					<th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th>
