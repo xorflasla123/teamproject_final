@@ -15,16 +15,8 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.ui.Model;
 
-
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import com.helloworld.root.member.dto.MemberDTO;
-import com.helloworld.root.message.MessageDTO;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-
-
-import com.helloworld.root.member.dto.MemberDTO;
 
 import com.helloworld.root.mybatis.member.MemberMapper;
 
