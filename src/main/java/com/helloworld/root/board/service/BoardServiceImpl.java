@@ -47,7 +47,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void categoryBoardList(Model model, int num, String boardLocal) {
 		int boardCount = mapper.categoryCount(boardLocal);
-		int pageLetter = 3;
+		int pageLetter = 10;
 		int repeat = boardCount / pageLetter;
 		if(boardCount % pageLetter != 0) {
 			repeat += 1;
@@ -60,7 +60,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void boardList(Model model, int num) {
 		int boardCount = mapper.boardCount();
-		int pageLetter = 3;
+		int pageLetter = 10;
 		int repeat = boardCount / pageLetter;
 		if(boardCount % pageLetter != 0) {
 			repeat += 1;
@@ -73,7 +73,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void boardLikeList(Model model, int num, String userId) {
 		int boardLikeCount = mapper.boardLikeCount(userId);
-		int pageLetter = 3;
+		int pageLetter = 10;
 		int repeat = boardLikeCount / pageLetter;
 		if(boardLikeCount % pageLetter != 0) {
 			repeat += 1;
@@ -87,7 +87,7 @@ public class BoardServiceImpl implements BoardService {
 	public void search(Model model, int num, String search, String searchWord) {
 		int searchCount = mapper.searchCount(search, searchWord);
 		System.out.println(searchCount);
-		int pageLetter = 3;
+		int pageLetter = 10;
 		int repeat = searchCount / pageLetter;
 		if(searchCount % pageLetter != 0) {
 			repeat += 1;
