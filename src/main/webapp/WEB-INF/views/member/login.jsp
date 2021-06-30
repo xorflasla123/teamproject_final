@@ -17,7 +17,9 @@ ul {
 }
 
 .body {
-	
+	font-family: "맑은고딕", "돋움";
+	font-size: 12px;
+	color: 444444;
 }
 
 #login_box {
@@ -78,7 +80,7 @@ h1 {
 #btns li {
 	margin-left: 40px;
 	display: inline;
-	font-size: 17px;
+	font-size: 15px;
 }
 
 #chk_login {
