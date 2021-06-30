@@ -163,7 +163,7 @@
 				<tr>
 					<td colspan="3" align="center">
 						<input type="button" onclick="register()" name="join" value="가입">
-						<input type="button" onclick="history.back()" value="취소">
+						<input type="button" onclick="location.href='${contextPath}/member/login'" value="취소">
 					</td>
 				</tr>
 			</table>
