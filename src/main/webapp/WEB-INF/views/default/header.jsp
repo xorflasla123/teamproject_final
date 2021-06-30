@@ -16,12 +16,20 @@
 .head { width: 100%; height: 100%; margin: auto;}
 
 .bar { position:fixed; list-style: none; display: flex; justify-content: flex-end; 
-	width: 2000px; height:45px; z-index: 9998; background-color: rgba(0,0,0,0);}
+	width: 2000px; height:45px; z-index: 9998; background-color: rgba(0,0,0,0); transition: all 0.5s;}
 
 li {padding-right: 20px; position: relative; right: 150px; font-size: 20pt;}
 
+a b:hover{ 
+	
+	padding-bottom: 3px;
+	border-bottom: 1px solid orange;
+	transition: all 0.5s;
+}
+
 ul li a b { }
-header a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
+
+header a { text-decoration: none; padding: 15px; font-size: 13pt;}
 
 .main { text-align: center; margin: auto; padding-top: 80px; }
 
@@ -45,7 +53,7 @@ footer {
 			
 		else
 			$('.bar').css('background-color','rgba(0,0,0,.6)') && $('.bar').css('color', 'white') 
-			&& $('ul li a b').css('color', 'white');
+			&& $('ul li a b').css('color', 'white') ;
 			
 	})
 
