@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <style type="text/css">
 #first {
@@ -27,10 +26,7 @@
 	height: 500px;
 	width: 270px;
 }
-</style>
-<!--여기까지 메모  -->
 
-<style>
 #hiddenMode {
 	display: none;
 }
@@ -38,7 +34,10 @@
 #btns11 {
 	display: none;
 }
+</style>
+<!--여기까지 메모  -->
 
+<style>
 .map_wrap, .map_wrap * {
 	margin: 0;
 	padding: 0;
@@ -54,7 +53,7 @@
 .map_wrap {
 	position: relative;
 	width: 100%;
-	height: 850px;
+	height: 800px;
 }
 
 #menu_wrap {
