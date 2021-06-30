@@ -16,14 +16,31 @@
 .head { width: 100%; height: 100%; margin: auto;}
 
 .bar { position:fixed; list-style: none; display: flex; justify-content: flex-end; 
-	width: 2000px; height:45px; z-index: 9998; background-color: rgba(0,0,0,.6); color: white;}
+	width: 2000px; height:45px; z-index: 9998; background-color: rgba(0,0,0,.6); color: white; transition: all 0.5s;}
 
 .bar li {padding-right: 20px; position: relative; right: 150px; font-size: 20pt;}
 
+a b:hover{ 
+	
+	padding-bottom: 3px;
+	border-bottom: 1px solid orange;
+	transition: all 0.5s;
+}
+
 ul li a b { color: white;}
+
+header a { text-decoration: none; padding: 15px; font-size: 13pt;}
 .bar a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
 
 .main { text-align: center; margin: auto; padding-top: 80px; }
+
+footer {
+	font-size: 20pt;
+	color: pink;
+	text-align: center;
+	font-family: monospace;
+	font-style: italic;
+}
 
 
 </style>
@@ -37,7 +54,7 @@ ul li a b { color: white;}
 		<div class="wrap">
 			<ul class="bar">
 		
-				<li style="font-size: 22pt; position: relative; right: 1200px"><b>Hello World</b></li>
+				<li style="font-size: 22pt; position: absolute; right: 1800px"><b>Hello World</b></li>
 				
 				<li><a href="${contextPath }/index"><b>HOME</b></a></li>
 				

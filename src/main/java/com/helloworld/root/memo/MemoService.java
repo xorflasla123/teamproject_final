@@ -1,13 +1,10 @@
 package com.helloworld.root.memo;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
-
-import com.helloworld.root.member.dto.MemberDTO;
 
 public interface MemoService {
 	public int addMemo(MemoDTO dto);
