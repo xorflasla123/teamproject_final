@@ -12,8 +12,8 @@
  #first{
  display:none;
      position: fixed; z-index:9; margin: 0 auto; 
-     top: 30px; left: 100; right: 0; height: 1200px; width: 330px;
-     background-color: rgba(212,244,250);      }
+     top: 80px; left: 100; right: 0; height: 900px; width: 330px;
+     background-color: white;      }
 
 #content{  resize:none; height: 500px; width: 270px; }
 </style> <!--여기까지 메모  -->
@@ -440,7 +440,7 @@
 	</div>
 
 	<div id="first">
-<div style="width:250px; margin: 0 auto; padding-top: 20px;">
+<div style="width:250px; margin: 0 auto; padding-top: 10px;">
 <form id="frm">
 <b>메모장</b> <hr>
 

@@ -8,7 +8,7 @@
 
 <style>
 
-* {
+ #login_box * {
 	margin: 0;
 	padding: 0;
 }
@@ -27,8 +27,8 @@ body {
 
 position:absolute; 
 top:10%; left:30%;
-margin-top:-80px; margin-left:-110px;
- text-align: center; margin:auto; padding-top: 80px;
+margin-top:-80px; margin-left:-80px;
+ text-align: center; margin:auto; padding-top: 100px;
     width:420px;
     height:450px;
     margin:80px;
@@ -43,7 +43,6 @@ font-family:"Arial";
 }
 
 #login_box input {
-
     width:370px;
     height:45px;
     font-size:17px;
@@ -53,6 +52,7 @@ font-family:"Arial";
 #id_pass {
 	display: inline-block;
 	vertical-align: top;
+	
 }
 
 #id_pass span {
@@ -77,7 +77,7 @@ font-size:20px;
 
 #btns {
 
-    margin:40px 0 0 0;
+    margin:50px 35px 0 0;
     text-decoration:underline;   
 
 }
@@ -85,6 +85,7 @@ font-size:20px;
 #btns li {
 	margin-left: 40px;
 	display: inline;
+	 font-size:17px;
 }
 
 #chk_login {
@@ -103,9 +104,10 @@ padding-top: 20px;
  padding-bottom: 20px;
 }
 
-li {
+ #login_box li {
 	padding-top: 20px;
 }
+
 
 </style>
 
@@ -123,6 +125,7 @@ li {
   <div id="login_box">
     <h1>Hello World</h1><br>
     <ul id="input_button">
+      
       <li id="id_pass">
         <ul><li>
             <input type="text" name="id" placeholder=" 아이디를 입력하세요">
@@ -134,7 +137,7 @@ li {
       </li>
     
           <li id=chk_login>   
-        <input type="checkbox" style="width:18px;height:18px;"  name="autoLogin" >
+        <input type="checkbox" style="width:18px; height:18px;"  name="autoLogin" >
          로그인 상태 유지</li> 
     
       <li id="login_btn">
@@ -147,7 +150,9 @@ li {
       <li><a href="register_form">회원 가입 </a></li>
       <li><a href="${contextPath }/member/forgotId">아이디 찾기 </a></li>
        <li><a href="${contextPath }/member/forgotPwd">비밀번호 찾기 </a></li>
+
     </ul>
+   
   </div> <!-- login_box -->
 </form></header>
 </div> 
