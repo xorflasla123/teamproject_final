@@ -314,6 +314,9 @@ window.onload = function (){ //브라우저 시작과 동시에 댓글 보여주
 }
 </script>
 <style type="text/css">
+	.contentview { padding-top: 100px; }
+	.contenttable th { height: 40px; width: 100px; }
+	.contenttable td { height: 40px; width: 600px; }
 	.reco { display: flex; }
 	#myProgress {
 	  width: 500px;
@@ -354,11 +357,11 @@ window.onload = function (){ //브라우저 시작과 동시에 댓글 보여주
 <body>
 <c:import url="../default/header.jsp"/><br>
 	<div>
-		<div>
-			<div style="margin: auto; width: 400px;">
+		<div class="contentview">
+			<div style="margin: auto; width: 800px;">
 				<input type="hidden" id="boardId" value="${ contentData.boardId }">
 				<input type="hidden" id="userId" value="${ loginUser }">
-				<table border="1">
+				<table border="1" class="contenttable">
 					<tr>
 						<th>글 번호</th><td>${ contentData.boardId }</td>
 						<th>작성자</th><td>${ contentData.userId }</td>

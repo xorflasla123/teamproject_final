@@ -6,6 +6,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
+<style type="text/css"> 
+ #first{
+ display:none;
+     position: fixed; z-index:9; margin: 0 auto; 
+     top: 80px; left: 100; right: 0; height: 900px; width: 330px;
+     background-color: white;      }
+
+#content {
+	resize: none;
+	height: 500px;
+	width: 270px;
+}
+
+#hiddenMode {
+	display: none;
+}
+
+#btns11 {
+	display: none;
+}
+</style>
+<!--여기까지 메모  -->
+
 <style>
 .map_wrap, .map_wrap * {
 	margin: 0;
@@ -22,7 +47,7 @@
 .map_wrap {
 	position: relative;
 	width: 100%;
-	height: 850px;
+	height: 800px;
 }
 
 #menu_wrap {
@@ -365,27 +390,38 @@
 	<br>
 	<c:set var="contextPath" value="${pageContext.request.contextPath }" />
 
+	<input id="hidden_name" type="hidden" name="place_name" value="">
+	<input id="hidden_address" type="hidden" name="place_address" value="">
+	<input id="hidden_userId" type="hidden" name="user_Id"
+		value="${loginUser }">
+
+
 	<div class="map_wrap">
 		<div id="map"
 			style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
 		<button type="button" onclick="visible1()" id="">키워드 검색</button>
 		<button type="button" onclick="visible2()" id="">카테고리 검색</button>
-		<button type="button" onclick="invisible()" id="btnhidden">닫기</button>
-	
+
+		<input type="button" onclick="slideClick()" value="메모">
+		<div id="btnhidden">
+			<button type="button" onclick="invisible()">닫기</button>
+		</div>
+
 		<form action="${contextPath }/map/navi" method="get" target="_blank">
 			<input type="text" name="dep" placeholder="출발지 입력"><br>
-			<input type="text" name="arr" placeholder="도착지 입력">
-			<input type="submit" value="검색">
+			<input type="text" name="arr" placeholder="도착지 입력"> <input
+				type="submit" value="검색">
 		</form>
+
 
 		<div id="hidden1">
 			<div id="menu_wrap" class="bg_white">
 				<div class="option">
 					<div>
 						<form onsubmit="searchPlaces(); return false;">
-		                    키워드 : <input type="text" value="" id="keyword" size="15"> 
-		                    <button type="submit">검색하기</button> 
-		                </form>
+							키워드 : <input type="text" value="" id="keyword" size="15">
+							<button type="submit">검색하기</button>
+						</form>
 					</div>
 				</div>
 				<hr>
@@ -411,35 +447,157 @@
 		</div>
 	</div>
 
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d88b03ad0e3ed3f735224649327c5f2&libraries=services"></script>
+	<div id="first">
 
-	<script>                                        /* 여기부분 =이랑 &사이가 appkey넣는 자리 */
-		let keyword='';
-		$(document).ready(function(){
+<div style="width:250px; margin: 0 auto; padding-top: 10px;">
+<form id="frm">
+<b>메모장</b> <hr>
+
+<b>작성자  <input type="text" id="id" name="user_id" value="${loginUser} " readonly> </b><br> <br>
+<b>제목</b>  <input type="text" id="title" size="30" name="title"><br><br>
+<b>내용</b> <br> <textarea rows="5" cols="30" id="content" name="content"></textarea>
+<hr>
+<div id="btns11">
+<input type="button" id="repBtn" onclick="rep()" value="저장">
+<input type="button" id="cancelBtn" onclick="slide_hide()" value="취소">
+<input type="button" id="listBtn" onclick="memoList()" value="메모 목록"> </div>
+
+<div id="hiddenMode">
+<input type="button" id="modiBtn" onclick="modify1()" value="수정"type="hidden">
+<input type="button" id="deleBtn" onclick="delete1()" value="삭제" type="hidden">
+<input type="button" id="backBtn" onclick="back1()" value="이전으로"type="hidden">
+</div>
+<input type="hidden" name="memo_id" id="memo_id" value="">
+</form>
+</div ><div id="memolist">
+
+</div>
+</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script><!-- 메모 -->
+	<script type="text/javascript">
+   function slideClick(){
+	   var userId = document.getElementById("hidden_userId").value;
+	   if(userId == ""){
+		   alert('로그인 먼저 해주세요')
+	   }else{
+	   console.log('실행11')
+	   $("#first").slideDown("slow");
+	   $("#modal_wrap").show();
+	   $("#btns11").show();
+	   $("#hiddenMode").hide();
+	   document.getElementById("content").value = "";
+	   document.getElementById("title").value = "";
+	
+	   
+	   }
+   }
+   function slide_hide(){
+	   $("#first").slideUp("fast");
+	   $("#modal_wrap").hide();
+   }
+   function rep(){
+	   let form={}; let arr = $("#frm").serializeArray();
+	   for(i=0 ; i<arr.length ; i++){
+		   form[arr[i].name] = arr[i].value
+	   }
+	   $.ajax({
+		   url: "addMemo", type:"POST",  
+		   data: JSON.stringify(form),
+		   contentType: "application/json; charset=utf-8",
+		   dataType : "json",
+		   success: function(result){
+			   alert("성공적으로 저장되었습니다"); slide_hide();
+			   
+		   }, error: function(){
+			   alert("문제 발생 !!!");
+		   }
+	   })
+   }
+  
+</script><!-- 여기까지 메모 -->
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=761a0a96bd36bae33e8d2523115b5777&libraries=services"></script>
+
+
+<!-- 
+		/* 여기부분 =이랑 &사이가 appkey넣는 자리 */ -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	
+	<!-- 메모 -->
+	<script type="text/javascript">
+		function slideClick() {
+			var userId = document.getElementById("hidden_userId").value;
+			if (userId == "") {
+				alert('로그인 먼저 해주세요')
+			} else {
+				console.log('실행11')
+				$("#first").slideDown("slow");
+				$("#modal_wrap").show();
+				$("#btns11").show();
+				$("#hiddenMode").hide();
+				$("#memolist").hide();
+				document.getElementById("content").value = "";
+				document.getElementById("title").value = "";
+
+			}
+		}
+		function slide_hide() {
+			$("#first").slideUp("fast");
+			$("#modal_wrap").hide();
+		}
+		function rep() {
+			let form = {};
+			let arr = $("#frm").serializeArray();
+			for (i = 0; i < arr.length; i++) {
+				form[arr[i].name] = arr[i].value
+			}
+			$.ajax({
+				url : "addMemo",
+				type : "POST",
+				data : JSON.stringify(form),
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				success : function(result) {
+					alert("성공적으로 저장되었습니다");
+					slide_hide();
+
+				},
+				error : function() {
+					alert("문제 발생 !!!");
+				}
+			})
+		}
+	</script>
+	<!-- 여기까지 메모 -->
+	
+	<script>
+		let keyword = '';
+		$(document).ready(function() {
 			let keyword1 = "${hs}";
 			console.log(keyword);
 			console.log(keyword1);
-			if(keyword1!=null){
+			if (keyword1 != null) {
 				document.getElementById('keyword').value = keyword1;
 			}
 			searchPlaces();
 			$("#hidden1").show();
 			$("#btnhidden").show();
 		});
-	
+
 		function visible1() {
 			$("#hidden1").show();
 			$("#hidden2").hide();
+			$(".option").show();
 			$("#btnhidden").show();
 			kakao.maps.event.removeListener(map, 'idle', searchPlaces1);
 			resetCategory();
+			resetKeyword();
 		}
 		function visible2() {
 			$("#hidden2").show();
 			$("#hidden1").hide();
 			$("#btnhidden").show();
+			$("#category").css('left', '10px');
 			resetKeyword();
 			kakao.maps.event.addListener(map, 'idle', searchPlaces1);
 		}
@@ -608,6 +766,9 @@
 
 				// 정상적으로 검색이 완료됐으면 지도에 마커를 표출합니다
 				displayPlaces1(data);
+
+				// 페이지 번호를 표출합니다
+				displayPagination(pagination);
 			} else if (status === kakao.maps.services.Status.ZERO_RESULT) {
 				// 검색결과가 없는경우 해야할 처리가 있다면 이곳에 작성해 주세요
 
@@ -667,7 +828,18 @@
 
 		// 지도에 마커를 표출하는 함수입니다
 		function displayPlaces1(places) {
+			$("#hidden1").show();
+			$(".option").hide();
+			$("#category").css('left', '300px');
+			var listEl = document.getElementById('placesList'), menuEl = document
+					.getElementById('menu_wrap'), fragment = document
+					.createDocumentFragment(), bounds = new kakao.maps.LatLngBounds(), listStr = '';
 
+			// 검색 결과 목록에 추가된 항목들을 제거합니다
+			removeAllChildNods(listEl);
+
+			// 지도에 표시되고 있는 마커를 제거합니다
+			removeMarker();
 			// 몇번째 카테고리가 선택되어 있는지 얻어옵니다
 			// 이 순서는 스프라이트 이미지에서의 위치를 계산하는데 사용됩니다
 			var order = document.getElementById(currCategory).getAttribute(
@@ -676,8 +848,13 @@
 			for (var i = 0; i < places.length; i++) {
 
 				// 마커를 생성하고 지도에 표시합니다
-				var marker = addMarker1(new kakao.maps.LatLng(places[i].y,
-						places[i].x), order);
+				var placePosition = new kakao.maps.LatLng(places[i].y,
+						places[i].x), marker = addMarker1(placePosition, order), itemEl = getListItem(
+						i, places[i]);
+
+				// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+				// LatLngBounds 객체에 좌표를 추가합니다
+				bounds.extend(placePosition);
 
 				// 마커와 검색결과 항목을 클릭 했을 때
 				// 장소정보를 표출하도록 클릭 이벤트를 등록합니다
@@ -685,8 +862,15 @@
 					kakao.maps.event.addListener(marker, 'click', function() {
 						displayPlaceInfo(place);
 					});
+					itemEl.onclick = function() {
+						displayPlaceInfo(place);
+					};
 				})(marker, places[i]);
+				fragment.appendChild(itemEl);
 			}
+			// 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
+			listEl.appendChild(fragment);
+			menuEl.scrollTop = 0;
 		}
 
 		// 검색결과 항목을 Element로 반환하는 함수입니다
@@ -813,14 +997,20 @@
 						+ place.address_name + '</span>';
 			}
 
-			content += '    <span class="tel">' + place.phone + '</span>'
-					+ '</div>' + '<div class="after"></div>';
+			content += '    <span class="tel">'
+					+ place.phone
+					+ '</span>'
+					+ '<button type="button" onclick="memoAdd()">메모 추가</button></div>'
+					+ '<div class="after"></div>';
 
 			//infowindow.setContent(content);
 			//infowindow.open(map, marker);
 			contentNode.innerHTML = content;
 			placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
 			placeOverlay.setMap(map);
+
+			document.getElementById("hidden_name").value = place.place_name
+			document.getElementById("hidden_address").value = place.address_name
 		}
 
 		// 검색결과 목록의 자식 Element를 제거하는 함수입니다
@@ -847,12 +1037,18 @@
 						+ place.address_name + '</span>';
 			}
 
-			content += '    <span class="tel">' + place.phone + '</span>'
-					+ '</div>' + '<div class="after"></div>';
+			content += '    <span class="tel">'
+					+ place.phone
+					+ '</span>'
+					+ '<button type="button" onclick="memoAdd()">메모 추가</button></div>'
+					+ '<div class="after"></div>';
 
 			contentNode.innerHTML = content;
 			placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
 			placeOverlay.setMap(map);
+
+			document.getElementById("hidden_name").value = place.place_name
+			document.getElementById("hidden_address").value = place.address_name
 		}
 
 		// 각 카테고리에 클릭 이벤트를 등록합니다
@@ -892,6 +1088,163 @@
 			if (el) {
 				el.className = 'on';
 			}
+		}
+
+		function memoAdd() {
+			var content = document.getElementById("content").value;
+			var name1 = document.getElementById("hidden_name").value;
+			var addr1 = document.getElementById("hidden_address").value;
+			var newContent = content + " " + name1 + " " + addr1
+			console.log(name1)
+			console.log(addr1)
+			$("#content").val(newContent);
+
+		}
+
+		function memoList() {
+			$("#memolist").show();
+			var userId = document.getElementById("hidden_userId").value;
+			var num1 = 1;
+			$
+					.ajax({
+						url : "memolist/" + $("#hidden_userId").val() + "/"
+								+ num1,
+						type : "GET",
+						contentType : "application/json; charset=utf-8",
+						dataType : "json",
+						success : function(map) {
+							console.log('성공 1 2')
+							let html = ""
+							html += "<div align='center' ><table border='1'><tr><th>제목</th><th>날짜</th> </tr>";
+							map.list.forEach(function(data) {
+
+								html += " <tr><td><a href='#'onclick=modishow("
+										+ data.memo_id + ")>" + data.title
+										+ "</a></td><td>" + data.saveDate
+										+ "</td></tr>";
+
+							})
+							html += "</table>";
+
+							for (var num = 1; num <= map.repeat; num++) {
+								html += "<a href='#' onclick='paging11(" + num
+										+ ")'>[" + num + "]</a>&nbsp;";
+
+							}
+							$("#memolist").html(html)
+							document.getElementById("content").value = "";
+							document.getElementById("title").value = "";
+
+						},
+						error : function() {
+							alert("문제 발생 !!!");
+						}
+					})
+		}
+		function paging11(num1) {
+			console.log(num1 + "나는123")
+			$
+					.ajax({
+						url : "memolist/" + $("#hidden_userId").val() + "/"
+								+ num1,
+						type : "GET",
+						contentType : "application/json; charset=utf-8",
+						dataType : "json",
+						success : function(map) {
+							console.log('성공 1 2')
+							let html = ""
+							html += "<div align='center' ><table border='1'><tr><th>제목</th><th>날짜</th> </tr>";
+							map.list.forEach(function(data) {
+
+								html += " <tr><td><a href='#'onclick=modishow("
+										+ data.memo_id + ")>" + data.title
+										+ "</a></td><td>" + data.saveDate
+										+ "</td></tr>";
+
+							})
+							html += "</table>";
+
+							for (var num = 1; num <= map.repeat; num++) {
+								html += "<a href='#' onclick='paging11(" + num
+										+ ")'>[" + num + "]</a>&nbsp;";
+
+							}
+							$("#memolist").html(html)
+						},
+						error : function() {
+							alert("문제 발생 !!!");
+						}
+					})
+		}
+		function modishow(memo_id) {
+			$.ajax({
+				url : "modishow/" + memo_id,
+				type : "GET",
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				success : function(data) {
+					console.log('성공 1 2')
+					$("#btns11").hide();
+					$("#hiddenMode").show();
+					$("#id").val(data.user_id);
+					$("#title").val(data.title);
+					$("#content").val(data.content);
+					$("#memo_id").val(memo_id);
+				},
+				error : function() {
+					alert("문제 발생 !!!");
+				}
+			})
+		}
+		function modify1() {
+			let form = {};
+			let arr = $("#frm").serializeArray();
+			for (i = 0; i < arr.length; i++) {
+				form[arr[i].name] = arr[i].value
+			}
+			$.ajax({
+				url : "modiMemo",
+				type : "POST",
+				data : JSON.stringify(form),
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				success : function(result) {
+					alert("성공적으로 수정되었습니다");
+				},
+				error : function() {
+					alert("문제가 발생하였씁낟 !!!");
+				}
+			})
+		}
+
+		function delete1() {
+			var memo_id = document.getElementById("memo_id").value;
+			$.ajax({
+				url : "delete1/" + memo_id,
+				type : "GET",
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				success : function(data) {
+					console.log('성공 3 4')
+					document.getElementById("content").value = "";
+					document.getElementById("title").value = "";
+					alert("삭제되었습니다");
+					$("#btns11").show();
+					$("#hiddenMode").hide();
+					memoList();
+
+				},
+				error : function() {
+					alert("문제 발생 !!!");
+				}
+			})
+		}
+
+		function back1() {
+			$("#btns11").show();
+			$("#hiddenMode").hide();
+			document.getElementById("content").value = "";
+			document.getElementById("title").value = "";
 		}
 	</script>
 </body>

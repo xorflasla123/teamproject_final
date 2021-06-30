@@ -16,10 +16,15 @@
 .head { width: 100%; height: 100%; margin: auto;}
 
 .bar { position:fixed; list-style: none; display: flex; justify-content: flex-end; 
+<<<<<<< HEAD
 	width: 2000px; height:45px; z-index: 9998; background-color: rgba(0,0,0,0); transition: all 0.5s;}
+=======
+	width: 2000px; height:45px; z-index: 9998; background-color: rgba(0,0,0,.6); color: white;}
+>>>>>>> 2aed076bec5d1d26acf35840b114e86c7a0f2ae4
 
-li {padding-right: 20px; position: relative; right: 150px; font-size: 20pt;}
+.bar li {padding-right: 20px; position: relative; right: 150px; font-size: 20pt;}
 
+<<<<<<< HEAD
 a b:hover{ 
 	
 	padding-bottom: 3px;
@@ -30,6 +35,10 @@ a b:hover{
 ul li a b { }
 
 header a { text-decoration: none; padding: 15px; font-size: 13pt;}
+=======
+ul li a b { color: white;}
+.bar a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
+>>>>>>> 2aed076bec5d1d26acf35840b114e86c7a0f2ae4
 
 .main { text-align: center; margin: auto; padding-top: 80px; }
 
@@ -43,6 +52,7 @@ footer {
 
 
 </style>
+<<<<<<< HEAD
 <script>
 
 	$(window).scroll(function(){
@@ -58,6 +68,9 @@ footer {
 	})
 
 </script>
+=======
+
+>>>>>>> 2aed076bec5d1d26acf35840b114e86c7a0f2ae4
 </head>
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath }" />
@@ -80,12 +93,16 @@ footer {
 						</c:when>
 						
 						<c:otherwise>
+
 							<a href="${contextPath }/member/logout"><b>로그아웃</b></a>
+							<li><a href="${contextPath }/member/info?id=${loginUser }"><b>마이페이지</b></a></li>
+
 						</c:otherwise>
 					</c:choose>
 				</li>
-				
-				<li><a href="${contextPath }/member/info?id=${loginUser }"><b>마이페이지</b></a></li>
+
+		
+
 				
 				<!-- <li><a href="${contextPath }/map/navigate">길찾기</a></li> -->
 
