@@ -9,14 +9,11 @@
 		
   <!-- 히카리 커넥션풀 빈 등록 -->
   <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-  <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-
-  <property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:49161:xe" />
-  <property name="username" value="abcd" />
-  <property name="password" value="1234" />
-
-
-  </bean>  
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@182.172.201.56:1521:xe" />
+		<property name="username" value="ltlking" />
+		<property name="password" value="rinian147" />
+	</bean> 
   <!-- 히카리 데이터소스 빈 등록 -->  
   <bean id="ds" class="com.zaxxer.hikari.HikariDataSource">
   <constructor-arg ref="hikariConfig"/>
