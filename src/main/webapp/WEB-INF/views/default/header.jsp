@@ -16,32 +16,18 @@
 .head { width: 100%; height: 100%; margin: auto;}
 
 .bar { position:fixed; list-style: none; display: flex; justify-content: flex-end; 
-	width: 2000px; height:45px; z-index: 9998; background-color: rgba(0,0,0,0);}
+	width: 2000px; height:45px; z-index: 9998; background-color: rgba(0,0,0,.6); color: white;}
 
 .bar li {padding-right: 20px; position: relative; right: 150px; font-size: 20pt;}
 
-ul li a b { }
+ul li a b { color: white;}
 .bar a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
 
 .main { text-align: center; margin: auto; padding-top: 80px; }
 
 
 </style>
-<script>
 
-	$(window).scroll(function(){
-		if($(this).scrollTop() == 0)
-			$('.bar').css('background-color','rgba(0,0,0,0)') && $('.bar').css('color', 'black') 
-			&& $('ul li a b').css('color', 'black');
-			
-			
-		else
-			$('.bar').css('background-color','rgba(0,0,0,.6)') && $('.bar').css('color', 'white') 
-			&& $('ul li a b').css('color', 'white');
-			
-	})
-
-</script>
 </head>
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath }" />
