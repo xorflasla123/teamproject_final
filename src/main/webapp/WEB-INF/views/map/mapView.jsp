@@ -516,7 +516,7 @@
   
 </script><!-- 여기까지 메모 -->
 	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=761a0a96bd36bae33e8d2523115b5777&libraries=services"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d88b03ad0e3ed3f735224649327c5f2&libraries=services"></script>
 
 
 <!-- 
@@ -1094,7 +1094,7 @@
 			var content = document.getElementById("content").value;
 			var name1 = document.getElementById("hidden_name").value;
 			var addr1 = document.getElementById("hidden_address").value;
-			var newContent = content + " " + name1 + " " + addr1
+			var newContent = content + " " + name1 + " " + addr1 + '\n'
 			console.log(name1)
 			console.log(addr1)
 			$("#content").val(newContent);
