@@ -64,7 +64,21 @@
 	<hr>
 	<c:import url="default/footer.jsp" />
 	
-	
+	<script>
+	window.onload = function(){
+		$('.bar').css('background-color','rgba(0,0,0,0)') && $('.bar').css('color', 'black') 
+		&& $('ul li a b').css('color', 'black');
+	}
+	$(window).scroll(function(){
+		if($(this).scrollTop() == 0)
+			$('.bar').css('background-color','rgba(0,0,0,0)') && $('.bar').css('color', 'black') 
+			&& $('ul li a b').css('color', 'black');
+		else
+			$('.bar').css('background-color','rgba(0,0,0,.6)') && $('.bar').css('color', 'white') 
+			&& $('ul li a b').css('color', 'white');
+	})
+
+</script>
 
 </body>
 </html>

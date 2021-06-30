@@ -16,9 +16,9 @@
 .head { width: 100%; height: 100%; margin: auto;}
 
 .bar { position:fixed; list-style: none; display: flex; justify-content: flex-end; 
-	width: 2000px; height:45px; z-index: 9998; background-color: rgba(0,0,0,0); transition: all 0.5s;}
+	width: 2000px; height:45px; z-index: 9998; background-color: rgba(0,0,0,.6); color: white; transition: all 0.5s;}
 
-li {padding-right: 20px; position: relative; right: 150px; font-size: 20pt;}
+.bar li {padding-right: 20px; position: relative; right: 150px; font-size: 20pt;}
 
 a b:hover{ 
 	
@@ -27,9 +27,10 @@ a b:hover{
 	transition: all 0.5s;
 }
 
-ul li a b { }
+ul li a b { color: white;}
 
 header a { text-decoration: none; padding: 15px; font-size: 13pt;}
+.bar a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
 
 .main { text-align: center; margin: auto; padding-top: 80px; }
 
@@ -43,21 +44,7 @@ footer {
 
 
 </style>
-<script>
 
-	$(window).scroll(function(){
-		if($(this).scrollTop() == 0)
-			$('.bar').css('background-color','rgba(0,0,0,0)') && $('.bar').css('color', 'black') 
-			&& $('ul li a b').css('color', 'black');
-			
-			
-		else
-			$('.bar').css('background-color','rgba(0,0,0,.6)') && $('.bar').css('color', 'white') 
-			&& $('ul li a b').css('color', 'white') ;
-			
-	})
-
-</script>
 </head>
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath }" />
@@ -67,7 +54,7 @@ footer {
 		<div class="wrap">
 			<ul class="bar">
 		
-				<li style="font-size: 22pt; position: relative; right: 1200px"><b>Hello World</b></li>
+				<li style="font-size: 22pt; position: absolute; right: 1800px"><b>Hello World</b></li>
 				
 				<li><a href="${contextPath }/index"><b>HOME</b></a></li>
 				
@@ -80,12 +67,16 @@ footer {
 						</c:when>
 						
 						<c:otherwise>
+
 							<a href="${contextPath }/member/logout"><b>로그아웃</b></a>
+							<li><a href="${contextPath }/member/info?id=${loginUser }"><b>마이페이지</b></a></li>
+
 						</c:otherwise>
 					</c:choose>
 				</li>
-				
-				<li><a href="${contextPath }/member/info?id=${loginUser }"><b>마이페이지</b></a></li>
+
+		
+
 				
 				<!-- <li><a href="${contextPath }/map/navigate">길찾기</a></li> -->
 
