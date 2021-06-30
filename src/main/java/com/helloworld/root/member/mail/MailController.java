@@ -31,7 +31,7 @@ public class MailController {
 		sb.append("<html><body>");
 		sb.append("<h1>Hello World</h>");
 		sb.append("<h2>요청하신 회원님의 아이디는 </h2>");
-		sb.append("<h4>"+(String)session.getAttribute("idChk")+"</h4>");
+		sb.append("<h4 style='color: red;'>"+(String)session.getAttribute("idChk")+"</h4>");
 		sb.append("<h2> 입니다.</h2>");
 		sb.append("</body></html>");
 		
