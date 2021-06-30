@@ -166,14 +166,14 @@ function bad() {
 
 let data; //삭제를 돕기 위해 데이터 저장
 let re_id;
-
+var ls = '<c:out value="${loginUser}"/>';
 //댓글 test용이기 때문에 table에 게시판id, userId가 없음.
 function rep(){ //댓글 저장
 	let form={}; let arr=$("#frm").serializeArray();
 	for(i=0; i<arr.length; i++){
 		form[arr[i].name] = arr[i].value
 	}
-	console.log(form); //null값 체크
+	console.log(ls); //null값 체크
 	$.ajax({
 		url: "addReply", type: "POST",
 		data: JSON.stringify(form),
@@ -183,7 +183,11 @@ function rep(){ //댓글 저장
 			$('textarea').val(''); //textarea 비우기
 			replyData(); //화면에 보여주는 function
 		}, error: function(){
-			alert("내용을 적어주세요!!!");
+			if(ls.length>=1){
+				alert("내용을 적어주세요!!!");
+			} else{
+				alert("로그인 후 이용하실 수 있습니다.")
+			}
 		}
 	})
 }
@@ -301,7 +305,11 @@ function replyData(){ //댓글 보여주는 부분
 }
 
 function visible(i){
-	$("#hidden"+i).show();
+	if(ls.length>=1){
+		$("#hidden"+i).show();
+	} else{
+		alert("로그인 후 이용하실 수 있습니다.")	
+	}
 }
 
 function invisible(i){
