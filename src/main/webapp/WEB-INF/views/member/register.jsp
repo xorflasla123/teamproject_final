@@ -11,8 +11,11 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<!--  <script src="${contextPath }/resources/daumPost_js/daumpost.js"></script>-->
+ <script src="${contextPath }/resources/daumPost_js/daumpost.js"></script>
 <script>
+
+	
+
 function id22(){
 	console.log('아이디 중복확인')
 	var id1 = $("#id").val();
@@ -57,6 +60,11 @@ function myFocus(){
 	 possRegi = document.getElementById("possRegi").value;
 	 chkPw = document.getElementById("chkPw");
 	 pwd = document.getElementById("pwd");
+	 addr1= $("#addr1").val()
+	    addr2= $("#addr2").val()	
+	    addr3= $("#addr3").val()	 
+	    addr = addr1+"/"+addr2+"/"+addr3
+	    $("#addr3").val(addr)
 	 if(chkPw.value !=pwd.value){
 		 alert('비밀번호를 다시 확인해주세요')
 		 chkPw.focus()
@@ -67,7 +75,9 @@ function myFocus(){
 			 alert('이메일 인증해주세요')
 		 }
 	 }
-	 
+	 {
+			
+	 }
    
  }   
 </script>
@@ -127,9 +137,11 @@ function authNum1(){
     
      
   <input size="30" type="text" name="num" placeholder="휴대전화">
- <input type="text" id="addr" name="addr" placeholder="주 소"><br>
-  <input type="button" onclick="daumPost()" value="주소찾기"><br>
 
+ <input size="30" type="text" id="addr1" name="addr1" placeholder="우편번호">
+  <input type="button" onclick="daumPost()" value="주소찾기"><br>
+  <input type="text" id="addr2" placeholder="주 소"><br>
+   <input type="text" id="addr3" name="addr" placeholder="상 세 주 소"><br>
   <input type="button" onclick="register()" name="join" value="가입" >
  <input type="button" onclick="history.back()" value="취소" >
   </td>

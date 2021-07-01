@@ -20,7 +20,7 @@
 
 .bar li {padding-right: 20px; position: relative; right: 150px; font-size: 20pt;}
 
-ul li a b { }
+ ul li a b { }
 .bar a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
 
 .main { text-align: center; margin: auto; padding-top: 80px; }

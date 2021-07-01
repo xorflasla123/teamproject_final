@@ -4,29 +4,66 @@
 <!DOCTYPE html>
 <html>
 <head>
+  
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
 
-<style type="text/css"> 
- #first{
- display:none;
-     position: fixed; z-index:9; margin: 0 auto; 
-     top: 80px; left: 100; right: 0; height: 900px; width: 330px;
-     background-color: white;      }
+<style type="text/css">
+.tablememo {
+border-collapse:collapse;
+	height: 90px;
+	width: 270px;
+	margin-left:17px;
+	opacity: 0.7;
+	background-color:white;
+}
+.container th{
+text-align:center;
+}
+#first {
+	display: none;
+	position: fixed;
+	z-index: 9;
+	margin: 0 auto;
+	top: 30px;
+	left: 100;
+	right: 0;
+	height: 900px;
+	width: 330px;
+	opacity: 0.7;
+		
+}
 
+#content_name{
+}
 #content {
+
 	resize: none;
-	height: 500px;
+	height: 440px;
 	width: 270px;
 }
-
-#hiddenMode {
-	display: none;
+#title {
+margin-left:10px;
+margin-bottom:30px;
+left:100px;
+	height: 20px;
+	width: 170px;
+}
+#id {
+margin-bottom:10px;
+	height: 20px;
+	width: 170px;
 }
 
-#btns11 {
+#hiddenMode button 
+#btns11 button {
 	display: none;
+	width: 95px;
+	height: 45px;
+}
+#frm{
+padding-top:30px;
 }
 </style>
 <!--여기까지 메모  -->
@@ -449,81 +486,91 @@
 
 	<div id="first">
 
-<div style="width:250px; margin: 0 auto; padding-top: 10px;">
-<form id="frm">
-<b>메모장</b> <hr>
+		<div style="width: 250px; margin: 0 auto; padding-top: 10px;">
+			<form id="frm">
+				<br>
+				<h3 style="position: absolute; top: 40px; right: 130px;" >여행일지</h3>
+				<br> <b>작성자</b> <input type="text" id="id" name="user_id"
+					value="${loginUser} " readonly>  <br> <b >제 목</b>
+				<input type="text" id="title" size="30" name="title"><br>
+				<b id="content_name">내용</b> <br>
+				<textarea rows="5" cols="30" id="content" name="content"></textarea>
+				<br>
+		
+				<div id="btns11">
+					<input type="button" id="repBtn" onclick="rep()" value="저장">
+					<input type="button" id="cancelBtn" onclick="slide_hide()"
+						value="취소"> <input type="button" id="listBtn"
+						onclick="memoList()" value="메모 목록"><br><br>
+				</div>
 
-<b>작성자  <input type="text" id="id" name="user_id" value="${loginUser} " readonly> </b><br> <br>
-<b>제목</b>  <input type="text" id="title" size="30" name="title"><br><br>
-<b>내용</b> <br> <textarea rows="5" cols="30" id="content" name="content"></textarea>
-<hr>
-<div id="btns11">
-<input type="button" id="repBtn" onclick="rep()" value="저장">
-<input type="button" id="cancelBtn" onclick="slide_hide()" value="취소">
-<input type="button" id="listBtn" onclick="memoList()" value="메모 목록"> </div>
-
-<div id="hiddenMode">
-<input type="button" id="modiBtn" onclick="modify1()" value="수정"type="hidden">
-<input type="button" id="deleBtn" onclick="delete1()" value="삭제" type="hidden">
-<input type="button" id="backBtn" onclick="back1()" value="이전으로"type="hidden">
-</div>
-<input type="hidden" name="memo_id" id="memo_id" value="">
-</form>
-</div ><div id="memolist">
-
-</div>
-</div>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script><!-- 메모 -->
+				<div id="hiddenMode">
+					<input type="button" id="modiBtn" onclick="modify1()" value="수정"
+						type="hidden"> <input type="button" id="deleBtn"
+						onclick="delete1()" value="삭제" type="hidden"> <input
+						type="button" id="backBtn" onclick="back1()" value="이전으로"
+						type="hidden"><br><br>
+				</div>
+				<input type="hidden" name="memo_id" id="memo_id" value="">
+			</form>
+		</div>
+		<div id="memolist"></div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<!-- 메모 -->
 	<script type="text/javascript">
-   function slideClick(){
-	   var userId = document.getElementById("hidden_userId").value;
-	   if(userId == ""){
-		   alert('로그인 먼저 해주세요')
-	   }else{
-	   console.log('실행11')
-	   $("#first").slideDown("slow");
-	   $("#modal_wrap").show();
-	   $("#btns11").show();
-	   $("#hiddenMode").hide();
-	   document.getElementById("content").value = "";
-	   document.getElementById("title").value = "";
-	
-	   
-	   }
-   }
-   function slide_hide(){
-	   $("#first").slideUp("fast");
-	   $("#modal_wrap").hide();
-   }
-   function rep(){
-	   let form={}; let arr = $("#frm").serializeArray();
-	   for(i=0 ; i<arr.length ; i++){
-		   form[arr[i].name] = arr[i].value
-	   }
-	   $.ajax({
-		   url: "addMemo", type:"POST",  
-		   data: JSON.stringify(form),
-		   contentType: "application/json; charset=utf-8",
-		   dataType : "json",
-		   success: function(result){
-			   alert("성공적으로 저장되었습니다"); slide_hide();
-			   
-		   }, error: function(){
-			   alert("문제 발생 !!!");
-		   }
-	   })
-   }
-  
-</script><!-- 여기까지 메모 -->
+		function slideClick() {
+			var userId = document.getElementById("hidden_userId").value;
+			if (userId == "") {
+				alert('로그인 먼저 해주세요')
+			} else {
+				console.log('실행11')
+				$("#first").slideDown("slow");
+				$("#modal_wrap").show();
+				$("#btns11").show();
+				$("#hiddenMode").hide();
+				document.getElementById("content").value = "";
+				document.getElementById("title").value = "";
+
+			}
+		}
+		function slide_hide() {
+			$("#first").slideUp("fast");
+			$("#modal_wrap").hide();
+		}
+		function rep() {
+			let form = {};
+			let arr = $("#frm").serializeArray();
+			for (i = 0; i < arr.length; i++) {
+				form[arr[i].name] = arr[i].value
+			}
+			$.ajax({
+				url : "addMemo",
+				type : "POST",
+				data : JSON.stringify(form),
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				success : function(result) {
+					alert("성공적으로 저장되었습니다");
+					slide_hide();
+
+				},
+				error : function() {
+					alert("문제 발생 !!!");
+				}
+			})
+		}
+	</script>
+	<!-- 여기까지 메모 -->
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=761a0a96bd36bae33e8d2523115b5777&libraries=services"></script>
 
 
-<!-- 
+	<!-- 
 		/* 여기부분 =이랑 &사이가 appkey넣는 자리 */ -->
-	</script>
+
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	
+
 	<!-- 메모 -->
 	<script type="text/javascript">
 		function slideClick() {
@@ -570,7 +617,7 @@
 		}
 	</script>
 	<!-- 여기까지 메모 -->
-	
+
 	<script>
 		let keyword = '';
 		$(document).ready(function() {
@@ -1116,12 +1163,13 @@
 						success : function(map) {
 							console.log('성공 1 2')
 							let html = ""
-							html += "<div align='center' ><table border='1'><tr><th>제목</th><th>날짜</th> </tr>";
+							html +=
+								"<div class='container' align='center' ><table class='tablememo' border=1><tr><th>제목</th><th>날짜</th> </tr>";
 							map.list.forEach(function(data) {
-
+								
 								html += " <tr><td><a href='#'onclick=modishow("
 										+ data.memo_id + ")>" + data.title
-										+ "</a></td><td>" + data.saveDate
+										+ "</a></td><td>" +data.saveDate
 										+ "</td></tr>";
 
 							})
@@ -1132,6 +1180,7 @@
 										+ ")'>[" + num + "]</a>&nbsp;";
 
 							}
+							html +="</div>";
 							$("#memolist").html(html)
 							document.getElementById("content").value = "";
 							document.getElementById("title").value = "";
@@ -1154,7 +1203,7 @@
 						success : function(map) {
 							console.log('성공 1 2')
 							let html = ""
-							html += "<div align='center' ><table border='1'><tr><th>제목</th><th>날짜</th> </tr>";
+							html += "<div class='container' align='center'><table class='tablememo' border=1><tr><th>제목</th><th>날짜</th> </tr>";
 							map.list.forEach(function(data) {
 
 								html += " <tr><td><a href='#'onclick=modishow("
@@ -1170,6 +1219,7 @@
 										+ ")'>[" + num + "]</a>&nbsp;";
 
 							}
+							html +="</div>";
 							$("#memolist").html(html)
 						},
 						error : function() {
