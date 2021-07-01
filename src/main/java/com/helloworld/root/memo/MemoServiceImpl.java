@@ -1,7 +1,6 @@
 package com.helloworld.root.memo;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;

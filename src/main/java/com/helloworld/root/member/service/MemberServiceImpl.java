@@ -26,13 +26,9 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	public int user_check(HttpServletRequest request) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		
-		MemberDTO dto = mapper.user_check(request.getParameter("id"));
-		
+	    MemberDTO dto = mapper.user_check(request.getParameter("id"));
 		if(dto != null) {
-			if(encoder.matches(request.getParameter("pwd"), dto.getPwd()) || 
-								request.getParameter("pwd").equals(dto.getPwd())) {
+			if(request.getParameter("pwd").equals(dto.getPwd())) {
 				return 0;
 			}
 		}
@@ -41,16 +37,8 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	public int register(MemberDTO dto) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); //비밀번호 안보이게 설정 
-		
 
-		// dto.setPw(encoder.encode(dto.getPwd())); 아래와 같음 
-
-		System.out.println("비밀번호 변경 전 : "+dto.getPwd());
-		String pwd = encoder.encode(dto.getPwd());
-		System.out.println("암호화 후 :"+pwd);
-		
-		dto.setPwd(pwd);
+		System.out.println(dto.getPwd());
 		System.out.println(dto.getAddr());
 		
 		try{

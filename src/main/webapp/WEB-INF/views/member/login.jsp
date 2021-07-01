@@ -31,7 +31,7 @@ ul {
 	text-align: center;
 	margin: auto;
 	padding-top: 100px;
-	width: 420px;
+	width: 450px;
 	height: 450px;
 	margin: 80px;
 	padding: 80px;
@@ -115,7 +115,7 @@ h1 {
 
 		<header>
 			<form action="${contextPath }/member/user_check" method="post">
-				<div id="login_box">
+				<div id="login_box" style="padding-left: 60px;">
 					<h1>Hello World</h1>
 					<br>
 					<ul id="input_button">

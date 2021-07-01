@@ -371,22 +371,22 @@ window.onload = function (){ //브라우저 시작과 동시에 댓글 보여주
 				<input type="hidden" id="userId" value="${ loginUser }">
 				<table border="1" class="contenttable">
 					<tr>
-						<th>글 번호</th><td>${ contentData.boardId }</td>
-						<th>작성자</th><td>${ contentData.userId }</td>
+						<th>글 번호</th><td>&nbsp;${ contentData.boardId }</td>
+						<th>작성자</th><td>&nbsp;${ contentData.userId }</td>
 					</tr>
 					<tr>
-						<th>제 목</th><td>${ contentData.title }</td>
-						<th>작성일</th><td>${ contentData.day }</td>
+						<th>제 목</th><td>&nbsp;${ contentData.title }</td>
+						<th>작성일</th><td>&nbsp;${ contentData.day }</td>
 					</tr>
 					<tr>
-						<th>조회수</th><td>${ contentData.hit }</td>
-						<th>좋아요</th><td id="like">${ contentLike }</td>
+						<th>조회수</th><td>&nbsp;${ contentData.hit }</td>
+						<th>좋아요</th><td id="like">&nbsp;${ contentLike }</td>
 					</tr>
 					<tr>
 						<th colspan="4">내용</th>
 					</tr>
 					<tr>
-						<td colspan="4">${ contentData.content }</td>
+						<td colspan="4">&nbsp;${ contentData.content }</td>
 					</tr>
 					<c:if test="${ contentData.picture != 'nan' }">
 						<tr>
@@ -455,5 +455,9 @@ window.onload = function (){ //브라우저 시작과 동시에 댓글 보여주
 	
 		<table border="1" id="show" style="margin: auto;"></table> <!-- 댓글 보여주는 부분 -->
 	</div>
+	<br><br>
+	<hr>
+	<c:import url="../default/footer.jsp" />
+	<br><br><br><br><br>
 </body>
 </html>

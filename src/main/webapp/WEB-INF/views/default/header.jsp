@@ -54,7 +54,7 @@ footer {
 		<div class="wrap">
 			<ul class="bar">
 		
-				<li style="font-size: 22pt; position: relative; right: 1200px"><b>Hello World</b></li>
+				<li style="font-size: 22pt; position: absolute; right: 1800px"><b>Hello World</b></li>
 				
 				<li><a href="${contextPath }/index"><b>HOME</b></a></li>
 				
