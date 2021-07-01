@@ -15,6 +15,5 @@
 		<input type="text" name="arr" placeholder="도착지 입력"><br>
 		<input type="submit" value="검색">
 	</form>
-
 </body>
 </html>

@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  
 <meta charset="UTF-8">
 <title>Map</title>
 
@@ -47,406 +46,6 @@
 #pagination a { display: inline-block; margin-right: 10px; }
 #pagination .on { font-weight: bold; cursor: default; color: #777; }
 
-</style>
-
-<style type="text/css">
-.tablememo {
-border-collapse:collapse;
-	height: 90px;
-	width: 270px;
-	margin-left:17px;
-	opacity: 0.7;
-	background-color:white;
-}
-.container th{
-text-align:center;
-}
-#first {
-	display: none;
-	position: fixed;
-	z-index: 9;
-	margin: 0 auto;
-	top: 30px;
-	left: 100;
-	right: 0;
-	height: 900px;
-	width: 330px;
-	opacity: 0.7;
-		
-}
-
-#content_name{
-}
-#content {
-
-	resize: none;
-	height: 440px;
-	width: 270px;
-}
-#title {
-margin-left:10px;
-margin-bottom:30px;
-left:100px;
-	height: 20px;
-	width: 170px;
-}
-#id {
-margin-bottom:10px;
-	height: 20px;
-	width: 170px;
-}
-
-#hiddenMode button 
-#btns11 button {
-	display: none;
-	width: 95px;
-	height: 45px;
-}
-#frm{
-padding-top:30px;
-}
- </style>
-<!--여기까지 메모  -->
-
-<style >
-.map_wrap, .map_wrap * {
-	margin: 0;
-	padding: 0;
-	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
-	font-size: 12px;
-}
-
-.map_wrap a, .map_wrap a:hover, .map_wrap a:active {
-	color: #000;
-	text-decoration: none;
-}
-
-.map_wrap {
-	position: relative;
-	width: 100%;
-	height: 800px;
-}
-
-#menu_wrap {
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	width: 250px;
-	margin: 10px 0 30px 10px;
-	padding: 5px;
-	overflow-y: auto;
-	background: rgba(255, 255, 255, 0.7);
-	z-index: 1;
-	font-size: 12px;
-	border-radius: 10px;
-}
-
-.bg_white {
-	background: #fff;
-}
-
-#menu_wrap hr {
-	display: block;
-	height: 1px;
-	border: 0;
-	border-top: 2px solid #5F5F5F;
-	margin: 3px 0;
-}
-
-#menu_wrap .option {
-	text-align: center;
-}
-
-#menu_wrap .option p {
-	margin: 10px 0;
-}
-
-#menu_wrap .option button {
-	margin-left: 5px;
-}
-
-#placesList li {
-	list-style: none;
-}
-
-#placesList .item {
-	position: relative;
-	border-bottom: 1px solid #888;
-	overflow: hidden;
-	cursor: pointer;
-	min-height: 65px;
-}
-
-#placesList .item span {
-	display: block;
-	margin-top: 4px;
-}
-
-#placesList .item h5, #placesList .item .info {
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-#placesList .item .info {
-	padding: 10px 0 10px 55px;
-}
-
-#placesList .info .gray {
-	color: #8a8a8a;
-}
-
-#placesList .info .jibun {
-	padding-left: 26px;
-	background:
-		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
-		no-repeat;
-}
-
-#placesList .info .tel {
-	color: #009900;
-}
-
-#placesList .item .markerbg {
-	float: left;
-	position: absolute;
-	width: 36px;
-	height: 37px;
-	margin: 10px 0 0 10px;
-	background:
-		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
-		no-repeat;
-}
-
-#placesList .item .marker_1 {
-	background-position: 0 -10px;
-}
-
-#placesList .item .marker_2 {
-	background-position: 0 -56px;
-}
-
-#placesList .item .marker_3 {
-	background-position: 0 -102px
-}
-
-#placesList .item .marker_4 {
-	background-position: 0 -148px;
-}
-
-#placesList .item .marker_5 {
-	background-position: 0 -194px;
-}
-
-#placesList .item .marker_6 {
-	background-position: 0 -240px;
-}
-
-#placesList .item .marker_7 {
-	background-position: 0 -286px;
-}
-
-#placesList .item .marker_8 {
-	background-position: 0 -332px;
-}
-
-#placesList .item .marker_9 {
-	background-position: 0 -378px;
-}
-
-#placesList .item .marker_10 {
-	background-position: 0 -423px;
-}
-
-#placesList .item .marker_11 {
-	background-position: 0 -470px;
-}
-
-#placesList .item .marker_12 {
-	background-position: 0 -516px;
-}
-
-#placesList .item .marker_13 {
-	background-position: 0 -562px;
-}
-
-#placesList .item .marker_14 {
-	background-position: 0 -608px;
-}
-
-#placesList .item .marker_15 {
-	background-position: 0 -654px;
-}
-
-#pagination {
-	margin: 10px auto;
-	text-align: center;
-}
-
-#pagination a {
-	display: inline-block;
-	margin-right: 10px;
-}
-
-#pagination .on {
-	font-weight: bold;
-	cursor: default;
-	color: #777;
-}
-/*  */
-#category {
-	position: absolute;
-	top: 10px;
-	left: 10px;
-	border-radius: 5px;
-	border: 1px solid #909090;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
-	background: #fff;
-	overflow: hidden;
-	z-index: 2;
-}
-
-#category li {
-	float: left;
-	list-style: none;
-	width: 50px; px;
-	border-right: 1px solid #acacac;
-	padding: 6px 0;
-	text-align: center;
-	cursor: pointer;
-}
-
-#category li.on {
-	background: #eee;
-}
-
-#category li:hover {
-	background: #ffe6e6;
-	border-left: 1px solid #acacac;
-	margin-left: -1px;
-}
-
-#category li:last-child {
-	margin-right: 0;
-	border-right: 0;
-}
-
-#category li span {
-	display: block;
-	margin: 0 auto 3px;
-	width: 27px;
-	height: 28px;
-}
-
-#category li .category_bg {
-	background:
-		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png)
-		no-repeat;
-}
-
-#category li .bank {
-	background-position: -10px 0;
-}
-
-#category li .mart {
-	background-position: -10px -36px;
-}
-
-#category li .pharmacy {
-	background-position: -10px -72px;
-}
-
-#category li .oil {
-	background-position: -10px -108px;
-}
-
-#category li .cafe {
-	background-position: -10px -144px;
-}
-
-#category li .store {
-	background-position: -10px -180px;
-}
-
-#category li.on .category_bg {
-	background-position-x: -46px;
-}
-
-.placeinfo_wrap {
-	position: absolute;
-	bottom: 28px;
-	left: -150px;
-	width: 300px;
-}
-
-.placeinfo {
-	position: relative;
-	width: 100%;
-	border-radius: 6px;
-	border: 1px solid #ccc;
-	border-bottom: 2px solid #ddd;
-	padding-bottom: 10px;
-	background: #fff;
-}
-
-.placeinfo:nth-of-type(n) {
-	border: 0;
-	box-shadow: 0px 1px 2px #888;
-}
-
-.placeinfo_wrap .after {
-	content: '';
-	position: relative;
-	margin-left: -12px;
-	left: 50%;
-	width: 22px;
-	height: 12px;
-	background:
-		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
-}
-
-.placeinfo a, .placeinfo a:hover, .placeinfo a:active {
-	color: #fff;
-	text-decoration: none;
-}
-
-.placeinfo a, .placeinfo span {
-	display: block;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-.placeinfo span {
-	margin: 5px 5px 0 5px;
-	cursor: default;
-	font-size: 13px;
-}
-
-.placeinfo .title {
-	font-weight: bold;
-	font-size: 14px;
-	border-radius: 6px 6px 0 0;
-	margin: -1px -1px 0 -1px;
-	padding: 10px;
-	color: #fff;
-	background: #d95050;
-	background: #d95050
-		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png)
-		no-repeat right 14px center;
-}
-
-.placeinfo .tel {
-	color: #0f7833;
-}
-
-.placeinfo .jibun {
-	color: #999;
-	font-size: 11px;
-	margin-top: 0;
-}
-
 /*  */
 #category { position: absolute; top: 10px; left: 10px; border-radius: 5px; border: 1px solid #909090; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4); background: #fff; overflow: hidden; z-index: 2; }
 #category li { float: left; list-style: none; width: 50px; px; border-right: 1px solid #acacac; padding: 6px 0; text-align: center; cursor: pointer; }
@@ -478,8 +77,17 @@ padding-top:30px;
 #hidden2 { display: none; }
 #btnhidden { display: none; }
 
-
-
+/* 메모 */
+.tablememo { border-collapse:collapse; height: 90px; width: 270px; margin-left:17px; opacity: 0.7; background-color:white; }
+.container th{ text-align:center; }
+#first { display: none; position: fixed; z-index: 9; margin: 0 auto; top: 30px; left: 100; right: 0; height: 900px; width: 330px; opacity: 0.7; }
+#content_name{ }
+#content { resize: none; height: 440px; width: 270px; }
+#title { margin-left:10px; margin-bottom:30px; left:100px; height: 20px; width: 170px; }
+#id { margin-bottom:10px; height: 20px; width: 170px; }
+#hiddenMode button 
+#btns11 button { display: none; width: 95px; height: 45px; }
+#frm{ padding-top:30px; }
 </style>
 
 </head>
@@ -540,8 +148,7 @@ padding-top:30px;
 	</div>
 
 	<div id="first">
-	
-	<div style="width: 250px; margin: 0 auto; padding-top: 10px;">
+		<div style="width: 250px; margin: 0 auto; padding-top: 10px;">
 			<form id="frm">
 				<br>
 				<h3 style="position: absolute; top: 40px; right: 130px;" >여행일지</h3>
@@ -564,76 +171,17 @@ padding-top:30px;
 					<input type="button" id="modiBtn" onclick="modify1()" value="수정" type="hidden">
 					<input type="button" id="deleBtn" onclick="delete1()" value="삭제" type="hidden">
 					<input type="button" id="backBtn" onclick="back1()" value="이전으로" type="hidden">
-				</div>
-				
+				</div>	
 
 				<input type="hidden" name="memo_id" id="memo_id" value="">
 			</form>
 		</div>
 		<div id="memolist"></div>
 	</div>
-
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<!-- 메모 -->
-	<script type="text/javascript">
-		function slideClick() {
-			var userId = document.getElementById("hidden_userId").value;
-			if (userId == "") {
-				alert('로그인 먼저 해주세요')
-			} else {
-				console.log('실행11')
-				$("#first").slideDown("slow");
-				$("#modal_wrap").show();
-				$("#btns11").show();
-				$("#hiddenMode").hide();
-				document.getElementById("content").value = "";
-				document.getElementById("title").value = "";
-
-			}
-		}
-		function slide_hide() {
-			$("#first").slideUp("fast");
-			$("#modal_wrap").hide();
-		}
-		function rep() {
-			let form = {};
-			let arr = $("#frm").serializeArray();
-			for (i = 0; i < arr.length; i++) {
-				form[arr[i].name] = arr[i].value
-			}
-			$.ajax({
-				url : "addMemo",
-				type : "POST",
-				data : JSON.stringify(form),
-				contentType : "application/json; charset=utf-8",
-				dataType : "json",
-				success : function(result) {
-					alert("성공적으로 저장되었습니다");
-					slide_hide();
-
-				},
-				error : function() {
-					alert("문제 발생 !!!");
-				}
-			})
-		}
-	</script>
-	<!-- 여기까지 메모 -->
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=761a0a96bd36bae33e8d2523115b5777&libraries=services"></script>
-
-
-	<!-- 
-		/* 여기부분 =이랑 &사이가 appkey넣는 자리 */ -->
-
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-	
-
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d88b03ad0e3ed3f735224649327c5f2&libraries=services"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=761a0a96bd36bae33e8d2523115b5777&libraries=services"></script>
 																				<!-- appkey넣는 자리 -->
-
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	
 	<script>
 		/* -------------- 기본 초기화+버튼 액션 -------------- */
 		let keyword = '';
@@ -711,9 +259,7 @@ padding-top:30px;
 			removeMarker();
 			placeOverlay.setMap(null);
 		}
-		
-		
-		
+	
 		/* -------------- API -------------- */
 		// 마커를 담을 배열입니다
 		var markers = [];
@@ -1150,7 +696,53 @@ padding-top:30px;
 				el.className = 'on';
 			}
 		}
-// 메모기능
+		
+		/* -------------- 메모 -------------- */
+		function slideClick() {
+			var userId = document.getElementById("hidden_userId").value;
+			if (userId == "") {
+				alert('로그인 먼저 해주세요')
+			} else {
+				console.log('실행11')
+				$("#first").slideDown("slow");
+				$("#modal_wrap").show();
+				$("#btns11").show();
+				$("#hiddenMode").hide();
+				document.getElementById("content").value = "";
+				document.getElementById("title").value = "";
+
+			}
+		}
+		
+		function slide_hide() {
+			$("#first").slideUp("fast");
+			$("#modal_wrap").hide();
+		}
+		
+		function rep() {
+			let form = {};
+			let arr = $("#frm").serializeArray();
+			for (i = 0; i < arr.length; i++) {
+				form[arr[i].name] = arr[i].value
+			}
+			$.ajax({
+				url : "addMemo",
+				type : "POST",
+				data : JSON.stringify(form),
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				success : function(result) {
+					alert("성공적으로 저장되었습니다");
+					slide_hide();
+
+				},
+				error : function() {
+					alert("문제 발생 !!!");
+				}
+			})
+		}
+		
+		// 메모기능
 		function saveMemo() {
 			let form = {};
 			let arr = $("#frm").serializeArray();
@@ -1173,6 +765,7 @@ padding-top:30px;
 				}
 			})
 		}
+		
 		function memoAdd() {
 			var content = document.getElementById("content").value;
 			var name1 = document.getElementById("hidden_name").value;
@@ -1226,6 +819,7 @@ padding-top:30px;
 						}
 					})
 		}
+		
 		function paging11(num1) {
 			console.log(num1 + "나는123")
 			$
@@ -1262,6 +856,7 @@ padding-top:30px;
 						}
 					})
 		}
+		
 		function modishow(memo_id) {
 			$.ajax({
 				url : "modishow/" + memo_id,
@@ -1282,6 +877,7 @@ padding-top:30px;
 				}
 			})
 		}
+		
 		function modify1() {
 			let form = {};
 			let arr = $("#frm").serializeArray();
@@ -1332,7 +928,6 @@ padding-top:30px;
 			document.getElementById("content").value = "";
 			document.getElementById("title").value = "";
 		}
-
 	</script>
 </body>
 </html>

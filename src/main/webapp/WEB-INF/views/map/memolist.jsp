@@ -37,7 +37,7 @@
 			<tr>
 				<td colspan="4">
 					<c:forEach var="num" begin="1" end="${repeat }">
-							<a href="${contextPath }/map/memolist?num=${num}">${num } &nbsp;</a>
+						<a href="${contextPath }/map/memolist?num=${num}">${num } &nbsp;</a>
 					</c:forEach>
 				</td>
 			</tr>
