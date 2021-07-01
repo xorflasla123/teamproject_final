@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+function showPopup() {
+	window.open("board/how", "a", "width=500, height=600, top=60");
+}
+</script>
 
 <style type="text/css">
 * { margin: 0;}
@@ -80,7 +85,7 @@ footer {
 				
 				<!-- <li><a href="${contextPath }/map/navigate">길찾기</a></li> -->
 
-				<li><a href="${contextPath }/board/#"><b>이용방법</b></a></li>
+				<li onclick="showPopup()"><a href=""><b>이용방법</b></a></li>
 				
 			</ul>
 		</div>
