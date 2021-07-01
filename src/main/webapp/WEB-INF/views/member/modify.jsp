@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+
 #moditable th, #moditable td {
 	font-size: 20px;
 	margin: auto;
@@ -23,12 +24,19 @@
 	margin-left: 15%;
 	margin-right: 15%;
 	width: 70%;
+}
+ .wrap {
+	width: 1300px;
+	margin: auto;
+	margin-top: 110px;
+	font-size: 20px;
 
 }
 
 input {
 	width: 190px;
 	height: 45px;
+
 }
 
 #moditable td input {
@@ -49,12 +57,30 @@ margin-left:24px;
 
 h1 {
 	text-align: center;
+
+}
+
+td input {
+	height: 37px;
+	width: 230px;
+	font-size: 24px;
+}
+
+button {
+	font-size: 18px;
+	padding: 12px;
+	border-radius: 2px;
+	width: 95px;
+	height: 45px;
+	align: center;
+
 }
 </style>
 </head>
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath }" />
 	<c:import url="../default/header.jsp" />
+
 
 		<div class=container>
 			<div style="width: auto; margin: 0 auto;" >
@@ -102,6 +128,7 @@ h1 {
 							
 						</td>
 						</tr>
+
 
 
 						<tr>

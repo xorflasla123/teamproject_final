@@ -44,13 +44,13 @@ h1 {
 </style>
 </head>
 
-<body>
+<body >
 	<c:set var="contextPath" value="${pageContext.request.contextPath }" />
 	<c:import url="../default/header.jsp" />
 
 	<div class="container">
 		<div style="width: auto; margin: 0 auto;">
-			<h1 style="position: absolute; top:150px; left:770px;">개인정보</h1>
+			<h1 style="position: absolute; top:150px; left:820px;">개인정보</h1>
 			<table class="table table-striped" id="infotable"style="width: 60%; height: 500px;">
 				<tr>
 					<th>아이디</th>

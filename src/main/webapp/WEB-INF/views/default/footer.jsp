@@ -7,6 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-푸터ㅓㅓㅓㅓㅓ
+	<footer>
+		<div>
+			Copyright &copy; CARE Lab. All rights reserved.
+		</div>
+		<div>
+			<b style="color: black;">배동민 이택림 김샤론 이도현</b>
+		</div>
+	</footer>
 </body>
 </html>

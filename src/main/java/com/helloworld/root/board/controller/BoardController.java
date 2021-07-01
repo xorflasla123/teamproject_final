@@ -43,6 +43,7 @@ public class BoardController {
 		}
 		return "board/main";
 	}
+	
 	@RequestMapping("search")
 	public String search(@RequestParam String search, @RequestParam String searchWord,
 			Model model, @RequestParam(value="num", required = false, defaultValue = "1") int num) {
@@ -52,17 +53,20 @@ public class BoardController {
 		
 		return "board/searchView";
 	}
+	
 	@GetMapping("likelist")
 	public String likeBoardList(Model model, @RequestParam String userId,
 			@RequestParam(value="num", required = false, defaultValue = "1") int num) {
 		bs.boardLikeList(model, num, userId);
 		return "board/likeList";
 	}
+	
 	@RequestMapping("write")
 	public String write(@RequestParam String boardLocal, Model model) {
 		model.addAttribute("boardLocal", boardLocal);
 		return "board/writeForm";
 	}
+	
 	@PostMapping("writesave")
 	public void writeSave(MultipartHttpServletRequest mul, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String message = bs.writeSave(mul, request);
@@ -70,6 +74,7 @@ public class BoardController {
 		PrintWriter out = response.getWriter();
 		out.print(message);
 	}
+	
 	@GetMapping("contentview")
 	public String contentView(@RequestParam int boardId, Model model) {
 		bs.contentView(boardId, model);
@@ -86,6 +91,7 @@ public class BoardController {
 		int result = bs.boardLike(boardId, userId);
 		return result;
 	}
+	
 	@PostMapping(value="boardcheck", produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public HashMap<String, Integer> boardCheckLike(@RequestBody BoardInfoDTO dto) {
@@ -97,6 +103,7 @@ public class BoardController {
 		map = bs.boardCheck(boardId, userId);
 		return map;
 	}
+	
 	@PostMapping(value="good", produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public HashMap<String, Integer> goodClick(@RequestBody BoardRecoDTO dto) {
@@ -104,6 +111,7 @@ public class BoardController {
 		map = bs.goodClick(dto);
 		return map;
 	}
+	
 	@PostMapping(value="bad", produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public HashMap<String, Integer> badClick(@RequestBody BoardRecoDTO dto) {
@@ -111,6 +119,7 @@ public class BoardController {
 		map = bs.badClick(dto);
 		return map;
 	}
+	
 	@GetMapping("download")
 	public void download(@RequestParam String pictureName, HttpServletResponse response) throws Exception {
 		response.addHeader("Content-disposition", "attachment; pictureName=" + pictureName);
@@ -119,6 +128,7 @@ public class BoardController {
 		FileCopyUtils.copy(in, response.getOutputStream());
 		in.close();
 	}
+	
 	@GetMapping("delete")
 	public void boardDelete(@RequestParam int boardId, @RequestParam String pictureName,
 			HttpServletResponse response, HttpServletRequest request) throws Exception {
@@ -129,16 +139,23 @@ public class BoardController {
 		PrintWriter out = response.getWriter();
 		out.print(message);
 	}
+	
 	@GetMapping("modifyform")
 	public String modifyForm(@RequestParam int boardId, Model model) {
 		bs.modifyForm(boardId, model);
 		return "board/modifyForm";
 	}
+	
 	@PostMapping("modify")
 	public void modify(MultipartHttpServletRequest mul, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String message = bs.modify(mul, request);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print(message);
+	}
+	
+	@GetMapping("how")
+	public String how() {
+		return "board/how";
 	}
 }

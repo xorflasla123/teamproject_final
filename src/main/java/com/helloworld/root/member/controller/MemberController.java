@@ -33,11 +33,9 @@ import com.helloworld.root.member.session_name.MemberSessionName;
 
 @Controller
 @RequestMapping("member")
-
 public class MemberController implements MemberSessionName {
 	@Autowired
 	MemberService ms;
-
 
 	@GetMapping("/login")
 	public String login() {
@@ -52,32 +50,22 @@ public class MemberController implements MemberSessionName {
 		PrintWriter out = response.getWriter();
 
 		if(result == 0) {
-
-			System.out.print(request.getParameter("id"));
-
+			//System.out.print(request.getParameter("id"));
 			out.print("<script>location.href='successLogin?id="+request.getParameter("id")+"&autoLogin="+request.getParameter("autoLogin")+"';</script>");
-			// return "redirect:successLogin";
 		}else {
-			out.print("<script>alert('로그인 정보를 확인해주세요.');location.href='login';</script>");}
-		// out.flush();
-
-		// return "redirect:login";}
+			out.print("<script>alert('로그인 정보를 확인해주세요.');location.href='login';</script>");
+		}
 	}
-
 
 	@RequestMapping("successLogin")
 	public String successLogin(@RequestParam(value="id", required = false) String id, 
-
-
-			@RequestParam (value="autoLogin", required = false)String autoLogin,
-			HttpSession session,
-			HttpServletResponse response) {
-		System.out.println("successLogin"+id);
+								@RequestParam (value="autoLogin", required = false)String autoLogin,
+								HttpSession session,
+								HttpServletResponse response) {
+		//System.out.println("successLogin"+id);
 		session.setAttribute(LOGIN, id);
 
-		System.out.println(autoLogin);
-
-		// return "redirect:/index ";  //redirect 저장된 데이터를 가져오는 것 
+		//System.out.println(autoLogin);
 
 		if(autoLogin != null) {
 			int limitTime = 60*60*24*30; // 30일
@@ -86,39 +74,27 @@ public class MemberController implements MemberSessionName {
 			loginCookie.setMaxAge(limitTime);
 			response.addCookie(loginCookie);
 
-
-			//long expiredDate = System.currentTimeMillis() + (limitTime*1000);
-
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(new java.util.Date());
 			cal.add(Calendar.MONTH, 1);
 
 			Date limitDate = new Date(cal.getTimeInMillis());
 			ms.keepLogin(session.getId(), limitDate, id);
-
 		}
 		return "/index";
-
 	}
 
 	@GetMapping("/logout")
 	public String logout(HttpSession session, HttpServletResponse response,
-
-			@CookieValue(value = "loginCookie", required = false) Cookie loginCookie) {
+						@CookieValue(value = "loginCookie", required = false) Cookie loginCookie) {
 		if (session.getAttribute(LOGIN) != null) {
 			if (loginCookie != null) {
-
 				loginCookie.setMaxAge(0);
 				response.addCookie(loginCookie);
 
 				ms.keepLogin("nono", new Date(System.currentTimeMillis()), (String) session.getAttribute(LOGIN));
-
-				ms.keepLogin("nan", new Date(System.currentTimeMillis()),
-
-						(String)session.getAttribute(LOGIN));
-
+				ms.keepLogin("nan", new Date(System.currentTimeMillis()), (String)session.getAttribute(LOGIN));
 			}
-
 			session.invalidate();
 		}
 		return "redirect:/index";
@@ -134,7 +110,6 @@ public class MemberController implements MemberSessionName {
 	public String register(MemberDTO dto) {
 		int result = ms.register(dto);
 		if (result == 1) {
-
 			return "redirect:login";
 		}
 		return "redirect:register_form";
@@ -155,7 +130,6 @@ public class MemberController implements MemberSessionName {
 
 	@GetMapping("save")
 	public String save(Model model) {
-
 		return "redirect:/member/userInfo";
 	}
 
@@ -168,7 +142,6 @@ public class MemberController implements MemberSessionName {
 
 	@PostMapping("modify")
 	public String modify(MemberDTO dto, Model model) {
-
 		int result = ms.modify(dto);
 		if(result==1) {
 			model.addAttribute("id", dto.getId()); // 데이터를 가져옴
@@ -179,94 +152,73 @@ public class MemberController implements MemberSessionName {
 
 	@GetMapping("delete")
 	public String delete(@RequestParam String id, HttpSession session) {
-
 		ms.delete(id);
 		session.invalidate();
 		return "redirect:/index";		
 	}
 
-
 	@GetMapping("/forgotId")
 	public String forgotId() {
-		System.out.println("아이디 찾기 실행");
+		//System.out.println("아이디 찾기 실행");
 		return "member/forgotId";
 	}
 
 	@PostMapping("/id_check")
 	public void id_check(HttpServletRequest request, RedirectAttributes rs, HttpServletResponse response,
 			HttpSession session) throws Exception {
-
 		String idChk = ms.id_check(request);
 
-
 		if(idChk != null) {
-
 			session.setAttribute("email", request.getParameter("email"));
 			session.setAttribute("idChk", idChk);
-			System.out.println("아이디찾기 이메일 인증 성공");
+			//System.out.println("아이디찾기 이메일 인증 성공");
 
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('메일이 발송 되었습니다. 메일을 확인하세요.'); location.href='/root/sendId';</script>");
-
-
-			// return "member/login";
-		}
-
-		else {
-			System.out.println("아이디찾기 이메일 인증 실패");
-
+		}else {
+			//System.out.println("아이디찾기 이메일 인증 실패");
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('등록된 이메일이 없습니다.'); location.href='forgotId'</script>");
-
-
-			// return "member/forgotId";
-
 		}
 	}
 
 	@GetMapping("/forgotPwd")
 	public String forgotPwd() {
-		System.out.println("비밀번호 찾기 실행");
+		//System.out.println("비밀번호 찾기 실행");
 		return "member/forgotPwd";
 	}
 
 	@PostMapping("/pwd_check")
 	public void pwd_check(HttpServletRequest request, RedirectAttributes rs, HttpServletResponse response,
 			HttpSession session) throws Exception {
-
 		String pwdChk = ms.pwd_check(request);
 
-
 		if(pwdChk != null) {
-
 			session.setAttribute("email", request.getParameter("email"));
 			session.setAttribute("pwdChk", pwdChk);
-			System.out.println("비밀번호찾기 이메일 인증 성공");
+			//System.out.println("비밀번호찾기 이메일 인증 성공");
 
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('메일이 발송 되었습니다. 메일을 확인하세요.'); location.href='/root/sendPwd';</script>");
-
-			// return "member/login";
-
 		} else {
-			System.out.println("비밀번호찾기 이메일 인증 실패");
-
+			//System.out.println("비밀번호찾기 이메일 인증 실패");
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('등록된 이메일이 없습니다.'); location.href='forgotPwd'</script>");
-			// return "member/forgotPwd";
 		}
 	}
+	
 	@ResponseBody
 	@PostMapping("id_chk")
 	public int id_chk(@RequestBody String id1 ) {
-		System.out.println("id_chk 실행");
+		//System.out.println("id_chk 실행");
 		id1 = id1.replace("\"", ""); //쌍따옴표 없애는 법
-		System.out.println("11"+id1);
+		//System.out.println("11"+id1);
 		int chkId = ms.id_chk(id1);
+		
 		return chkId;
 	}
 
