@@ -1,6 +1,5 @@
 package com.helloworld.root.memo;
 
-
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -15,24 +14,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.helloworld.root.member.session_name.MemberSessionName;
 
 @Controller
-public class MemoController implements MemberSessionName{
-	@Autowired MemoService ms;
-	@PostMapping(value="addMemo", produces = "application/json; charset=utf-8")
+public class MemoController implements MemberSessionName {
+	@Autowired
+	MemoService ms;
+
+	@PostMapping(value = "addMemo", produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public int addMemo(@RequestBody Map<String, Object> map, HttpSession session) {
 		MemoDTO dto = new MemoDTO();
-		dto.setUser_id((String)session.getAttribute(LOGIN));
-		dto.setTitle((String)map.get("title"));
-		dto.setContent((String)map.get("content"));
-	    int result = ms.addMemo(dto);
-	    System.out.println(result);
+		dto.setUser_id((String) session.getAttribute(LOGIN));
+		dto.setTitle((String) map.get("title"));
+		dto.setContent((String) map.get("content"));
+		int result = ms.addMemo(dto);
+		// System.out.println(result);
 		return result;
-		
 	}
+
 	@RequestMapping("memoView")
 	public String contentView() {
 		return "memoView";
 	}
-	
-
 }

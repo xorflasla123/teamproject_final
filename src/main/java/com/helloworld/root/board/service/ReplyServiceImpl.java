@@ -16,6 +16,7 @@ public class ReplyServiceImpl implements ReplyService{
 	@Override
 	public void addReply(Map<String, Object> map) {
 		BoardRepDTO dto = new BoardRepDTO();
+		
 		if(map.get("group_id")==null) {
 			dto.setBoard_id(Integer.parseInt((String)(map.get("board_id"))));
 			dto.setUser_id((String)map.get("user_id"));
@@ -30,7 +31,6 @@ public class ReplyServiceImpl implements ReplyService{
 			dto.setId(Integer.parseInt((String)(map.get("group_id"))));
 			mapper.addReply2(dto);
 		}
-		
 	}
 
 	@Override
@@ -40,8 +40,6 @@ public class ReplyServiceImpl implements ReplyService{
 
 	@Override
 	public void removeReply(Map<String, Object> map) {
-		//System.out.println(map.get("layer"));
-		
 		if((int)map.get("layer") == 1) { //layer 1 == 자식 댓글(대댓글)
 			mapper.removeReply(map);
 		} else if((int)map.get("layer") == 0){ //layer 0 == 부모 댓글

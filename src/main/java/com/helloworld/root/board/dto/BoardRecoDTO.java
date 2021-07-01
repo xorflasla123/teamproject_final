@@ -8,18 +8,23 @@ public class BoardRecoDTO {
 	public int getBoardId() {
 		return boardId;
 	}
+	
 	public void setBoardId(int boardId) {
 		this.boardId = boardId;
 	}
+	
 	public String getUserId() {
 		return userId;
 	}
+	
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	
 	public int getGood() {
 		return good;
 	}
+	
 	public void setGood(int good) {
 		this.good = good;
 	}

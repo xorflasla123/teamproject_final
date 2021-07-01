@@ -18,20 +18,17 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter implements M
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("인터셉터 테스트");
+		//System.out.println("인터셉터 테스트");
 		Cookie cookie = WebUtils.getCookie(request, "loginCookie");
 		
 		if(cookie != null) {
-			System.out.println(cookie.getValue());
+			//System.out.println(cookie.getValue());
 			MemberDTO dto = ms.getUserSessionId(cookie.getValue());
 			
 			if(dto != null) {
 				request.getSession().setAttribute(LOGIN, dto.getId());
 			}
 		}
-		
 		return true;
 	}
-	
-
 }

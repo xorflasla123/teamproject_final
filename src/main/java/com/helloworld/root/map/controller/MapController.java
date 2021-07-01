@@ -24,6 +24,7 @@ import com.helloworld.root.memo.MemoService;
 @RequestMapping("map")
 
 public class MapController  implements MemberSessionName{
+	@Autowired MemoService ms;
 	
 	@GetMapping("navigate")
 	public String navigate() {
@@ -61,7 +62,7 @@ public class MapController  implements MemberSessionName{
 		
 		return "map/mapView";
 	}
-	@Autowired MemoService ms;
+	
 	@PostMapping(value="addMemo", produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public int addMemo(@RequestBody Map<String, Object> map, HttpSession session) {
@@ -93,14 +94,16 @@ public class MapController  implements MemberSessionName{
 	@ResponseBody
 	public int modiMemo(@RequestBody Map<String, Object> map, HttpSession session) {
 		MemoDTO dto = new MemoDTO();
+		
 		dto.setUser_id((String)session.getAttribute(LOGIN));
 		dto.setTitle((String)map.get("title"));
 		dto.setContent((String)map.get("content"));
 		dto.setMemo_id(Integer.parseInt((String)map.get("memo_id")));
+		
 	    int result = ms.modiMemo(dto);
 	    System.out.println(result);
+	    
 		return result;
-		
 	}
 	
 	@GetMapping(value="delete1/{memo_id}", produces = "application/json; charset=utf-8")
