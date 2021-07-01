@@ -116,7 +116,7 @@ h1 {
 		<header>
 			<form action="${contextPath }/member/pwd_check" method="post">
 				<div id="login_box">
-					<h1>비 밀 번 호 찾 기</h1>
+					<h1>비밀번호 찾기</h1>
 					<br><br><br><br><br>
 					<input type="text" name="email" placeholder="등록한 이메일 입력"><br><br><br>
 					<input type="submit" value="확 인">

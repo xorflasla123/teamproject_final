@@ -16,13 +16,10 @@ public class MemberInterceptor extends HandlerInterceptorAdapter implements Memb
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
-		System.out.println("컨트롤 전 인터셉터");
-		
+		//System.out.println("컨트롤 전 인터셉터");
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute(LOGIN) == null) {
-			//response.sendRedirect("login");
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>alert('로그인 해주세요'); location.href='login';</script>");
@@ -34,10 +31,6 @@ public class MemberInterceptor extends HandlerInterceptorAdapter implements Memb
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		
-		System.out.println("컨트롤 후 인터셉터");
-
+		//System.out.println("컨트롤 후 인터셉터");
 	}
-	
-
 }

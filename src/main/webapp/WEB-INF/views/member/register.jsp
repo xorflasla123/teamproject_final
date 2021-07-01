@@ -10,9 +10,11 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+ <script src="${contextPath }/resources/daumPost_js/daumpost.js"></script>
 <script>
+
+
 	function id22() {
 		console.log('아이디 중복확인')
 		var id1 = $("#id").val();
@@ -37,6 +39,7 @@
 
 		})
 	}
+
 </script>
 
 <script>
@@ -54,22 +57,27 @@
 	}
 </script>
 <script>
-	function register() {
-		possRegi = document.getElementById("possRegi").value;
-		chkPw = document.getElementById("chkPw");
-		pwd = document.getElementById("pwd");
-		if (chkPw.value != pwd.value) {
-			alert('비밀번호를 다시 확인해주세요')
-			chkPw.focus()
-		} else {
-			if (possRegi != "") {
-				alert('회원가입이 완료되었습니다')
-				fo.submit()
-			} else {
-				alert('이메일 인증해주세요')
-			}
-		}
-	}
+ function register(){
+	 possRegi = document.getElementById("possRegi").value;
+	 chkPw = document.getElementById("chkPw");
+	 pwd = document.getElementById("pwd");
+	 addr1= $("#addr1").val()
+	    addr2= $("#addr2").val()	
+	    addr3= $("#addr3").val()	 
+	    addr = addr1+"/"+addr2+"/"+addr3
+	    $("#addr3").val(addr)
+	 if(chkPw.value !=pwd.value){
+		 alert('비밀번호를 다시 확인해주세요')
+		 chkPw.focus()
+	 }else{
+		 if(possRegi != ""){
+			 alert('회원가입이 완료되었습니다')
+			 fo.submit()
+		 }else{
+			 alert('이메일 인증해주세요')
+		 }
+	 }
+ }
 </script>
 <script>
 	function email22() {
@@ -114,6 +122,7 @@
 </style>
 </head>
 <body>
+
 	<c:import url="../default/header.jsp" />
 	<div class="wrap" style="width: 550px; height: 762px; margin: 0 auto; padding-top: 150px;">
 		<form id="fo" action="register" method="post">
@@ -156,10 +165,20 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td style="font-size: 20px; text-align: center;">주소 : </td>
-					<td><input size="35" type="text" id="addr" name="addr" placeholder="주 소"></td>
+					<td style="font-size: 20px; text-align: center;">우편번호 : </td>
+					<td><input size="35" type="text" id="addr1" name="addr1" placeholder="우편번호"></td>
 					<td><input type="button" onclick="daumPost()" value="주소찾기"></td>
+					
 				</tr>
+				<tr><td style="font-size: 20px; text-align: center;">주 소 : </td>
+				<td><input size="35" type="text" id="addr2" placeholder="주 소"></td><td></td></tr>
+				<tr>
+				<td style="font-size: 20px; text-align: center;">상세주소 : </td>
+				
+                    <td><input size="35" type="text" id="addr3" name="addr" placeholder="상 세 주 소"></td>
+                    <td></td>
+                    </tr>
+
 				<tr>
 					<td colspan="3" align="center">
 						<input type="button" onclick="register()" name="join" value="가입">
@@ -173,5 +192,6 @@
 	</div>
 	<hr>
 	<c:import url="../default/footer.jsp" />
+
 </body>
 </html>
