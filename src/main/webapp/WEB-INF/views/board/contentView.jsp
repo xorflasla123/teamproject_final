@@ -362,14 +362,14 @@ window.onload = function (){ //브라우저 시작과 동시에 댓글 보여주
 	}
 </style>
 </head>
-<body>
+<body style="background-color: #fff7e6;">
 <c:import url="../default/header.jsp"/><br>
 	<div>
 		<div class="contentview">
 			<div style="margin: auto; width: 800px;">
 				<input type="hidden" id="boardId" value="${ contentData.boardId }">
 				<input type="hidden" id="userId" value="${ loginUser }">
-				<table border="1" class="contenttable">
+				<table border="1" class="contenttable" style="background-color: #f8fdf1;">
 					<tr>
 						<th>글 번호</th><td>&nbsp;${ contentData.boardId }</td>
 						<th>작성자</th><td>&nbsp;${ contentData.userId }</td>

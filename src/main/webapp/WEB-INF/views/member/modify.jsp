@@ -37,7 +37,7 @@ button {
 }
 </style>
 </head>
-<body>
+<body style="background-color: #fff7e6;">
 
 	<div class="wrap">
 		<div style="width: 300px; margin: 0 auto;">

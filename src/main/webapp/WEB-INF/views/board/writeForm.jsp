@@ -44,13 +44,13 @@
 }
 </style>
 </head>
-<body>
+<body style="background-color: #fff7e6;">
 	<c:import url="../default/header.jsp" />
 	<hr>
 	<div class="main" style="height: 830px; width: 900px; padding-left: 300px;">
 		<h1 style="padding-top: 50px; padding-right: 300px;">게시글 작성</h1>
 		<form id="fo" class="writeform" action="${contextPath}/board/writesave" enctype="multipart/form-data" method="post">
-			<table border="1">
+			<table border="1" style="background-color: #f8fdf1;">
 				<tr>
 					<td><b>작성자</b></td>
 					<td><input style="height: 25px; width: 300px;" type="text" name="userId" value="${ loginUser }" readonly></td>

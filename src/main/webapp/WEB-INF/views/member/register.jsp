@@ -63,12 +63,12 @@
 			chkPw.focus()
 		} else {
 			if (possRegi != "") {
+				alert('회원가입이 완료되었습니다')
 				fo.submit()
 			} else {
 				alert('이메일 인증해주세요')
 			}
 		}
-
 	}
 </script>
 <script>

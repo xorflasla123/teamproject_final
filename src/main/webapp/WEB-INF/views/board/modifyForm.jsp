@@ -35,14 +35,14 @@
 	.modifyform b { font-size: 18px; }
 </style>
 </head>
-<body>
+<body style="background-color: #fff7e6;">
 	<c:import url="../default/header.jsp" /><hr>
 	<div class="main" style="height: 830px; width: 800px; padding-left: 300px;">
 		<h1 style="padding-top: 50px; padding-right: 300px;">게시글 수정</h1>
 		<form id="fo" class="modifyform" action="${ contextPath }/board/modify" enctype="multipart/form-data" method="post">
 			<input type="hidden" name="boardId" value="${ contentData.boardId }">
 			<input type="hidden" name="originPictureName" value="${ contentData.picture }">
-			<table border="1">
+			<table border="1" style="background-color: #f8fdf1;">
 			<tr>
 				<td><b>카테고리</b></td>
 				<td>

@@ -17,7 +17,7 @@
 	.attribute {
 		font-size: 25px;
 		height: 50px;
-		color: #e7708d;
+		color: #4b4d4d;
 		border-bottom: 3px solid #ccc;
 	}
 	.boardTable { width: 1000px; }
@@ -25,16 +25,16 @@
 	.boardTable td { height: 40px; font-size: 18px; }
 	.footerdiv { padding-top: 132px; }
 	.footerhr { margin-top:0px; margin-bottom:0px; border:0; border-top: 1px solid black; }
-	
+	.noboard:hover { background-color: #f8fdf1; }
 </style>
 </head>
-<body>
+<body style="background-color: #fff7e6;">
 	<c:set var="contextPath" value="${ pageContext.request.contextPath }" />
 	<c:import url="../default/header.jsp" />
 	<div class="page main">
 		<div class="board">
 			<h1 class="boardtitle">저장된 게시글</h1><br><br>
-			<table class="boardTable table-hover" border="1">
+			<table class="boardTable table-hover" style="background-color: #f8fdf1;" border="1">
 				<thead>
 				<tr class="attribute">
 					<th style="width: 100px;">번호</th><th style="width: 400px;">제목</th><th style="width: 150px;">작성자</th><th style="width: 200px;">작성일</th><th style="width: 150px;">조회수</th>
@@ -44,7 +44,7 @@
 				<c:choose>
 					<c:when test="${ boardLikeList.size() == 0 }">
 						<tr>
-							<th colspan="5" style="height: 40px;">저장된 글이 없습니다.</th>
+							<th class="noboard" colspan="5" style="height: 40px; font-size: 18px;">저장된 글이 없습니다.</th>
 						</tr>
 					</c:when>
 					<c:otherwise>
