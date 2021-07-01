@@ -153,4 +153,9 @@ public class BoardController {
 		PrintWriter out = response.getWriter();
 		out.print(message);
 	}
+	
+	@GetMapping("how")
+	public String how() {
+		return "board/how";
+	}
 }
