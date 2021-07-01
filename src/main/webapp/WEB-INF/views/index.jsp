@@ -64,7 +64,7 @@
 	<hr>
 	<c:import url="default/footer.jsp" />
 	
-	<script>
+<script>
 	window.onload = function(){
 		$('.bar').css('background-color','rgba(0,0,0,0)') && $('.bar').css('color', 'black') 
 		&& $('ul li a b').css('color', 'black');
