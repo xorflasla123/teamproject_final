@@ -81,7 +81,6 @@
 .tablememo { border-collapse:collapse; height: 90px; width: 270px; margin-left:17px; opacity: 0.7; background-color:white; }
 .container th{ text-align:center; }
 #first { display: none; position: fixed; z-index: 9; margin: 0 auto; top: 30px; left: 100; right: 0; height: 900px; width: 330px; opacity: 0.7; }
-#content_name{ }
 #content { resize: none; height: 440px; width: 270px; }
 #title { margin-left:10px; margin-bottom:30px; left:100px; height: 20px; width: 170px; }
 #id { margin-bottom:10px; height: 20px; width: 170px; }
@@ -155,7 +154,7 @@
 				<br> <b>작성자</b> <input type="text" id="id" name="user_id"
 					value="${loginUser} " readonly>  <br> <b >제 목</b>
 				<input type="text" id="title" size="30" name="title"><br>
-				<b id="content_name">내용</b> <br>
+				<b>내용</b> <br>
 				<textarea rows="5" cols="30" id="content" name="content"></textarea>
 				<br>
 		
@@ -165,7 +164,6 @@
 						value="취소"> <input type="button" id="listBtn"
 						onclick="memoList()" value="메모 목록"><br><br>
 				</div>
-
 
 				<div id="hiddenMode">
 					<input type="button" id="modiBtn" onclick="modify1()" value="수정" type="hidden">
@@ -781,80 +779,70 @@
 			$("#memolist").show();
 			var userId = document.getElementById("hidden_userId").value;
 			var num1 = 1;
-			$
-					.ajax({
-						url : "memolist/" + $("#hidden_userId").val() + "/"
-								+ num1,
-						type : "GET",
-						contentType : "application/json; charset=utf-8",
-						dataType : "json",
-						success : function(map) {
-							console.log('성공 1 2')
-							let html = ""
-							html +=
-								"<div class='container' align='center' ><table class='tablememo' border=1><tr><th>제목</th><th>날짜</th> </tr>";
-							map.list.forEach(function(data) {
-								
-								html += " <tr><td><a href='#'onclick=modishow("
-										+ data.memo_id + ")>" + data.title
-										+ "</a></td><td>" +data.saveDate
-										+ "</td></tr>";
-
-							})
-							html += "</table>";
-
-							for (var num = 1; num <= map.repeat; num++) {
-								html += "<a href='#' onclick='paging11(" + num
-										+ ")'>[" + num + "]</a>&nbsp;";
-
-							}
-							html +="</div>";
-							$("#memolist").html(html)
-							document.getElementById("content").value = "";
-							document.getElementById("title").value = "";
-
-						},
-						error : function() {
-							alert("문제 발생 !!!");
-						}
+			$.ajax({
+				url : "memolist/" + $("#hidden_userId").val() + "/" + num1,
+				type : "GET",
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				success : function(map) {
+					console.log('성공 1 2')
+					let html = ""
+					html +=
+						"<div class='container' align='center' ><table class='tablememo' border=1><tr><th>제목</th><th>날짜</th> </tr>";
+					map.list.forEach(function(data) {
+						html += " <tr><td><a href='#'onclick=modishow("
+								+ data.memo_id + ")>" + data.title
+								+ "</a></td><td>" +data.saveDate
+								+ "</td></tr>";
 					})
+					html += "</table>";
+
+					for (var num = 1; num <= map.repeat; num++) {
+						html += "<a href='#' onclick='paging11(" + num
+								+ ")'>[" + num + "]</a>&nbsp;";
+					}
+					html +="</div>";
+					$("#memolist").html(html)
+					document.getElementById("content").value = "";
+					document.getElementById("title").value = "";
+
+				},
+				error : function() {
+					alert("문제 발생 !!!");
+				}
+			})
 		}
 		
 		function paging11(num1) {
 			console.log(num1 + "나는123")
-			$
-					.ajax({
-						url : "memolist/" + $("#hidden_userId").val() + "/"
-								+ num1,
-						type : "GET",
-						contentType : "application/json; charset=utf-8",
-						dataType : "json",
-						success : function(map) {
-							console.log('성공 1 2')
-							let html = ""
-							html += "<div class='container' align='center'><table class='tablememo' border=1><tr><th>제목</th><th>날짜</th> </tr>";
-							map.list.forEach(function(data) {
-
-								html += " <tr><td><a href='#'onclick=modishow("
-										+ data.memo_id + ")>" + data.title
-										+ "</a></td><td>" + data.saveDate
-										+ "</td></tr>";
-
-							})
-							html += "</table>";
-
-							for (var num = 1; num <= map.repeat; num++) {
-								html += "<a href='#' onclick='paging11(" + num
-										+ ")'>[" + num + "]</a>&nbsp;";
-
-							}
-							html +="</div>";
-							$("#memolist").html(html)
-						},
-						error : function() {
-							alert("문제 발생 !!!");
-						}
+			$.ajax({
+				url : "memolist/" + $("#hidden_userId").val() + "/" + num1,
+				type : "GET",
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				success : function(map) {
+					console.log('성공 1 2')
+					let html = ""
+					html += "<div class='container' align='center'><table class='tablememo' border=1><tr><th>제목</th><th>날짜</th> </tr>";
+					map.list.forEach(function(data) {
+						html += " <tr><td><a href='#'onclick=modishow("
+								+ data.memo_id + ")>" + data.title
+								+ "</a></td><td>" + data.saveDate
+								+ "</td></tr>";
 					})
+					html += "</table>";
+
+					for (var num = 1; num <= map.repeat; num++) {
+						html += "<a href='#' onclick='paging11(" + num
+								+ ")'>[" + num + "]</a>&nbsp;";
+					}
+					html +="</div>";
+					$("#memolist").html(html)
+				},
+				error : function() {
+					alert("문제 발생 !!!");
+				}
+			})
 		}
 		
 		function modishow(memo_id) {
