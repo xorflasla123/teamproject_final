@@ -104,13 +104,13 @@ h1 {
 </style>
 
 </head>
-<body>
+<body style="background-color: #fff7e6;">
 
 	<c:set var="contextPath" value="${pageContext.request.contextPath }" />
 	<c:import url="../default/header.jsp" />
 
 	<div class="wrap body" align="center"
-		style="width: 100%; height: 969px; background-image: url('${contextPath }/resources/image/mainN.jpg');">
+		style="width: 100%; height: 900px; background-image: url('${contextPath }/resources/image/mainN.jpg');">
 
 
 		<header>
@@ -151,7 +151,8 @@ h1 {
 				<!-- login_box -->
 			</form>
 		</header>
-	</div>
+	</div><hr>
+	<c:import url="../default/footer.jsp" />
 
 	<!-- 
 		<form action="${contextPath }/member/user_check" method="post">
