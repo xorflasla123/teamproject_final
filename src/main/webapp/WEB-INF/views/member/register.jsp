@@ -13,8 +13,6 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
  <script src="${contextPath }/resources/daumPost_js/daumpost.js"></script>
 <script>
-
-
 	function id22() {
 		console.log('아이디 중복확인')
 		var id1 = $("#id").val();
@@ -39,9 +37,7 @@
 
 		})
 	}
-
 </script>
-
 <script>
 	function myFocus() {
 		console.log('비밀번호 확인 실행')
@@ -57,27 +53,27 @@
 	}
 </script>
 <script>
- function register(){
-	 possRegi = document.getElementById("possRegi").value;
-	 chkPw = document.getElementById("chkPw");
-	 pwd = document.getElementById("pwd");
-	 addr1= $("#addr1").val()
-	    addr2= $("#addr2").val()	
-	    addr3= $("#addr3").val()	 
-	    addr = addr1+"/"+addr2+"/"+addr3
-	    $("#addr3").val(addr)
-	 if(chkPw.value !=pwd.value){
-		 alert('비밀번호를 다시 확인해주세요')
-		 chkPw.focus()
-	 }else{
-		 if(possRegi != ""){
-			 alert('회원가입이 완료되었습니다')
-			 fo.submit()
-		 }else{
-			 alert('이메일 인증해주세요')
-		 }
-	 }
- }
+	function register() {
+		possRegi = document.getElementById("possRegi").value;
+		chkPw = document.getElementById("chkPw");
+		pwd = document.getElementById("pwd");
+		addr1 = $("#addr1").val()
+		addr2 = $("#addr2").val()
+		addr3 = $("#addr3").val()
+		addr = addr1 + "/" + addr2 + "/" + addr3
+		$("#addr3").val(addr)
+		if (chkPw.value != pwd.value) {
+			alert('비밀번호를 다시 확인해주세요')
+			chkPw.focus()
+		} else {
+			if (possRegi != "") {
+				alert('회원가입이 완료되었습니다')
+				fo.submit()
+			} else {
+				alert('이메일 인증해주세요')
+			}
+		}
+	}
 </script>
 <script>
 	function email22() {
@@ -98,8 +94,6 @@
 				alert('문제 발생했어요')
 			}
 		})
-
-		<!--location.href = "${contextPath }/auth_form?email=" + email1-->
 	}
 </script>
 <script>
@@ -108,14 +102,13 @@
 		an = document.getElementById("auth").value;
 		userkey = document.getElementById("userkey").value;
 		if (an == userkey) {
-			alert('인증성공')
+			alert('인증 성공')
 			$("#possRegi").val("success");
 		} else {
 			alert('인증 실패')
 		}
 	}
 </script>
-
 <style type="text/css">
 .registertable tr { height: 50px; }
 .registertable input { height: 30px; }

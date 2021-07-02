@@ -80,7 +80,7 @@ public class MapController  implements MemberSessionName{
 	@ResponseBody
 	public Map<String,Object> memolist(@PathVariable String userId,@PathVariable int num, Model model,
 			 HttpSession session ){
-		System.out.println("num :"+num); //해당하는 num이 없으면 null값이나 0을 나타내기 위해 required= false 사용 false없으면 오류발생
+		System.out.println("num :"+num);
 		return ms.selectAllMemoList(model,num,userId, session);
 	}
 	

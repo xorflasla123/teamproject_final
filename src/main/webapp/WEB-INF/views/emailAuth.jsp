@@ -11,9 +11,8 @@
 		userkey = document.getElementById("userkey").value;
 		if(an == userkey){
 			alert('인증성공')
-			
 			location.href='member/possRegi'
-				window.close();
+			window.close();
 		}else{
 			alert('인증 실패')
 		}

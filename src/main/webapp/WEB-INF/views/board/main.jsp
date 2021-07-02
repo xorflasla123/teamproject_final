@@ -80,7 +80,9 @@
 			<table class="boardTable table-hover" border="1" style="background-color: #f8fdf1;">
 				<thead>
 				<tr class="attribute">
-					<th style="width: 100px;">번호</th><th style="width: 400px;">제목</th><th style="width: 150px;">작성자</th><th style="width: 200px;">작성일</th><th style="width: 150px;">조회수</th>
+					<th style="width: 100px;">번호</th><th style="width: 400px;">제목</th>
+					<th style="width: 150px;">작성자</th><th style="width: 200px;">작성일</th>
+					<th style="width: 150px;">조회수</th>
 				</tr>
 				</thead>
 				<tbody>

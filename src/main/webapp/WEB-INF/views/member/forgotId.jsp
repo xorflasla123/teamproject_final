@@ -111,8 +111,6 @@ h1 {
 
 	<div class="wrap body" align="center"
 		style="width: 100%; height: 969px; background-image: url('${contextPath }/resources/image/mainN.jpg');">
-
-
 		<header>
 			<form action="${contextPath }/member/id_check" method="post">
 				<div id="login_box">
