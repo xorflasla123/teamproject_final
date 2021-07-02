@@ -21,7 +21,7 @@
 </script>
 <style type="text/css">
 	.page { display: flex; padding-top: 80px; }
-	.board { padding-left: 30px; padding-top: 50px; padding-bottom: 80px; height: 700px; }
+	.board { padding-left: 50px; padding-top: 50px; padding-bottom: 80px; height: 700px; }
 	.boardtitle { font-size: 50px; }
 	.category { padding-top: 230px; }
 	.category li a { color: black; text-decoration: none; font-size: 15px; margin-right: 120px; }
