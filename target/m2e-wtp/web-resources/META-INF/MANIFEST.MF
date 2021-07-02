@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
+Built-By: idohyeon
+Build-Jdk: 15.0.2
+=======
 Built-By: ltlki
 Build-Jdk: 15.0.1
+>>>>>>> 9a2cc95649b1f3e597a0ede36b31aa8fa7be7727
 Created-By: Maven Integration for Eclipse
 

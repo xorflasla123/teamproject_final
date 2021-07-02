@@ -110,6 +110,7 @@ h1 {
 	<c:import url="../default/header.jsp" />
 
 	<div class="wrap body" align="center" style="width: 100%; height: 900px; background-image: url('${contextPath }/resources/image/mainN.jpg');">
+
 		<header>
 			<form action="${contextPath }/member/user_check" method="post">
 				<div id="login_box" style="padding-left: 60px;">
@@ -138,6 +139,8 @@ h1 {
 				<!-- login_box -->
 			</form>
 		</header>
+
+
 	</div><hr>
 	<c:import url="../default/footer.jsp" />
 
