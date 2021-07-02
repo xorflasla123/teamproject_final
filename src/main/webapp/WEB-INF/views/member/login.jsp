@@ -109,10 +109,14 @@ h1 {
 	<c:set var="contextPath" value="${pageContext.request.contextPath }" />
 	<c:import url="../default/header.jsp" />
 
+<<<<<<< HEAD
 	<div class="wrap body" align="center"
 
 		style="width: 100%; height: 900px; background-image: url('${contextPath }/resources/image/mainN.jpg');">
 
+=======
+	<div class="wrap body" align="center" style="width: 100%; height: 900px; background-image: url('${contextPath }/resources/image/mainN.jpg');">
+>>>>>>> 9a2cc95649b1f3e597a0ede36b31aa8fa7be7727
 		<header>
 			<form action="${contextPath }/member/user_check" method="post">
 				<div id="login_box" style="padding-left: 60px;">
@@ -141,6 +145,7 @@ h1 {
 				<!-- login_box -->
 			</form>
 		</header>
+<<<<<<< HEAD
 
 	</div>
 	
@@ -150,5 +155,10 @@ h1 {
 
 
 
+=======
+	</div><hr>
+	<c:import url="../default/footer.jsp" />
+
+>>>>>>> 9a2cc95649b1f3e597a0ede36b31aa8fa7be7727
 </body>
 </html>
