@@ -9,9 +9,10 @@
 <title>Insert title here</title>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="${contextPath }/resources/daumPost_js/daumpost.js"></script>
 
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
- <script src="${contextPath }/resources/daumPost_js/daumpost.js"></script>
 <script>
 	function id22() {
 		console.log('아이디 중복확인')
@@ -110,77 +111,113 @@
 	}
 </script>
 <style type="text/css">
-.registertable tr { height: 50px; }
-.registertable input { height: 30px; }
+.registertable tr {
+	height: 50px;
+}
+
+.registertable input {
+	height: 30px;
+}
 </style>
 </head>
 <body>
 
 	<c:import url="../default/header.jsp" />
-	<div class="wrap" style="width: 550px; height: 762px; margin: 0 auto; padding-top: 150px;">
+	<div class="wrap"
+		style="width: 550px; height: 762px; margin: 0 auto; padding-top: 150px;">
 		<form id="fo" action="register" method="post">
 			<table class="registertable">
 				<tr>
-					<td colspan="3" align="center" style="font-size: 25px; padding-bottom: 40px;"><h1>회원가입</h1></td>
+					<td colspan="3" align="center" style="font-size: 25px; padding-bottom: 40px;">
+					<h1>회원가입</h1></td>
 				</tr>
 				<tr>
-					<td style="width: 150px; font-size: 20px;  text-align: center;">아이디 : </td>
-					<td style="width: 250px;"><input size="35" type="text" name="id" id="id" placeholder="아이디"></td>
-					<td><input type="button" onclick="id22()" value="중복인증"></td>
+					<td style="width: 150px; font-size: 20px; text-align: center;">아이디 :</td>
+					<td style="width: 250px;">
+						<input size="35" type="text" name="id" id="id" placeholder="아이디">
+					</td>
+					<td>
+						<input type="button" onclick="id22()" value="중복인증">
+					</td>
 				</tr>
 				<tr>
-					<td style="font-size: 20px; text-align: center;">비밀번호 : </td>
-					<td><input size="35" type="password" name="pwd" id="pwd" placeholder="비밀번호"></td>
+					<td style="font-size: 20px; text-align: center;">비밀번호 :</td>
+					<td>
+						<input size="35" type="password" name="pwd" id="pwd" placeholder="비밀번호">
+					</td>
 					<td></td>
 				</tr>
 				<tr>
-					<td style="font-size: 20px; text-align: center;">비밀번호 확인 : </td>
-					<td><input size="35" type="password" name="chkPw" id="chkPw" onchange="myFocus()" placeholder="비밀번호 확인"></td>
+					<td style="font-size: 20px; text-align: center;">비밀번호 확인 :</td>
+					<td>
+						<input size="35" type="password" name="chkPw" id="chkPw" onchange="myFocus()" placeholder="비밀번호 확인">
+					</td>
 				</tr>
 				<tr>
-					<td style="font-size: 20px; text-align: center;">이름 : </td>
-					<td><input size="35" type="text" name="name" placeholder="이름"></td>
+					<td style="font-size: 20px; text-align: center;">이름 :</td>
+					<td>
+						<input size="35" type="text" name="name" placeholder="이름">
+					</td>
 					<td></td>
 				</tr>
 				<tr>
-					<td style="font-size: 20px; text-align: center;">이메일 : </td>
-					<td><input size="35" type="text" name="email" id="email" placeholder="이메일"></td>
-					<td><input type="button" onclick="email22()" value="인증하기"></td>
+					<td style="font-size: 20px; text-align: center;">이메일 :</td>
+					<td>
+						<input size="35" type="text" name="email" id="email" placeholder="이메일">
+					</td>
+					<td>
+						<input type="button" onclick="email22()" value="인증하기">
+					</td>
 				</tr>
 				<tr>
 					<td></td>
-					<td><input size="35" type="text" id="auth" name="authNum" placeholder="인증번호를 입력해주세요"></td>
-					<td><input type="button" onclick="authNum1()" value="확인"></td>
+					<td>
+						<input size="35" type="text" id="auth" name="authNum" placeholder="인증번호를 입력해주세요">
+					</td>
+					<td>
+						<input type="button" onclick="authNum1()" value="확인">
+					</td>
 				</tr>
 				<tr>
-					<td style="font-size: 20px; text-align: center;">전화번호 : </td>
-					<td><input size="35" type="text" name="num" placeholder="휴대전화"></td>
+					<td style="font-size: 20px; text-align: center;">전화번호 :</td>
+					<td>
+						<input size="35" type="text" name="num" placeholder="휴대전화">
+					</td>
 					<td></td>
 				</tr>
 				<tr>
-					<td style="font-size: 20px; text-align: center;">우편번호 : </td>
-					<td><input size="35" type="text" id="addr1" name="addr1" placeholder="우편번호"></td>
-					<td><input type="button" onclick="daumPost()" value="주소찾기"></td>
-					
+					<td style="font-size: 20px; text-align: center;">우편번호 :</td>
+					<td>
+						<input size="35" type="text" id="addr1" name="addr1" placeholder="우편번호">
+					</td>
+					<td>
+						<input type="button" onclick="daumPost()" value="주소찾기">
+					</td>
 				</tr>
-				<tr><td style="font-size: 20px; text-align: center;">주 소 : </td>
-				<td><input size="35" type="text" id="addr2" placeholder="주 소"></td><td></td></tr>
 				<tr>
-				<td style="font-size: 20px; text-align: center;">상세주소 : </td>
-				
-                    <td><input size="35" type="text" id="addr3" name="addr" placeholder="상 세 주 소"></td>
-                    <td></td>
-                    </tr>
+					<td style="font-size: 20px; text-align: center;">주 소 :</td>
+					<td>
+						<input size="35" type="text" id="addr2" placeholder="주 소">
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td style="font-size: 20px; text-align: center;">상세주소 :</td>
+
+					<td>
+						<input size="35" type="text" id="addr3" name="addr" placeholder="상 세 주 소">
+					</td>
+					<td></td>
+				</tr>
 
 				<tr>
-					<td colspan="3" align="center">
-						<input type="button" onclick="register()" name="join" value="가입">
+					<td colspan="3" align="center"><input type="button" onclick="register()" name="join" value="가입">
 						<input type="button" onclick="location.href='${contextPath}/member/login'" value="취소">
 					</td>
 				</tr>
 			</table>
-			<input type="hidden" id="userkey" value=""> 
-			<input type="hidden" id="possRegi" value=""> 	
+			<input type="hidden" id="userkey" value="">
+			<input type="hidden" id="possRegi" value="">
 		</form>
 	</div>
 	<hr>

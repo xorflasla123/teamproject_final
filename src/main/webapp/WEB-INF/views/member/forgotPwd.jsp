@@ -78,7 +78,7 @@ h1 {
 }
 
 #btns li {
-	margin-left: 40px;
+	margin-left: 30px;
 	display: inline;
 	font-size: 15px;
 }
@@ -113,7 +113,7 @@ h1 {
 		style="width: 100%; height: 969px; background-image: url('${contextPath }/resources/image/mainN.jpg');">
 		<header>
 			<form action="${contextPath }/member/pwd_check" method="post">
-				<div id="login_box">
+				<div id="login_box" style="padding-left: 60px;">
 					<h1>비밀번호 찾기</h1>
 					<br><br><br><br><br>
 					<input type="text" name="email" placeholder="등록한 이메일 입력"><br><br><br>

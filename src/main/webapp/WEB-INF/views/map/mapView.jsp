@@ -84,8 +84,8 @@
 #content { resize: none; height: 440px; width: 270px; }
 #title { margin-left:10px; margin-bottom:30px; left:100px; height: 20px; width: 170px; }
 #id { margin-bottom:10px; height: 20px; width: 170px; }
-#hiddenMode button 
-#btns11 button { display: none; width: 95px; height: 45px; }
+#hiddenMode button  { display: none; width: 95px; height: 45px; }
+#btns11 button{ display: none; width: 95px; height: 45px; }
 #frm{ padding-top:30px; }
 </style>
 
@@ -101,16 +101,22 @@
 
 	<div class="map_wrap">
 		<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
-		<button type="button" onclick="visible1()" id="">키워드 검색</button>
-		<button type="button" onclick="visible2()" id="">카테고리 검색</button>
-
-		<input type="button" onclick="slideClick()" value="메모">
-		<button type="button" onclick="invisible()" id="btnhidden">닫기</button>
-
+		
 		<form action="${contextPath }/map/navi" method="get" target="_blank">
-			<input type="text" name="dep" placeholder="출발지 입력"><br>
-			<input type="text" name="arr" placeholder="도착지 입력">
-			<input type="submit" value="검색">
+			<table>
+				<tr>
+					<td rowspan="2"><label><b>길찾기</b></label></td>
+					<td>
+						<input type="text" name="dep" placeholder="출발지 입력"><br>
+						<input type="text" name="arr" placeholder="도착지 입력">
+					</td>
+					<td rowspan="2"><input type="submit" value="검색" style="width: 50px; height: 40px;"></td>
+					<td rowspan="2"><input type="button" onclick="slideClick()" value="메모" style="width: 50px; height: 40px;"></td>
+					<td rowspan="2"><button type="button" onclick="visible1()" id="" style="width: 100px; height: 40px;">키워드 검색</button></td>
+					<td rowspan="2"><button type="button" onclick="visible2()" id="" style="width: 100px; height: 40px;">카테고리 검색</button></td>
+					<td rowspan="2"><button type="button" onclick="invisible()" id="btnhidden" style="width: 50px; height: 40px;">닫기</button></td>
+				</tr>
+			</table>
 		</form>
 
 		<div id="hidden1">
@@ -150,25 +156,22 @@
 		<div style="width: 250px; margin: 0 auto; padding-top: 10px;">
 			<form id="frm">
 				<br>
-				<h3 style="position: absolute; top: 40px; right: 130px;" >여행일지</h3>
-				<br> <b>작성자</b> <input type="text" id="id" name="user_id"
-					value="${loginUser} " readonly>  <br> <b >제 목</b>
-				<input type="text" id="title" size="30" name="title"><br>
+				<h3 style="position: absolute; top: 40px; right: 130px;">여행일지</h3><br> 
+				<b>작성자</b> <input type="text" id="id" name="user_id" value="${loginUser}" readonly><br> 
+				<b>제 목</b> <input type="text" id="title" size="30" name="title"><br> 
 				<b>내용</b> <br>
-				<textarea rows="5" cols="30" id="content" name="content"></textarea>
-				<br>
-		
+				<textarea rows="5" cols="30" id="content" name="content"></textarea><br>
+
 				<div id="btns11">
 					<input type="button" id="repBtn" onclick="rep()" value="저장">
-					<input type="button" id="cancelBtn" onclick="slide_hide()"
-						value="취소"> <input type="button" id="listBtn"
-						onclick="memoList()" value="메모 목록"><br><br>
+					<input type="button" id="cancelBtn" onclick="slide_hide()" value="취소"> 
+					<input type="button" id="listBtn" onclick="memoList()" value="메모 목록"><br><br>
 				</div>
 
 				<div id="hiddenMode">
 					<input type="button" id="modiBtn" onclick="modify1()" value="수정" type="hidden">
 					<input type="button" id="deleBtn" onclick="delete1()" value="삭제" type="hidden">
-					<input type="button" id="backBtn" onclick="back1()" value="이전으로" type="hidden">
+					<input type="button" id="backBtn" onclick="back1()" value="이전으로" type="hidden"><br><br>
 				</div>	
 
 				<input type="hidden" name="memo_id" id="memo_id" value="">
@@ -880,9 +883,10 @@
 				dataType : "json",
 				success : function(result) {
 					alert("성공적으로 수정되었습니다");
+					memoList();
 				},
 				error : function() {
-					alert("문제가 발생하였씁낟 !!!");
+					alert("문제 발생 !!!");
 				}
 			})
 		}
