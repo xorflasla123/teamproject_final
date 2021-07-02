@@ -42,11 +42,11 @@
 		var userId = $("#userId").val();
 		var form = {boardId:boardId, userId:userId}
 		$.ajax({
-			url : "boardcheck",	// url 주소
-			type : "post",			// 보내는 방식
-			data : JSON.stringify(form),	// 보낼 데이터(form을 json타입으로 변경) 자바스크립트 객체 타입을 json으로 변경
-			contentType : "application/json; charset=utf-8",	// 보낼 데이터 타입 지정
-			dataType : "json",	// 리턴 type
+			url : "boardcheck",
+			type : "post",
+			data : JSON.stringify(form),
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
 			success : function(result) {
 				if(result.like != 0) {
 					$("#likeBtn").attr("src", "${contextPath }/resources/image/like.jpg");
@@ -80,11 +80,11 @@
 		var userId = $("#userId").val();
 		var form = {boardId:boardId, userId:userId}
 		$.ajax({
-			url : "like",	// url 주소
-			type : "post",			// 보내는 방식
-			data : JSON.stringify(form),	// 보낼 데이터(form을 json타입으로 변경) 자바스크립트 객체 타입을 json으로 변경
-			contentType : "application/json; charset=utf-8",	// 보낼 데이터 타입 지정
-			dataType : "json",	// 리턴 type
+			url : "like",
+			type : "post",
+			data : JSON.stringify(form),
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
 			success : function(result) {
 				$("#like").text(result)
 				var valueBtn = $("#likeBtn").attr("src");
@@ -105,11 +105,11 @@
 		var userId = $("#userId").val();
 		var form = {boardId:boardId, userId:userId}
 		$.ajax({
-			url : "good",	// url 주소
-			type : "post",			// 보내는 방식
-			data : JSON.stringify(form),	// 보낼 데이터(form을 json타입으로 변경) 자바스크립트 객체 타입을 json으로 변경
-			contentType : "application/json; charset=utf-8",	// 보낼 데이터 타입 지정
-			dataType : "json",	// 리턴 type
+			url : "good",
+			type : "post",
+			data : JSON.stringify(form),
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
 			success : function(result) {
 				console.log('good성공')
 				var total = result.total;
@@ -137,11 +137,11 @@
 		var userId = $("#userId").val();
 		var form = {boardId:boardId, userId:userId}
 		$.ajax({
-			url : "bad",	// url 주소
-			type : "post",			// 보내는 방식
-			data : JSON.stringify(form),	// 보낼 데이터(form을 json타입으로 변경) 자바스크립트 객체 타입을 json으로 변경
-			contentType : "application/json; charset=utf-8",	// 보낼 데이터 타입 지정
-			dataType : "json",	// 리턴 type
+			url : "bad",
+			type : "post",
+			data : JSON.stringify(form),
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
 			success : function(result) {
 				console.log('bad성공')
 				var total = result.total;
@@ -165,12 +165,11 @@
 		})
 	}
 	
-	////////////////////////////////이 밑으로는 댓글
+	/* ---------- 댓글 ---------- */
 	
 	let data; //삭제를 돕기 위해 데이터 저장
 	let re_id;
 	var ls = '<c:out value="${loginUser}"/>';
-	//댓글 test용이기 때문에 table에 게시판id, userId가 없음.
 	function rep(){ //댓글 저장
 		let form={}; let arr=$("#frm").serializeArray();
 		for(i=0; i<arr.length; i++){
@@ -243,9 +242,6 @@
 				if(rep.length==0){
 					html += "<h3>댓글이 없습니다.</h3>"
 				} else{
-					/* html += `<tr> //멋져!
-								<td>내용</td> <td>작성일자</td> <td></td>
-							</tr>` */
 					for(i=0;i<rep.length;i++){
 						let date = new Date(rep[i].date);
 						let hours = date.getHours();
@@ -355,7 +351,7 @@
 	background-color: green;
 }
 
-/* 아래는 댓글용 */
+/* 댓글 */
 #hidden {
 	display: none;
 	align-content: center;
@@ -418,33 +414,30 @@
 					</tr>
 					<c:if test="${ contentData.picture != 'nan' }">
 						<tr>
-							<th colspan="4"><img width="200px" height="200px"
-								src="${ contextPath }/board/download?pictureName=${ contentData.picture }">
+							<th colspan="4">
+								<img width="200px" height="200px" src="${ contextPath }/board/download?pictureName=${ contentData.picture }">
 							</th>
 						</tr>
 					</c:if>
 					<c:if test="${ loginUser == contentData.userId }">
 						<tr>
-							<td colspan="4"><input type="button"
-								onclick="location.href='${ contextPath }/board/modifyform?boardId=${ contentData.boardId }'"
-								value="수정하기"> <input type="button"
-								onclick="location.href='${ contextPath }/board/delete?boardId=${ contentData.boardId }&pictureName=${ contentData.picture }'"
-								value="삭제하기"></td>
+							<td colspan="4">
+								<input type="button" onclick="location.href='${ contextPath }/board/modifyform?boardId=${ contentData.boardId }'" value="수정하기"> 
+								<input type="button" onclick="location.href='${ contextPath }/board/delete?boardId=${ contentData.boardId }&pictureName=${ contentData.picture }'" value="삭제하기">
+							</td>
 						</tr>
 					</c:if>
 					<tr>
-						<td colspan="4" style="align-content: right;"><c:if
-								test="${ loginUser != null }">
-								<img src="${contextPath }/resources/image/dislike.jpg"
-									id="likeBtn" onclick="like()"
-									style="width: 20px; height: 20px;">
-							</c:if> <input type="button" onclick="history.back()" value="돌아가기">
+						<td colspan="4" style="align-content: right;">
+							<c:if test="${ loginUser != null }">
+								<img src="${contextPath }/resources/image/dislike.jpg" id="likeBtn" onclick="like()" style="width: 20px; height: 20px;">
+							</c:if>
+							<input type="button" onclick="history.back()" value="돌아가기">
 						</td>
 					</tr>
 				</table>
 			</div>
-			<div class="reco"
-				style="padding-top: 30px; padding-bottom: 30px; margin: auto; width: 600px;">
+			<div class="reco" style="padding-top: 30px; padding-bottom: 30px; margin: auto; width: 600px;">
 				<c:choose>
 					<c:when test="${ loginUser != null }">
 						<input type="button" onclick="good()" value="추천">
@@ -472,9 +465,8 @@
 		<div style="margin: auto; width: 600px;">
 			<div style="padding: 10px 10px 10px 10px;">
 				<form id="frm">
-					<input type="hidden" name="board_id"
-						value="${contentData.boardId }"> <input type="hidden"
-						name="user_id" value="${loginUser }">
+					<input type="hidden" name="board_id" value="${contentData.boardId }">
+					<input type="hidden" name="user_id" value="${loginUser }">
 					<textarea class="writeBox" id="content" name="content"></textarea>
 					<div align="right">
 						<button type="button" onclick="rep()">댓글 달기</button>

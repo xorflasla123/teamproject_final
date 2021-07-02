@@ -39,7 +39,6 @@
 		})
 	}
 </script>
-
 <script>
 	function myFocus() {
 		console.log('비밀번호 확인 실행')
@@ -96,8 +95,6 @@
 				alert('문제 발생했어요')
 			}
 		})
-
-		<!--location.href = "${contextPath }/auth_form?email=" + email1-->
 	}
 </script>
 <script>
@@ -106,14 +103,13 @@
 		an = document.getElementById("auth").value;
 		userkey = document.getElementById("userkey").value;
 		if (an == userkey) {
-			alert('인증성공')
+			alert('인증 성공')
 			$("#possRegi").val("success");
 		} else {
 			alert('인증 실패')
 		}
 	}
 </script>
-
 <style type="text/css">
 .registertable tr {
 	height: 50px;
@@ -138,72 +134,90 @@
 				<tr>
 					<td style="width: 150px; font-size: 20px; text-align: center;">아이디 :</td>
 					<td style="width: 250px;">
-					<input size="35" type="text" name="id" id="id" placeholder="아이디"></td>
-					<td><input type="button" onclick="id22()" value="중복인증"></td>
+						<input size="35" type="text" name="id" id="id" placeholder="아이디">
+					</td>
+					<td>
+						<input type="button" onclick="id22()" value="중복인증">
+					</td>
 				</tr>
 				<tr>
 					<td style="font-size: 20px; text-align: center;">비밀번호 :</td>
-					<td><input size="35" type="password" name="pwd" id="pwd" 
-					     placeholder="비밀번호"></td>
+					<td>
+						<input size="35" type="password" name="pwd" id="pwd" placeholder="비밀번호">
+					</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td style="font-size: 20px; text-align: center;">비밀번호 확인 :</td>
-					<td><input size="35" type="password" name="chkPw" id="chkPw"
-						onchange="myFocus()" placeholder="비밀번호 확인"></td>
+					<td>
+						<input size="35" type="password" name="chkPw" id="chkPw" onchange="myFocus()" placeholder="비밀번호 확인">
+					</td>
 				</tr>
 				<tr>
 					<td style="font-size: 20px; text-align: center;">이름 :</td>
-					<td><input size="35" type="text" name="name" placeholder="이름"></td>
+					<td>
+						<input size="35" type="text" name="name" placeholder="이름">
+					</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td style="font-size: 20px; text-align: center;">이메일 :</td>
-					<td><input size="35" type="text" name="email" id="email"
-						placeholder="이메일"></td>
-					<td><input type="button" onclick="email22()" value="인증하기"></td>
+					<td>
+						<input size="35" type="text" name="email" id="email" placeholder="이메일">
+					</td>
+					<td>
+						<input type="button" onclick="email22()" value="인증하기">
+					</td>
 				</tr>
 				<tr>
 					<td></td>
-					<td><input size="35" type="text" id="auth" name="authNum"
-						placeholder="인증번호를 입력해주세요"></td>
-					<td><input type="button" onclick="authNum1()" value="확인"></td>
+					<td>
+						<input size="35" type="text" id="auth" name="authNum" placeholder="인증번호를 입력해주세요">
+					</td>
+					<td>
+						<input type="button" onclick="authNum1()" value="확인">
+					</td>
 				</tr>
 				<tr>
 					<td style="font-size: 20px; text-align: center;">전화번호 :</td>
-					<td><input size="35" type="text" name="num" placeholder="휴대전화"></td>
+					<td>
+						<input size="35" type="text" name="num" placeholder="휴대전화">
+					</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td style="font-size: 20px; text-align: center;">우편번호 :</td>
-					<td><input size="35" type="text" id="addr1" name="addr1"
-						placeholder="우편번호"></td>
-					<td><input type="button" onclick="daumPost()" value="주소찾기"></td>
-
+					<td>
+						<input size="35" type="text" id="addr1" name="addr1" placeholder="우편번호">
+					</td>
+					<td>
+						<input type="button" onclick="daumPost()" value="주소찾기">
+					</td>
 				</tr>
 				<tr>
 					<td style="font-size: 20px; text-align: center;">주 소 :</td>
-					<td><input size="35" type="text" id="addr2" placeholder="주 소"></td>
+					<td>
+						<input size="35" type="text" id="addr2" placeholder="주 소">
+					</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td style="font-size: 20px; text-align: center;">상세주소 :</td>
 
-					<td><input size="35" type="text" id="addr3" name="addr"
-						placeholder="상 세 주 소"></td>
+					<td>
+						<input size="35" type="text" id="addr3" name="addr" placeholder="상 세 주 소">
+					</td>
 					<td></td>
 				</tr>
 
 				<tr>
-					<td colspan="3" align="center"><input type="button"
-						onclick="register()" name="join" value="가입"> <input
-						type="button"
-						onclick="location.href='${contextPath}/member/login'" value="취소">
+					<td colspan="3" align="center"><input type="button" onclick="register()" name="join" value="가입">
+						<input type="button" onclick="location.href='${contextPath}/member/login'" value="취소">
 					</td>
 				</tr>
 			</table>
-			<input type="hidden" id="userkey" value=""> <input
-				type="hidden" id="possRegi" value="">
+			<input type="hidden" id="userkey" value="">
+			<input type="hidden" id="possRegi" value="">
 		</form>
 	</div>
 	<hr>

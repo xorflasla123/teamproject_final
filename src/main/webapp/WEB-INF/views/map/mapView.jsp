@@ -908,7 +908,7 @@
 					memoList();
 				},
 				error : function() {
-					alert("문제가 발생하였씁낟 !!!");
+					alert("문제 발생 !!!");
 				}
 			})
 		}

@@ -81,14 +81,12 @@ button {
 	<c:set var="contextPath" value="${pageContext.request.contextPath }" />
 	<c:import url="../default/header.jsp" />
 
-
 		<div class=container>
 			<div style="width: auto; margin: 0 auto;" >
 				<h1 style="position: absolute; top:150px; left:770px;">개인정보 수정</h1>
 				<br>
 				<form id="modi" action="modify" method="post">
 					<table class="table table-striped" id="moditable" style="width: 60%; height: 500px;">
-
 						<tr>
 							<th>아이디</th>
 							<td ><input type="text" name="id" value="${info.id}" readonly></td>
@@ -129,6 +127,6 @@ button {
 				</form>
 			</div>
 		</div>
-	
+		
 </body>
 </html>

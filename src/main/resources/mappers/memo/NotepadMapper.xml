@@ -3,45 +3,45 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.helloworld.root.mybatis.memo.MemoMapper"> 
-<resultMap type="com.helloworld.root.memo.MemoDTO" id="memo">
-<id property="memo_id" column="memo_id"/>
-<result property="user_id" column="user_id"/>
-<result property="title" column="title"/>
-<result property="content" column="content"/>
-<result property="saveDate" column="write_date"/>
-</resultMap>
+	<resultMap type="com.helloworld.root.memo.MemoDTO" id="memo">
+		<id property="memo_id" column="memo_id"/>
+		<result property="user_id" column="user_id"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="saveDate" column="write_date"/>
+	</resultMap>
 
-<insert id="addMemo">
-insert into notepad(user_id,memo_id,title,content)
- values(#{user_id},memo_seq.nextval,#{title},#{content})
-</insert>
-<select id="getMemoList" resultMap="memo" >
- select * from notepad where memo_id = #{memo_id}
-  order by write_date desc
-</select>
-<select id="selectMemoCount" resultType="Integer">
- select count(*) from notepad where user_id = #{userId}
-</select>
-
-<delete id="delete">
-delete from notepad where memo_id = #{memo_id}
-</delete>
-
-
-<select id="selectAllMemoList" resultMap="memo">
-select B.* from(select rownum rn, A.* from
-(select * from notepad where user_id = #{userId} order by memo_id desc)A)B where rn between #{s} and #{e}
-<!--(select * from mvc_board order by write_no desc)를 A라 칭한다   -->
-
-</select>
-
-<select id="modishow" resultMap="memo">
-select * from notepad where memo_id = #{memo_id}
-
-</select>
-
-<update id="modiMemo">
- update notepad set title=#{title}, content=#{content}
-   where memo_id = #{memo_id}
-</update>
+	<insert id="addMemo">
+		insert into notepad(user_id,memo_id,title,content)
+		values(#{user_id},memo_seq.nextval,#{title},#{content})
+	</insert>
+	
+	<select id="getMemoList" resultMap="memo" >
+		 select * from notepad where memo_id = #{memo_id}
+		 order by write_date desc
+	</select>
+	
+	<select id="selectMemoCount" resultType="Integer">
+		select count(*) from notepad where user_id = #{userId}
+	</select>
+	
+	<delete id="delete">
+		delete from notepad where memo_id = #{memo_id}
+	</delete>
+	
+	<select id="selectAllMemoList" resultMap="memo">
+		select B.* from(select rownum rn, A.* from
+		(select * from notepad where user_id = #{userId} order by memo_id desc)A)B where rn between #{s} and #{e}
+		<!--(select * from notepad where user_id = #{userId} order by memo_id desc)를 A라 칭한다   -->
+	</select>
+	
+	<select id="modishow" resultMap="memo">
+		select * from notepad where memo_id = #{memo_id}
+	</select>
+	
+	<update id="modiMemo">
+		 update notepad set title=#{title}, content=#{content}
+		 where memo_id = #{memo_id}
+	</update>
+	
 </mapper>
