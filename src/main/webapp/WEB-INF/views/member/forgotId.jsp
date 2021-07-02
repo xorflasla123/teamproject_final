@@ -110,13 +110,8 @@ h1 {
 	<c:import url="../default/header.jsp" />
 
 	<div class="wrap body" align="center"
-<<<<<<< HEAD
-		style="width: 100%; height: 969px; background-image: url('${contextPath }/resources/image/mainN.jpg');">
-=======
 		style="width: 100%; height: 900px; background-image: url('${contextPath }/resources/image/mainN.jpg');">
 
-
->>>>>>> a_branch
 		<header>
 			<form action="${contextPath }/member/id_check" method="post">
 				<div id="login_box" style="padding-left: 60px;">

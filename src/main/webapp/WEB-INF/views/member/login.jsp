@@ -110,13 +110,9 @@ h1 {
 	<c:import url="../default/header.jsp" />
 
 	<div class="wrap body" align="center"
-<<<<<<< HEAD
-		style="width: 100%; height: 969px; background-image: url('${contextPath }/resources/image/mainN.jpg');">
-=======
+
 		style="width: 100%; height: 900px; background-image: url('${contextPath }/resources/image/mainN.jpg');">
 
-
->>>>>>> a_branch
 		<header>
 			<form action="${contextPath }/member/user_check" method="post">
 				<div id="login_box" style="padding-left: 60px;">
@@ -145,44 +141,14 @@ h1 {
 				<!-- login_box -->
 			</form>
 		</header>
-<<<<<<< HEAD
+
 	</div>
 	
-=======
-	</div><hr>
+
+	<hr>
 	<c:import url="../default/footer.jsp" />
 
-	<!-- 
-		<form action="${contextPath }/member/user_check" method="post">
-			<table style="font-size: 20pt; color: white; position: absolute; top: 400px; left: 200px;">
-				<tr>
-					<td><input type="text" name="id"></td>
-				</tr>
-				<tr>
-					<td><input type="password" name="pwd"></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" name="autoLogin">로그인유지</td>
-				</tr>
-				<tr>
-					<td><a href="${contextPath }/member/forgotId">아이디 / 비밀번호 찾기</a></td>
-				</tr>
-				<tr>
-					<td><input type="submit" value="로그인">&nbsp;</td>
-				</tr>
-				<tr>
-					<td><input type="button"
-						onclick="location.href='${contextPath }/member/register_form'">회원가입</td>
-				</tr>
-
-			</table>
-		</form> 
-	</div>-->
 
 
-
-
-
->>>>>>> a_branch
 </body>
 </html>
