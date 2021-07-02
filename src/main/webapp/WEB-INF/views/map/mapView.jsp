@@ -178,7 +178,7 @@
 		</div>
 		<div id="memolist"></div>
 	</div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=761a0a96bd36bae33e8d2523115b5777&libraries=services"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d88b03ad0e3ed3f735224649327c5f2&libraries=services"></script>
 																				<!-- appkey넣는 자리 -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	
