@@ -25,7 +25,6 @@ public class BoardInterceptor extends HandlerInterceptorAdapter implements Membe
 			"location.href='" + request.getContextPath() + "/member/login';</script>");
 			return false;
 		}
-		
 		return true;
 	}
 }

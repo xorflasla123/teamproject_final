@@ -17,5 +17,4 @@ function daumPost(){
             $("#addr3").focus()
         }
     }).open();
-	
 }

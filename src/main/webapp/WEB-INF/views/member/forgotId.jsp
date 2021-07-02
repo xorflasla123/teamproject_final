@@ -78,7 +78,7 @@ h1 {
 }
 
 #btns li {
-	margin-left: 40px;
+	margin-left: 30px;
 	display: inline;
 	font-size: 15px;
 }
@@ -104,18 +104,22 @@ h1 {
 </style>
 
 </head>
-<body>
+<body style="background-color: #fff7e6;">
 
 	<c:set var="contextPath" value="${pageContext.request.contextPath }" />
 	<c:import url="../default/header.jsp" />
 
 	<div class="wrap body" align="center"
+<<<<<<< HEAD
 		style="width: 100%; height: 969px; background-image: url('${contextPath }/resources/image/mainN.jpg');">
+=======
+		style="width: 100%; height: 900px; background-image: url('${contextPath }/resources/image/mainN.jpg');">
 
 
+>>>>>>> a_branch
 		<header>
 			<form action="${contextPath }/member/id_check" method="post">
-				<div id="login_box">
+				<div id="login_box" style="padding-left: 60px;">
 					<h1>아이디 찾기</h1>
 					<br><br><br><br><br>
 					<input type="text" name="email" placeholder="등록한 이메일 입력"><br><br><br>
@@ -129,7 +133,8 @@ h1 {
 			</form>
 			<!-- login_box -->
 		</header>
-	</div>
+	</div><hr>
+	<c:import url="../default/footer.jsp" />
 
 </body>
 </html>

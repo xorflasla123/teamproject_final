@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -8,9 +8,10 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-	function showPopup() {
-		window.open("board/how", "a", "width=500, height=600, top=60");
-	}
+
+function showPopup() {
+	window.open("/root/board/how", "", "width=500, height=600, top=60");
+}
 </script>
 
 <style type="text/css">
@@ -19,14 +20,11 @@
 .head { width: 100%; height: 100%; margin: auto;}
 .bar { position:fixed; list-style: none; display: flex; justify-content: flex-end;  width: 2000px; height:45px; z-index: 9998; background-color: rgba(0,0,0,.6); color: white; transition: all 0.5s;}
 .bar li {padding-right: 20px; position: relative; right: 150px; font-size: 20pt;}
-<<<<<<< HEAD
 
- ul li a b { }
-=======
 a b:hover{  padding-bottom: 3px; border-bottom: 1px solid orange; transition: all 0.5s; }
 ul li a b { color: white;}
 header a { text-decoration: none; padding: 15px; font-size: 13pt;}
->>>>>>> 1106013031cfa7af8bd7c322f12b74595d5b8f20
+
 .bar a { color: black; text-decoration: none; padding: 15px; font-size: 13pt;}
 .main { text-align: center; margin: auto; padding-top: 80px; }
 footer { font-size: 20pt; color: pink; text-align: center; font-family: monospace; font-style: italic; }

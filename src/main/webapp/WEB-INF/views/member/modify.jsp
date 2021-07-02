@@ -81,50 +81,41 @@ button {
 	<c:set var="contextPath" value="${pageContext.request.contextPath }" />
 	<c:import url="../default/header.jsp" />
 
-
 		<div class=container>
 			<div style="width: auto; margin: 0 auto;" >
 				<h1 style="position: absolute; top:150px; left:770px;">개인정보 수정</h1>
 				<br>
 				<form id="modi" action="modify" method="post">
 					<table class="table table-striped" id="moditable" style="width: 60%; height: 500px;">
-
 						<tr>
 							<th>아이디</th>
-							<td ><input type="text" name="id"
-								value="${info.id}" readonly></td>
+							<td ><input type="text" name="id" value="${info.id}" readonly></td>
 						</tr>
 
 						<tr>
 							<th>비밀번호</th>
-							<td><input type="text"
-								name="pwd" value="${info.pwd}"></td>
+							<td><input type="text" name="pwd" value="${info.pwd}"></td>
 						</tr>
 
 						<tr>
 							<th>이 름</th>
-							<td><input type="text"
-								name="name" value="${info.name}" readonly></td>
+							<td><input type="text" name="name" value="${info.name}" readonly></td>
 						</tr>
 
 						<tr>
 							<th>이메일</th>
-							<td><input type="text"
-								name="email" value="${info.email }"></td>
+							<td><input type="text" name="email" value="${info.email }"></td>
 						</tr>
 
 						<tr>
 							<th>전화번호</th>
-							<td><input type="text"
-								name="num" value="${info.num }"></td>
+							<td><input type="text" name="num" value="${info.num }"></td>
 						</tr>
 
 						<tr>
 							<th>주 소</th>
 							<td style="text-align: center;">
-							<input
-								 type="text" name="addr"
-								value="${info.addr }" placeholder="우편번호"><br>
+							<input type="text" name="addr" value="${info.addr }" placeholder="우편번호"><br>
 							</td>
 						</tr>
 						<tr>
@@ -136,6 +127,6 @@ button {
 				</form>
 			</div>
 		</div>
-	
+		
 </body>
 </html>

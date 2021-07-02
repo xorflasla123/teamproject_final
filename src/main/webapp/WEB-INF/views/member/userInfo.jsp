@@ -24,8 +24,7 @@
 
 				<c:forEach var="dto" items="${memberList }">
 					<tr>
-						<td><a href="${contextPath }/member/info?id=${loginUser }">
-								${dto.id }</a></td>
+						<td><a href="${contextPath }/member/info?id=${loginUser }">${dto.id }</a></td>
 						<td>${dto.pwd }</td>
 						<td>${dto.name }</td>
 						<td>${dto.email }</td>
