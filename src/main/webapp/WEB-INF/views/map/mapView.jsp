@@ -78,7 +78,7 @@
 #btnhidden { display: none; }
 
 /* 메모 */
-.tablememo { border-collapse:collapse; height: 90px; width: 270px; margin-left:17px; opacity: 0.7; background-color:white; }
+.tablememo { border-collapse:collapse; height: 90px; width: 270px; margin-left:17px; opacity: 0.9; background-color:white; }
 .container th{ text-align:center; }
 #first { display: none; position: fixed; z-index: 9; margin: 0 auto; top: 30px; left: 100; right: 0; height: 900px; width: 330px; opacity: 0.7; }
 #content { resize: none; height: 440px; width: 270px; }
@@ -90,7 +90,7 @@
 </style>
 
 </head>
-<body>
+<body style="background-color: #fff7e6;">
 	<c:import url="../default/header.jsp" />
 	<hr><br><br>
 	<c:set var="contextPath" value="${pageContext.request.contextPath }" />
