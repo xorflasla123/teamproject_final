@@ -69,7 +69,7 @@ public class MemberController implements MemberSessionName {
 
 		if(autoLogin != null) {
 			int limitTime = 60*60*24*30; // 30일
-			Cookie loginCookie = new Cookie("loginCookie", id);
+			Cookie loginCookie = new Cookie("loginCookie", session.getId());
 			loginCookie.setPath("/");
 			loginCookie.setMaxAge(limitTime);
 			response.addCookie(loginCookie);
