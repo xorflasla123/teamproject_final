@@ -119,8 +119,8 @@ h1 {
 					<input type="submit" value="확 인">
 					<ul id="btns">
 						<li><a href="register_form">회원 가입 </a></li>
-						<li><a href="${contextPath }/member/forgotId">아이디 찾기 </a></li>
-						<li><a href="${contextPath }/member/forgotPwd">비밀번호 찾기 </a></li>
+						<li><a href="${contextPath }/member/login">로그인</a></li>
+						<li><a href="${contextPath }/member/forgotPwd">비밀번호 찾기</a></li>
 					</ul>
 				</div>
 			</form>
