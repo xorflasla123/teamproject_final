@@ -9,7 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 function showPopup() {
-	window.open("board/how", "a", "width=500, height=600, top=60");
+	window.open("/root/board/how", "", "width=500, height=600, top=60");
 }
 </script>
 
