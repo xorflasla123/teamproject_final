@@ -793,7 +793,7 @@
 			var content = document.getElementById("content").value;
 			var name1 = document.getElementById("hidden_name").value;
 			var addr1 = document.getElementById("hidden_address").value;
-			var newContent = content + " " + name1 + " " + addr1 + "\n"
+			var newContent = content + " " + name1 + " - " + addr1 + "\n"
 			console.log(name1)
 			console.log(addr1)
 			$("#content").val(newContent);

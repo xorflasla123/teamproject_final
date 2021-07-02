@@ -132,7 +132,7 @@
 					<h1>회원가입</h1></td>
 				</tr>
 				<tr>
-					<td style="width: 150px; font-size: 20px; text-align: center;">아이디 :</td>
+					<td style="width: 150px; font-size: 20px; text-align: right;">아이디 :&nbsp;</td>
 					<td style="width: 250px;">
 						<input size="35" type="text" name="id" id="id" placeholder="아이디">
 					</td>
@@ -141,27 +141,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="font-size: 20px; text-align: center;">비밀번호 :</td>
+					<td style="font-size: 20px; text-align: right;">비밀번호 :&nbsp;</td>
 					<td>
 						<input size="35" type="password" name="pwd" id="pwd" placeholder="비밀번호">
 					</td>
 					<td></td>
 				</tr>
 				<tr>
-					<td style="font-size: 20px; text-align: center;">비밀번호 확인 :</td>
+					<td style="font-size: 20px; text-align: right;">비밀번호 확인 :&nbsp;</td>
 					<td>
 						<input size="35" type="password" name="chkPw" id="chkPw" onchange="myFocus()" placeholder="비밀번호 확인">
 					</td>
 				</tr>
 				<tr>
-					<td style="font-size: 20px; text-align: center;">이름 :</td>
+					<td style="font-size: 20px; text-align: right;">이름 :&nbsp;</td>
 					<td>
 						<input size="35" type="text" name="name" placeholder="이름">
 					</td>
 					<td></td>
 				</tr>
 				<tr>
-					<td style="font-size: 20px; text-align: center;">이메일 :</td>
+					<td style="font-size: 20px; text-align: right;">이메일 :&nbsp;</td>
 					<td>
 						<input size="35" type="text" name="email" id="email" placeholder="이메일">
 					</td>
@@ -179,14 +179,14 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="font-size: 20px; text-align: center;">전화번호 :</td>
+					<td style="font-size: 20px; text-align: right;">전화번호 :&nbsp;</td>
 					<td>
 						<input size="35" type="text" name="num" placeholder="휴대전화">
 					</td>
 					<td></td>
 				</tr>
 				<tr>
-					<td style="font-size: 20px; text-align: center;">우편번호 :</td>
+					<td style="font-size: 20px; text-align: right;">우편번호 :&nbsp;</td>
 					<td>
 						<input size="35" type="text" id="addr1" name="addr1" placeholder="우편번호">
 					</td>
@@ -195,14 +195,14 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="font-size: 20px; text-align: center;">주 소 :</td>
+					<td style="font-size: 20px; text-align: right;">주 소 :&nbsp;</td>
 					<td>
 						<input size="35" type="text" id="addr2" placeholder="주 소">
 					</td>
 					<td></td>
 				</tr>
 				<tr>
-					<td style="font-size: 20px; text-align: center;">상세주소 :</td>
+					<td style="font-size: 20px; text-align: right;">상세주소 :&nbsp;</td>
 
 					<td>
 						<input size="35" type="text" id="addr3" name="addr" placeholder="상 세 주 소">
