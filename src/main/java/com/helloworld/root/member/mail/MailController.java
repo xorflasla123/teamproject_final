@@ -76,7 +76,7 @@ public class MailController {
 	@ResponseBody
 	public String auth(@RequestBody String email, HttpServletRequest request, Model model) {
 		String userkey = ms.auth(email, request, model);
-		System.out.println("22222");
+
 		return userkey;
 
 	}
