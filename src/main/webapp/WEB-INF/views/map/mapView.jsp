@@ -84,8 +84,8 @@
 #content { resize: none; height: 440px; width: 270px; }
 #title { margin-left:10px; margin-bottom:30px; left:100px; height: 20px; width: 170px; }
 #id { margin-bottom:10px; height: 20px; width: 170px; }
-#hiddenMode button 
-#btns11 button { display: none; width: 95px; height: 45px; }
+#hiddenMode button  { display: none; width: 95px; height: 45px; }
+#btns11 button{ display: none; width: 95px; height: 45px; }
 #frm{ padding-top:30px; }
 </style>
 
@@ -101,16 +101,22 @@
 
 	<div class="map_wrap">
 		<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
-		<button type="button" onclick="visible1()" id="">키워드 검색</button>
-		<button type="button" onclick="visible2()" id="">카테고리 검색</button>
-
-		<input type="button" onclick="slideClick()" value="메모">
-		<button type="button" onclick="invisible()" id="btnhidden">닫기</button>
-
+		
 		<form action="${contextPath }/map/navi" method="get" target="_blank">
-			<input type="text" name="dep" placeholder="출발지 입력"><br>
-			<input type="text" name="arr" placeholder="도착지 입력">
-			<input type="submit" value="검색">
+			<table>
+				<tr>
+					<td rowspan="2"><label><b>길찾기</b></label></td>
+					<td>
+						<input type="text" name="dep" placeholder="출발지 입력"><br>
+						<input type="text" name="arr" placeholder="도착지 입력">
+					</td>
+					<td rowspan="2"><input type="submit" value="검색" style="width: 50px; height: 40px;"></td>
+					<td rowspan="2"><input type="button" onclick="slideClick()" value="메모" style="width: 50px; height: 40px;"></td>
+					<td rowspan="2"><button type="button" onclick="visible1()" id="" style="width: 100px; height: 40px;">키워드 검색</button></td>
+					<td rowspan="2"><button type="button" onclick="visible2()" id="" style="width: 100px; height: 40px;">카테고리 검색</button></td>
+					<td rowspan="2"><button type="button" onclick="invisible()" id="btnhidden" style="width: 50px; height: 40px;">닫기</button></td>
+				</tr>
+			</table>
 		</form>
 
 		<div id="hidden1">
@@ -150,25 +156,22 @@
 		<div style="width: 250px; margin: 0 auto; padding-top: 10px;">
 			<form id="frm">
 				<br>
-				<h3 style="position: absolute; top: 40px; right: 130px;" >여행일지</h3>
-				<br> <b>작성자</b> <input type="text" id="id" name="user_id"
-					value="${loginUser} " readonly>  <br> <b >제 목</b>
-				<input type="text" id="title" size="30" name="title"><br>
+				<h3 style="position: absolute; top: 40px; right: 130px;">여행일지</h3><br> 
+				<b>작성자</b> <input type="text" id="id" name="user_id" value="${loginUser}" readonly><br> 
+				<b>제 목</b> <input type="text" id="title" size="30" name="title"><br> 
 				<b>내용</b> <br>
-				<textarea rows="5" cols="30" id="content" name="content"></textarea>
-				<br>
-		
+				<textarea rows="5" cols="30" id="content" name="content"></textarea><br>
+
 				<div id="btns11">
 					<input type="button" id="repBtn" onclick="rep()" value="저장">
-					<input type="button" id="cancelBtn" onclick="slide_hide()"
-						value="취소"> <input type="button" id="listBtn"
-						onclick="memoList()" value="메모 목록"><br><br>
+					<input type="button" id="cancelBtn" onclick="slide_hide()" value="취소"> 
+					<input type="button" id="listBtn" onclick="memoList()" value="메모 목록"><br><br>
 				</div>
 
 				<div id="hiddenMode">
 					<input type="button" id="modiBtn" onclick="modify1()" value="수정" type="hidden">
 					<input type="button" id="deleBtn" onclick="delete1()" value="삭제" type="hidden">
-					<input type="button" id="backBtn" onclick="back1()" value="이전으로" type="hidden">
+					<input type="button" id="backBtn" onclick="back1()" value="이전으로" type="hidden"><br><br>
 				</div>	
 
 				<input type="hidden" name="memo_id" id="memo_id" value="">
@@ -176,7 +179,7 @@
 		</div>
 		<div id="memolist"></div>
 	</div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=761a0a96bd36bae33e8d2523115b5777&libraries=services"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d88b03ad0e3ed3f735224649327c5f2&libraries=services"></script>
 																				<!-- appkey넣는 자리 -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	
@@ -779,80 +782,70 @@
 			$("#memolist").show();
 			var userId = document.getElementById("hidden_userId").value;
 			var num1 = 1;
-			$
-					.ajax({
-						url : "memolist/" + $("#hidden_userId").val() + "/"
-								+ num1,
-						type : "GET",
-						contentType : "application/json; charset=utf-8",
-						dataType : "json",
-						success : function(map) {
-							console.log('성공 1 2')
-							let html = ""
-							html +=
-								"<div class='container' align='center' ><table class='tablememo' border=1><tr><th>제목</th><th>날짜</th> </tr>";
-							map.list.forEach(function(data) {
-								
-								html += " <tr><td><a href='#'onclick=modishow("
-										+ data.memo_id + ")>" + data.title
-										+ "</a></td><td>" +data.saveDate
-										+ "</td></tr>";
-
-							})
-							html += "</table>";
-
-							for (var num = 1; num <= map.repeat; num++) {
-								html += "<a href='#' onclick='paging11(" + num
-										+ ")'>[" + num + "]</a>&nbsp;";
-
-							}
-							html +="</div>";
-							$("#memolist").html(html)
-							document.getElementById("content").value = "";
-							document.getElementById("title").value = "";
-
-						},
-						error : function() {
-							alert("문제 발생 !!!");
-						}
+			$.ajax({
+				url : "memolist/" + $("#hidden_userId").val() + "/" + num1,
+				type : "GET",
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				success : function(map) {
+					console.log('성공 1 2')
+					let html = ""
+					html +=
+						"<div class='container' align='center' ><table class='tablememo' border=1><tr><th>제목</th><th>날짜</th> </tr>";
+					map.list.forEach(function(data) {
+						html += " <tr><td><a href='#'onclick=modishow("
+								+ data.memo_id + ")>" + data.title
+								+ "</a></td><td>" +data.saveDate
+								+ "</td></tr>";
 					})
+					html += "</table>";
+
+					for (var num = 1; num <= map.repeat; num++) {
+						html += "<a href='#' onclick='paging11(" + num
+								+ ")'>[" + num + "]</a>&nbsp;";
+					}
+					html +="</div>";
+					$("#memolist").html(html)
+					document.getElementById("content").value = "";
+					document.getElementById("title").value = "";
+
+				},
+				error : function() {
+					alert("문제 발생 !!!");
+				}
+			})
 		}
 		
 		function paging11(num1) {
 			console.log(num1 + "나는123")
-			$
-					.ajax({
-						url : "memolist/" + $("#hidden_userId").val() + "/"
-								+ num1,
-						type : "GET",
-						contentType : "application/json; charset=utf-8",
-						dataType : "json",
-						success : function(map) {
-							console.log('성공 1 2')
-							let html = ""
-							html += "<div class='container' align='center'><table class='tablememo' border=1><tr><th>제목</th><th>날짜</th> </tr>";
-							map.list.forEach(function(data) {
-
-								html += " <tr><td><a href='#'onclick=modishow("
-										+ data.memo_id + ")>" + data.title
-										+ "</a></td><td>" + data.saveDate
-										+ "</td></tr>";
-
-							})
-							html += "</table>";
-
-							for (var num = 1; num <= map.repeat; num++) {
-								html += "<a href='#' onclick='paging11(" + num
-										+ ")'>[" + num + "]</a>&nbsp;";
-
-							}
-							html +="</div>";
-							$("#memolist").html(html)
-						},
-						error : function() {
-							alert("문제 발생 !!!");
-						}
+			$.ajax({
+				url : "memolist/" + $("#hidden_userId").val() + "/" + num1,
+				type : "GET",
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				success : function(map) {
+					console.log('성공 1 2')
+					let html = ""
+					html += "<div class='container' align='center'><table class='tablememo' border=1><tr><th>제목</th><th>날짜</th> </tr>";
+					map.list.forEach(function(data) {
+						html += " <tr><td><a href='#'onclick=modishow("
+								+ data.memo_id + ")>" + data.title
+								+ "</a></td><td>" + data.saveDate
+								+ "</td></tr>";
 					})
+					html += "</table>";
+
+					for (var num = 1; num <= map.repeat; num++) {
+						html += "<a href='#' onclick='paging11(" + num
+								+ ")'>[" + num + "]</a>&nbsp;";
+					}
+					html +="</div>";
+					$("#memolist").html(html)
+				},
+				error : function() {
+					alert("문제 발생 !!!");
+				}
+			})
 		}
 		
 		function modishow(memo_id) {

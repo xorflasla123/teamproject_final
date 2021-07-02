@@ -91,40 +91,33 @@ button {
 
 						<tr>
 							<th>아이디</th>
-							<td ><input type="text" name="id"
-								value="${info.id}" readonly></td>
+							<td ><input type="text" name="id" value="${info.id}" readonly></td>
 						</tr>
 
 						<tr>
 							<th>비밀번호</th>
-							<td><input type="text"
-								name="pwd" value="${info.pwd}"></td>
+							<td><input type="text" name="pwd" value="${info.pwd}"></td>
 						</tr>
 
 						<tr>
 							<th>이 름</th>
-							<td><input type="text"
-								name="name" value="${info.name}" readonly></td>
+							<td><input type="text" name="name" value="${info.name}" readonly></td>
 						</tr>
 
 						<tr>
 							<th>이메일</th>
-							<td><input type="text"
-								name="email" value="${info.email }"></td>
+							<td><input type="text" name="email" value="${info.email }"></td>
 						</tr>
 
 						<tr>
 							<th>전화번호</th>
-							<td><input type="text"
-								name="num" value="${info.num }"></td>
+							<td><input type="text" name="num" value="${info.num }"></td>
 						</tr>
 
 						<tr>
 							<th>주 소</th>
 							<td style="text-align: center;">
-							<input
-								 type="text" name="addr"
-								value="${info.addr }" placeholder="우편번호"><br>
+							<input type="text" name="addr" value="${info.addr }" placeholder="우편번호"><br>
 							</td>
 						</tr>
 						<tr>

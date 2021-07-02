@@ -132,20 +132,19 @@
 		<form id="fo" action="register" method="post">
 			<table class="registertable">
 				<tr>
-					<td colspan="3" align="center"
-						style="font-size: 25px; padding-bottom: 40px;"><h1>회원가입</h1></td>
+					<td colspan="3" align="center" style="font-size: 25px; padding-bottom: 40px;">
+					<h1>회원가입</h1></td>
 				</tr>
 				<tr>
-					<td style="width: 150px; font-size: 20px; text-align: center;">아이디
-						:</td>
-					<td style="width: 250px;"><input size="35" type="text"
-						name="id" id="id" placeholder="아이디"></td>
+					<td style="width: 150px; font-size: 20px; text-align: center;">아이디 :</td>
+					<td style="width: 250px;">
+					<input size="35" type="text" name="id" id="id" placeholder="아이디"></td>
 					<td><input type="button" onclick="id22()" value="중복인증"></td>
 				</tr>
 				<tr>
 					<td style="font-size: 20px; text-align: center;">비밀번호 :</td>
-					<td><input size="35" type="password" name="pwd" id="pwd"
-						placeholder="비밀번호"></td>
+					<td><input size="35" type="password" name="pwd" id="pwd" 
+					     placeholder="비밀번호"></td>
 					<td></td>
 				</tr>
 				<tr>
