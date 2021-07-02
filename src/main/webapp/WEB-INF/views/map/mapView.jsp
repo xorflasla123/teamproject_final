@@ -779,80 +779,70 @@
 			$("#memolist").show();
 			var userId = document.getElementById("hidden_userId").value;
 			var num1 = 1;
-			$
-					.ajax({
-						url : "memolist/" + $("#hidden_userId").val() + "/"
-								+ num1,
-						type : "GET",
-						contentType : "application/json; charset=utf-8",
-						dataType : "json",
-						success : function(map) {
-							console.log('성공 1 2')
-							let html = ""
-							html +=
-								"<div class='container' align='center' ><table class='tablememo' border=1><tr><th>제목</th><th>날짜</th> </tr>";
-							map.list.forEach(function(data) {
-								
-								html += " <tr><td><a href='#'onclick=modishow("
-										+ data.memo_id + ")>" + data.title
-										+ "</a></td><td>" +data.saveDate
-										+ "</td></tr>";
-
-							})
-							html += "</table>";
-
-							for (var num = 1; num <= map.repeat; num++) {
-								html += "<a href='#' onclick='paging11(" + num
-										+ ")'>[" + num + "]</a>&nbsp;";
-
-							}
-							html +="</div>";
-							$("#memolist").html(html)
-							document.getElementById("content").value = "";
-							document.getElementById("title").value = "";
-
-						},
-						error : function() {
-							alert("문제 발생 !!!");
-						}
+			$.ajax({
+				url : "memolist/" + $("#hidden_userId").val() + "/" + num1,
+				type : "GET",
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				success : function(map) {
+					console.log('성공 1 2')
+					let html = ""
+					html +=
+						"<div class='container' align='center' ><table class='tablememo' border=1><tr><th>제목</th><th>날짜</th> </tr>";
+					map.list.forEach(function(data) {
+						html += " <tr><td><a href='#'onclick=modishow("
+								+ data.memo_id + ")>" + data.title
+								+ "</a></td><td>" +data.saveDate
+								+ "</td></tr>";
 					})
+					html += "</table>";
+
+					for (var num = 1; num <= map.repeat; num++) {
+						html += "<a href='#' onclick='paging11(" + num
+								+ ")'>[" + num + "]</a>&nbsp;";
+					}
+					html +="</div>";
+					$("#memolist").html(html)
+					document.getElementById("content").value = "";
+					document.getElementById("title").value = "";
+
+				},
+				error : function() {
+					alert("문제 발생 !!!");
+				}
+			})
 		}
 		
 		function paging11(num1) {
 			console.log(num1 + "나는123")
-			$
-					.ajax({
-						url : "memolist/" + $("#hidden_userId").val() + "/"
-								+ num1,
-						type : "GET",
-						contentType : "application/json; charset=utf-8",
-						dataType : "json",
-						success : function(map) {
-							console.log('성공 1 2')
-							let html = ""
-							html += "<div class='container' align='center'><table class='tablememo' border=1><tr><th>제목</th><th>날짜</th> </tr>";
-							map.list.forEach(function(data) {
-
-								html += " <tr><td><a href='#'onclick=modishow("
-										+ data.memo_id + ")>" + data.title
-										+ "</a></td><td>" + data.saveDate
-										+ "</td></tr>";
-
-							})
-							html += "</table>";
-
-							for (var num = 1; num <= map.repeat; num++) {
-								html += "<a href='#' onclick='paging11(" + num
-										+ ")'>[" + num + "]</a>&nbsp;";
-
-							}
-							html +="</div>";
-							$("#memolist").html(html)
-						},
-						error : function() {
-							alert("문제 발생 !!!");
-						}
+			$.ajax({
+				url : "memolist/" + $("#hidden_userId").val() + "/" + num1,
+				type : "GET",
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				success : function(map) {
+					console.log('성공 1 2')
+					let html = ""
+					html += "<div class='container' align='center'><table class='tablememo' border=1><tr><th>제목</th><th>날짜</th> </tr>";
+					map.list.forEach(function(data) {
+						html += " <tr><td><a href='#'onclick=modishow("
+								+ data.memo_id + ")>" + data.title
+								+ "</a></td><td>" + data.saveDate
+								+ "</td></tr>";
 					})
+					html += "</table>";
+
+					for (var num = 1; num <= map.repeat; num++) {
+						html += "<a href='#' onclick='paging11(" + num
+								+ ")'>[" + num + "]</a>&nbsp;";
+					}
+					html +="</div>";
+					$("#memolist").html(html)
+				},
+				error : function() {
+					alert("문제 발생 !!!");
+				}
+			})
 		}
 		
 		function modishow(memo_id) {
