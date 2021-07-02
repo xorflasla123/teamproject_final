@@ -78,7 +78,7 @@
 #btnhidden { display: none; }
 
 /* 메모 */
-.tablememo { border-collapse:collapse; height: 90px; width: 270px; margin-left:17px; opacity: 0.7; background-color:white; }
+.tablememo { border-collapse:collapse; height: 90px; width: 270px; margin-left:17px; opacity: 0.9; background-color:white; }
 .container th{ text-align:center; }
 #first { display: none; position: fixed; z-index: 9; margin: 0 auto; top: 30px; left: 100; right: 0; height: 900px; width: 330px; opacity: 0.7; }
 #content { resize: none; height: 440px; width: 270px; }
@@ -90,7 +90,7 @@
 </style>
 
 </head>
-<body>
+<body style="background-color: #fff7e6;">
 	<c:import url="../default/header.jsp" />
 	<hr><br><br>
 	<c:set var="contextPath" value="${pageContext.request.contextPath }" />
@@ -163,13 +163,13 @@
 				<textarea rows="5" cols="30" id="content" name="content"></textarea><br>
 
 				<div id="btns11">
-					<input type="button" id="repBtn" onclick="rep()" value="저장">
+					<input type="button" id="repBtn" onclick="titleChk()" value="저장">
 					<input type="button" id="cancelBtn" onclick="slide_hide()" value="취소"> 
 					<input type="button" id="listBtn" onclick="memoList()" value="메모 목록"><br><br>
 				</div>
 
 				<div id="hiddenMode">
-					<input type="button" id="modiBtn" onclick="modify1()" value="수정" type="hidden">
+					<input type="button" id="modiBtn" onclick="titleChkModi()" value="수정" type="hidden">
 					<input type="button" id="deleBtn" onclick="delete1()" value="삭제" type="hidden">
 					<input type="button" id="backBtn" onclick="back1()" value="이전으로" type="hidden"><br><br>
 				</div>	
@@ -744,7 +744,29 @@
 		}
 		
 		// 메모기능
-		function saveMemo() {
+		function titleChk(){
+			var titleChk = document.getElementById("title").value;
+			if(titleChk == ''){
+				alert('제목을 입력해주세요')
+				
+			}else{
+				 rep();	
+			}
+		}
+		
+		function titleChkModi(){
+			var titleChk = document.getElementById("title").value;
+			if(titleChk == ''){
+				alert('제목을 입력해주세요')
+				
+			}else{
+				modify1();	
+			}
+		} 
+		
+		
+		
+		function saveMemo() {		
 			let form = {};
 			let arr = $("#frm").serializeArray();
 			for (i = 0; i < arr.length; i++) {
