@@ -101,16 +101,22 @@
 
 	<div class="map_wrap">
 		<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
-		<button type="button" onclick="visible1()" id="">키워드 검색</button>
-		<button type="button" onclick="visible2()" id="">카테고리 검색</button>
-
-		<input type="button" onclick="slideClick()" value="메모">
-		<button type="button" onclick="invisible()" id="btnhidden">닫기</button>
-
+		
 		<form action="${contextPath }/map/navi" method="get" target="_blank">
-			<input type="text" name="dep" placeholder="출발지 입력"><br>
-			<input type="text" name="arr" placeholder="도착지 입력">
-			<input type="submit" value="검색">
+			<table>
+				<tr>
+					<td rowspan="2"><label><b>길찾기</b></label></td>
+					<td>
+						<input type="text" name="dep" placeholder="출발지 입력"><br>
+						<input type="text" name="arr" placeholder="도착지 입력">
+					</td>
+					<td rowspan="2"><input type="submit" value="검색" style="width: 50px; height: 40px;"></td>
+					<td rowspan="2"><input type="button" onclick="slideClick()" value="메모" style="width: 50px; height: 40px;"></td>
+					<td rowspan="2"><button type="button" onclick="visible1()" id="" style="width: 100px; height: 40px;">키워드 검색</button></td>
+					<td rowspan="2"><button type="button" onclick="visible2()" id="" style="width: 100px; height: 40px;">카테고리 검색</button></td>
+					<td rowspan="2"><button type="button" onclick="invisible()" id="btnhidden" style="width: 50px; height: 40px;">닫기</button></td>
+				</tr>
+			</table>
 		</form>
 
 		<div id="hidden1">
